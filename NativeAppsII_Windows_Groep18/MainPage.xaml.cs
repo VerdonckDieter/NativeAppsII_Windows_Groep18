@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NativeAppsII_Windows_Groep18.View;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,15 @@ namespace NativeAppsII_Windows_Groep18
         public MainPage()
         {
             this.InitializeComponent();
+            mainContent.Navigate(typeof(Overview));
+        }
+
+        private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            if (args.InvokedItem.Equals("TravelList"))
+            {
+                mainContent.Navigate(typeof(Overview));
+            }
         }
     }
 }
