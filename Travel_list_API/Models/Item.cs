@@ -21,16 +21,14 @@ namespace Travel_list_API.Models
             this.Amount = amount;
         }
 
-        public void ChangeAmount(int Amount)
-        {
-            this.Amount = Amount;
-        }
+        public void ChangeAmount(int Amount) => this.Amount = Amount;
 
         public enum ItemCategory
         {
             Kledij,
             Medicatie,
-            Hygiëne
+            Hygiëne,
+            Technologie
         }
     }
 }

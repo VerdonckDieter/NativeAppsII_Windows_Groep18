@@ -16,34 +16,16 @@ namespace Travel_list_API.Data.Repositories
             _travelLists = dBContext.TravelLists; 
         }
 
-        public void Add(TravelList travelList)
-        {
-            _travelLists.AddAsync(travelList);
-        }
+        public void Add(TravelList travelList) => _travelLists.AddAsync(travelList);
 
-        public void Delete(TravelList travelList)
-        {
-            _travelLists.Remove(travelList);
-        }
+        public void Delete(TravelList travelList) => _travelLists.Remove(travelList);
 
-        public TravelList GetTravelListById(int id)
-        {
-            return _travelLists.Include(t => t.Items).SingleOrDefault(t => t.Id == id);
-        }
+        public TravelList GetTravelListById(int id) => _travelLists.Include(t => t.Items).SingleOrDefault(t => t.Id == id);
 
-        public IEnumerable<TravelList> GetTravelLists()
-        {
-            return _travelLists.Include(t => t.Items).ToList();
-        }
+        public IEnumerable<TravelList> GetTravelLists() => _travelLists.Include(t => t.Items).ToList();
 
-        public void Update(TravelList travelList)
-        {
-            _travelLists.Update(travelList);
-        }
+        public void Update(TravelList travelList) => _travelLists.Update(travelList);
 
-        public void SaveChanges()
-        {
-            _dbContext.SaveChanges();
-        } 
+        public void SaveChanges() => _dbContext.SaveChanges();
     }
 }

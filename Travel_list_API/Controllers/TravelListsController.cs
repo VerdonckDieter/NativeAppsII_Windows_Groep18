@@ -19,16 +19,10 @@ namespace Travel_list_API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<TravelList> GetTravelLists()
-        {
-            return _travelListRepository.GetTravelLists();
-        }
+        public IEnumerable<TravelList> GetTravelLists() => _travelListRepository.GetTravelLists();
 
         [HttpGet("{id}")]
-        public TravelList GetTravelListById(int id)
-        {
-            return _travelListRepository.GetTravelListById(id);
-        }
+        public TravelList GetTravelListById(int id) => _travelListRepository.GetTravelListById(id);
 
         [HttpPost]
         public ActionResult<TravelList> PostTravelList(TravelList travelList)
