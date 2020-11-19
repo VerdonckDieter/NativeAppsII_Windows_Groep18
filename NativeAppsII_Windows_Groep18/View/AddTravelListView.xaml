@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="NativeAppsII_Windows_Groep18.View.AddTravelListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NativeAppsII_Windows_Groep18.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:vm="using:NativeAppsII_Windows_Groep18.ViewModel" 
+    xmlns:my="using:NativeAppsII_Windows_Groep18.DataModel"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    x:Name="pageAdd"
+    >
+
+    <Page.DataContext>
+        <vm:TravelListViewModel></vm:TravelListViewModel>
+    </Page.DataContext>
+
+    <StackPanel x:Name="stackPanelAdd" Width="450" VerticalAlignment="Center" Orientation="Vertical" >
+        <TextBlock Text="Title" />
+        <TextBox x:Name="nameInput" PlaceholderText="Name of TravelList" />
+
+      <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical" Width="220" Margin="0,0,5,0">
+                <TextBlock Text="Pick a start date" />
+                <CalendarDatePicker x:Name="startDateInput" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="5,0,0,0" Width="220">
+                <TextBlock Text="Pick an end date" />
+                <CalendarDatePicker x:Name="endDateInput" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+      </StackPanel>
+    </StackPanel>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Add" Label="Add TravelList" Command="{Binding AddCommand}" CommandParameter="{x:Bind nameInput.Text, Mode=OneWay}" />
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>

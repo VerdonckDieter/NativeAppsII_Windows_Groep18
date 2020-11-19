@@ -23,11 +23,23 @@ namespace NativeAppsII_Windows_Groep18.ViewModel.Commands
         #endregion
 
         #region Methods
-        public bool CanExecute(object parameter) => true;
+        public bool CanExecute(object parameter)
+        {
+            if(parameter != null)
+            {
+                var s = parameter as String;
+                if (String.IsNullOrEmpty(s))
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
 
-        public void Execute(object parameter) => AddTravelList(parameter);
+        public void Execute(object parameter) => AddTravelList(parameter as String);
 
-        private async void AddTravelList(object t) => await ViewModel.AddTravelList(); 
+        private async void AddTravelList(String t) => await ViewModel.AddTravelList(t); 
         #endregion
     }
 }
