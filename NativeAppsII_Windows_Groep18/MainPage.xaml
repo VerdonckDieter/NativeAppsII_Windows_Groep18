@@ -12,6 +12,7 @@
         <NavigationView x:Name="navView" ItemInvoked="NavView_ItemInvoked">
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="TravelList" Icon="Home"></NavigationViewItem>
+                <NavigationViewItem Content="Add TravelList" Icon="Add"></NavigationViewItem>
             </NavigationView.MenuItems>
 
             <Frame x:Name="mainContent"></Frame>

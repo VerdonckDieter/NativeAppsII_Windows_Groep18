@@ -35,6 +35,11 @@ namespace NativeAppsII_Windows_Groep18
             {
                 mainContent.Navigate(typeof(Overview));
             }
+
+            if (args.InvokedItem.Equals("Add TravelList"))
+            {
+                mainContent.Navigate(typeof(AddTravelListView));
+            }
         }
     }
 }
