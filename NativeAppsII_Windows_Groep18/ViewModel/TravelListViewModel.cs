@@ -38,10 +38,10 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
             }
         }
 
-        public async Task AddTravelList()
+        public async Task AddTravelList(String name)
         {
             //Nog travelList aanmaken maar weet nog niet hoe
-            var travelList = new TravelList();
+            var travelList = new TravelList() { Name = name, StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) };
             var travelListJson = JsonConvert.SerializeObject(travelList);
 
             HttpClient client = new HttpClient();

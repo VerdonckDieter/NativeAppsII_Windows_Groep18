@@ -26,19 +26,35 @@ namespace NativeAppsII_Windows_Groep18.DataModel
             }
         }
 
-        private DateTime _date;
-        public DateTime Date
+        private DateTime _startDate;
+        public DateTime StartDate
         {
             get
             {
-                return _date;
+                return _startDate;
             }
             set
             {
-                _date = value;
-                OnPropertyChanged("Date");
+                _startDate = value;
+                OnPropertyChanged("StartDate");
             }
         }
+
+        private DateTime _endDate;
+        public DateTime EndDate
+        {
+            get
+            {
+                return _endDate;
+            }
+            set
+            {
+                _endDate = value;
+                OnPropertyChanged("EndDate");
+            }
+        }
+
+        public ObservableCollection<Item> Items { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
