@@ -9,7 +9,8 @@ namespace Travel_list_API.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public ICollection<Item> Items { get; private set; }
         public ICollection<Task> Tasks { get; private set; }
 
@@ -18,10 +19,11 @@ namespace Travel_list_API.Models
             Tasks = new List<Task>();
         }
 
-        public TravelList(String Name, DateTime Date)
+        public TravelList(String Name, DateTime StartDate, DateTime EndDate)
         {
             this.Name = Name;
-            this.Date = Date;
+            this.StartDate = StartDate;
+            this.EndDate = EndDate;
         }
 
         public void AddItem(Item item) => Items.Add(item);

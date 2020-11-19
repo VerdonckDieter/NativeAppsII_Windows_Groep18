@@ -32,11 +32,11 @@ namespace Travel_list_API.Data
                 .HasForeignKey("TravelListId");
 
             builder.Entity<TravelList>().HasData(
-                new TravelList() { Id = 1, Name = "Test1", Date = DateTime.Now },
-                new TravelList() { Id = 2, Name = "Test2", Date = DateTime.Now },
-                new TravelList() { Id = 3, Name = "Test3", Date = DateTime.Now },
-                new TravelList() { Id = 4, Name = "Test4", Date = DateTime.Now },
-                new TravelList() { Id = 5, Name = "Test5", Date = DateTime.Now }
+                new TravelList() { Id = 1, Name = "Test1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) },
+                new TravelList() { Id = 2, Name = "Test2", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) },
+                new TravelList() { Id = 3, Name = "Test3", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) },
+                new TravelList() { Id = 4, Name = "Test4", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) },
+                new TravelList() { Id = 5, Name = "Test5", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) }
                 );
 
             builder.Entity<Item>().HasData(
