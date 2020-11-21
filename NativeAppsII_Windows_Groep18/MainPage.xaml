@@ -11,7 +11,7 @@
     <Grid>
         <NavigationView x:Name="navView" ItemInvoked="NavView_ItemInvoked">
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="TravelList" Icon="Home"></NavigationViewItem>
+                <NavigationViewItem Content="Home" Icon="Home"></NavigationViewItem>
                 <NavigationViewItem Content="Add TravelList" Icon="Add"></NavigationViewItem>
             </NavigationView.MenuItems>
 
