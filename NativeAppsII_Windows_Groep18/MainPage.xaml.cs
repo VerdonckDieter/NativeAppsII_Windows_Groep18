@@ -26,14 +26,14 @@ namespace NativeAppsII_Windows_Groep18
         public MainPage()
         {
             this.InitializeComponent();
-            mainContent.Navigate(typeof(Overview));
+            mainContent.Navigate(typeof(MasterDetail));
         }
 
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            if (args.InvokedItem.Equals("TravelList"))
+            if (args.InvokedItem.Equals("Home"))
             {
-                mainContent.Navigate(typeof(Overview));
+                mainContent.Navigate(typeof(MasterDetail));
             }
 
             if (args.InvokedItem.Equals("Add TravelList"))

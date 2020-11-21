@@ -131,8 +131,8 @@
     <Compile Include="View\AddTravelListView.xaml.cs">
       <DependentUpon>AddTravelListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Overview.xaml.cs">
-      <DependentUpon>Overview.xaml</DependentUpon>
+    <Compile Include="View\MasterDetail.xaml.cs">
+      <DependentUpon>MasterDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TravelListDetail.xaml.cs">
       <DependentUpon>TravelListDetail.xaml</DependentUpon>
@@ -168,7 +168,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Overview.xaml">
+    <Page Include="View\MasterDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,6 +180,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>7.0.0-preview4</Version>
     </PackageReference>
     <PackageReference Include="MvvmLight">
       <Version>5.4.1.1</Version>

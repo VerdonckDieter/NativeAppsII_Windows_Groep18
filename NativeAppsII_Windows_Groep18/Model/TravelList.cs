@@ -54,7 +54,7 @@ namespace NativeAppsII_Windows_Groep18.DataModel
             }
         }
 
-        public ObservableCollection<Item> Items { get; }
+        public ObservableCollection<Item> Items { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
