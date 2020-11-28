@@ -9,7 +9,7 @@ namespace Travel_list_API.Models
     {
         public String StartLocation { get;  set;  }
         public String Destination { get; set; }
-        public IList<String> StopOvers { get;  set;  }
+        public List<String> StopOvers { get;  set;  }
         public String Transport { get;  set; }
 
         public Itinerary()
