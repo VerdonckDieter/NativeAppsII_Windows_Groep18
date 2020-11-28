@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel_list_UWP", "NativeAppsII_Windows_Groep18\Travel_list_UWP.csproj", "{6EA3286D-A57B-4E77-B063-FAC3F34C2AED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel_list_API", "Travel_list_API\Travel_list_API.csproj", "{5F20C643-8301-4D31-A23D-48927E17F51D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travel_list_API", "Travel_list_API\Travel_list_API.csproj", "{5F20C643-8301-4D31-A23D-48927E17F51D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

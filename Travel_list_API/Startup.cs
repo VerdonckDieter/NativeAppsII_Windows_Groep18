@@ -30,11 +30,23 @@ namespace Travel_list_API
         {
             services.AddControllers();
             services.AddMvc().AddXmlSerializerFormatters();
+
+            //services.AddScoped<TravelListDataInit>();
+            services.AddScoped<ITravelListRepository, TravelListRepository>();
             services.AddDbContext<TravelListContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<ITravelListRepository, TravelListRepository>();
+            //services.AddDbContext<TravelListContext>(Options =>
+                //Options.UseSqlServer(Configuration.GetConnectionString("Context")));
 
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
+
+            services.AddSwaggerDocument(c =>
+            {
+                c.DocumentName = "apidocs";
+                c.Title = "Windows API";
+                c.Version = "v1";
+                c.Description = "The Windows API documentation.";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +56,9 @@ namespace Travel_list_API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseRouting();
 
@@ -55,6 +70,8 @@ namespace Travel_list_API
             {
                 endpoints.MapControllers();
             });
+
+            //init.InitializeData().Wait();
         }
     }
 }
