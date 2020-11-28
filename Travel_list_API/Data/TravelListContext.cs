@@ -10,26 +10,22 @@ namespace Travel_list_API.Data
     public class TravelListContext : DbContext
     {
         public DbSet<TravelList> TravelLists { get; set; }
-
+        //public DbSet<Item> Items { get; set; }
+        //public DbSet<Models.Task> Tasks { get; set; }
 
         public TravelListContext(DbContextOptions<TravelListContext> options) : base(options) { }
 
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //necessary for supporting the Add-Migration command from Pack Man Console
-            var connectionstring = @"Server=(localdb)\MSSQLLocalDB;Database=TravelListDB;Trusted_Connection=True;MultipleActiveResultSets=true";
-            optionsBuilder.UseSqlServer(connectionstring);
-        }*/
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //base.OnModelCreating(builder);
-
             builder.Entity<TravelList>()
                 .HasMany(t => t.Items)
                 .WithOne()
-                .IsRequired()
-                .HasForeignKey("TravelListId");
+                .IsRequired();
+
+            builder.Entity<TravelList>()
+                .HasMany(t => t.Tasks)
+                .WithOne()
+                .IsRequired();
 
             builder.Entity<TravelList>().HasData(
                 new TravelList() { Id = 1, Name = "Test1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) },
