@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\TravelList.cs" />

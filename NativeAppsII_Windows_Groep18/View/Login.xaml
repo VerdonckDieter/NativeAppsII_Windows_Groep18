@@ -7,10 +7,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid>
-      <Grid.RowDefinitions>
-        
-      </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+        <TextBlock  Grid.Row="0" Text="Travel List App" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid  Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="LoginMail" Grid.Row="0" Header="E-mail" PlaceholderText="Enter your e-mail" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20"/>
+
+            <Button x:Name="LoginButton" Grid.Row="2" Click="LoginUser" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Login" />
+
+        </Grid>
     </Grid>
 </Page>
