@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Travel_list_API.Models;
 
 namespace Travel_list_API.Data
@@ -12,6 +9,7 @@ namespace Travel_list_API.Data
         public DbSet<TravelList> TravelLists { get; set; }
         //public DbSet<Item> Items { get; set; }
         //public DbSet<Models.Task> Tasks { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
         public TravelListContext(DbContextOptions<TravelListContext> options) : base(options) { }
 
@@ -27,12 +25,21 @@ namespace Travel_list_API.Data
                 .WithOne()
                 .IsRequired();
 
+            builder.Entity<Client>()
+                .HasMany(c => c.TravelLists)
+                .WithOne()
+                .IsRequired();
+
+            builder.Entity<Client>().HasData(
+                new Client() { Id = 1, Email = "client@gmail.com", FirstName = "Pog", LastName = "Champ", BirthDate = DateTime.Now }
+                );
+
             builder.Entity<TravelList>().HasData(
-                new TravelList() { Id = 1, Name = "Test1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) },
-                new TravelList() { Id = 2, Name = "Test2", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) },
-                new TravelList() { Id = 3, Name = "Test3", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) },
-                new TravelList() { Id = 4, Name = "Test4", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) },
-                new TravelList() { Id = 5, Name = "Test5", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) }
+                new TravelList() { Id = 1, Name = "Test1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
+                new TravelList() { Id = 2, Name = "Test2", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
+                new TravelList() { Id = 3, Name = "Test3", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
+                new TravelList() { Id = 4, Name = "Test4", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
+                new TravelList() { Id = 5, Name = "Test5", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 }
                 );
 
             builder.Entity<Item>().HasData(
