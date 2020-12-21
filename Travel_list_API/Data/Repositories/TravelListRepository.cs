@@ -11,9 +11,9 @@ namespace Travel_list_API.Data.Repositories
     {
         private readonly TravelListContext _dbContext;
         private readonly DbSet<TravelList> _travelLists; 
-        public TravelListRepository(TravelListContext dBContext) { 
-            _dbContext = dBContext; 
-            _travelLists = dBContext.TravelLists; 
+        public TravelListRepository(TravelListContext dbContext) { 
+            _dbContext = dbContext; 
+            _travelLists = dbContext.TravelLists; 
         }
 
         public void Add(TravelList travelList) => _travelLists.AddAsync(travelList);
