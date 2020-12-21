@@ -10,8 +10,8 @@ using Travel_list_API.Data;
 namespace Travel_list_API.Migrations
 {
     [DbContext(typeof(TravelListContext))]
-    [Migration("20201119165118_Test")]
-    partial class Test
+    [Migration("20201221225942_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,40 @@ namespace Travel_list_API.Migrations
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Travel_list_API.Models.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BirthDate = new DateTime(2020, 12, 21, 23, 59, 41, 824, DateTimeKind.Local).AddTicks(3751),
+                            Email = "client@gmail.com",
+                            FirstName = "Pog",
+                            LastName = "Champ"
+                        });
+                });
 
             modelBuilder.Entity("Travel_list_API.Models.Item", b =>
                 {
@@ -134,7 +168,7 @@ namespace Travel_list_API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TravelListId")
+                    b.Property<int>("TravelListId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -151,6 +185,9 @@ namespace Travel_list_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
@@ -162,43 +199,50 @@ namespace Travel_list_API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClientId");
+
                     b.ToTable("TravelLists");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            EndDate = new DateTime(2020, 11, 24, 17, 51, 17, 841, DateTimeKind.Local).AddTicks(2026),
+                            ClientId = 1,
+                            EndDate = new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(1923),
                             Name = "Test1",
-                            StartDate = new DateTime(2020, 11, 19, 17, 51, 17, 839, DateTimeKind.Local).AddTicks(4530)
+                            StartDate = new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(1605)
                         },
                         new
                         {
                             Id = 2,
-                            EndDate = new DateTime(2020, 11, 24, 17, 51, 17, 841, DateTimeKind.Local).AddTicks(2471),
+                            ClientId = 1,
+                            EndDate = new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2491),
                             Name = "Test2",
-                            StartDate = new DateTime(2020, 11, 19, 17, 51, 17, 841, DateTimeKind.Local).AddTicks(2457)
+                            StartDate = new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2475)
                         },
                         new
                         {
                             Id = 3,
-                            EndDate = new DateTime(2020, 11, 24, 17, 51, 17, 841, DateTimeKind.Local).AddTicks(2484),
+                            ClientId = 1,
+                            EndDate = new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2508),
                             Name = "Test3",
-                            StartDate = new DateTime(2020, 11, 19, 17, 51, 17, 841, DateTimeKind.Local).AddTicks(2480)
+                            StartDate = new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2505)
                         },
                         new
                         {
                             Id = 4,
-                            EndDate = new DateTime(2020, 11, 24, 17, 51, 17, 841, DateTimeKind.Local).AddTicks(2490),
+                            ClientId = 1,
+                            EndDate = new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2514),
                             Name = "Test4",
-                            StartDate = new DateTime(2020, 11, 19, 17, 51, 17, 841, DateTimeKind.Local).AddTicks(2487)
+                            StartDate = new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2512)
                         },
                         new
                         {
                             Id = 5,
-                            EndDate = new DateTime(2020, 11, 24, 17, 51, 17, 841, DateTimeKind.Local).AddTicks(2496),
+                            ClientId = 1,
+                            EndDate = new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2521),
                             Name = "Test5",
-                            StartDate = new DateTime(2020, 11, 19, 17, 51, 17, 841, DateTimeKind.Local).AddTicks(2493)
+                            StartDate = new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2518)
                         });
                 });
 
@@ -215,7 +259,18 @@ namespace Travel_list_API.Migrations
                 {
                     b.HasOne("Travel_list_API.Models.TravelList", null)
                         .WithMany("Tasks")
-                        .HasForeignKey("TravelListId");
+                        .HasForeignKey("TravelListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Travel_list_API.Models.TravelList", b =>
+                {
+                    b.HasOne("Travel_list_API.Models.Client", null)
+                        .WithMany("TravelLists")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
