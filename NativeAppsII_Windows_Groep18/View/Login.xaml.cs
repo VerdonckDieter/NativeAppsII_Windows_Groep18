@@ -31,12 +31,12 @@ namespace NativeAppsII_Windows_Groep18.View
             LoginViewModel = new LoginViewModel();
         }
 
-        private void LoginUser(object sender, RoutedEventArgs e)
+        private async void LoginUser(object sender, RoutedEventArgs e)
         {
             string mail = LoginMail.Text;
             try
             {
-                LoginViewModel.Login(mail);
+                await LoginViewModel.Login(mail);
                 this.Frame.Navigate(typeof(MasterDetail));
             }
             catch (Exception ex)
@@ -47,6 +47,11 @@ namespace NativeAppsII_Windows_Groep18.View
                 dialog.ShowAsync();
             }
 
+        }
+
+        private void NavigateToRegister(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Register));
         }
     }
 }

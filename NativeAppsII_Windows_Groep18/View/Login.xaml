@@ -7,22 +7,60 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ScreenSizes">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <TextBlock  Grid.Row="0" Text="Travel List App" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Grid  Grid.Row="1">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50*"/>
                 <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
             </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Row="0" VerticalAlignment="Center" Margin="20">
+                <TextBox x:Name="LoginMail" Grid.Row="0" Header="E-mail" PlaceholderText="Enter your e-mail" Margin="0, 0, 0, 24" HorizontalAlignment="Stretch"/>
 
-            <TextBox x:Name="LoginMail" Grid.Row="0" Header="E-mail" PlaceholderText="Enter your e-mail" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20"/>
+                <Button x:Name="LoginButton" Grid.Row="1" Click="LoginUser" Content="Login" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White"/>
+            </StackPanel>
 
-            <Button x:Name="LoginButton" Grid.Row="2" Click="LoginUser" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Login" />
+            <TextBlock Grid.Row="1"  Text="Don't have an account yet?" VerticalAlignment="Bottom" HorizontalAlignment="Center"  />
 
+            <Button Grid.Row="2" x:Name="NavigateButton" Click="NavigateToRegister" Content="Register" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="CornflowerBlue" FontWeight="SemiBold">
+                <Button.Background>
+                    <SolidColorBrush Opacity="0"/>
+                </Button.Background>
+            </Button>
         </Grid>
     </Grid>
 </Page>
