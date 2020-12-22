@@ -12,8 +12,8 @@ namespace Travel_list_API.Models
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public ICollection<Item> Items { get; private set; }
-        public ICollection<Task> Tasks { get; private set; }
+        public List<Item> Items { get; private set; }
+        public List<Task> Tasks { get; private set; }
 
         public TravelList() {
             Items = new List<Item>();

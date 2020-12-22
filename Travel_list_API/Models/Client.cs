@@ -12,7 +12,7 @@ namespace Travel_list_API.Models
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public ICollection<TravelList> TravelLists { get; set; }
+        public List<TravelList> TravelLists { get; set; }
 
         public Client()
         {
