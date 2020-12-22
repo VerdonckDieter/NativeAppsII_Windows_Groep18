@@ -9,7 +9,7 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
     public class LoginViewModel
     {
         public Client Client { get; set; }
-        public async void Login(string email)
+        public async System.Threading.Tasks.Task Login(string email)
         {
             HttpClient client = new HttpClient();
             try
@@ -17,7 +17,6 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
                 var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/client/" + email));
                 var loggedInClient = JsonConvert.DeserializeObject<Client>(json);
                 Client = loggedInClient;
-
             }
             catch (HttpRequestException)
             {
