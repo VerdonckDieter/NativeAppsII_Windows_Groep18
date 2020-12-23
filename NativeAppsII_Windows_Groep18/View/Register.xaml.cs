@@ -27,11 +27,11 @@ namespace NativeAppsII_Windows_Groep18.View
         public RegisterViewModel RegisterViewModel;
         public Register()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             RegisterViewModel = new RegisterViewModel();
         }
 
-        private void RegisterUser(object sender, RoutedEventArgs e)
+        private async void RegisterUser(object sender, RoutedEventArgs e)
         {
             string email = RegisterEmail.Text;
             string firstname = RegisterFirstname.Text;
@@ -39,9 +39,8 @@ namespace NativeAppsII_Windows_Groep18.View
             DateTime birthdate = RegisterBirthdate.Date.DateTime;
             try
             {
-                Task task = RegisterViewModel.Register(email, firstname, lastname, birthdate);
-                task.Wait();
-                this.Frame.Navigate(typeof(Login));
+                await RegisterViewModel.Register(email, firstname, lastname, birthdate);
+                Frame.Navigate(typeof(Login));
             }
             catch (Exception ex)
             {
