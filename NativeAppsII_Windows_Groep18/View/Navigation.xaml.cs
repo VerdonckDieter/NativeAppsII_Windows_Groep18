@@ -22,24 +22,35 @@ namespace NativeAppsII_Windows_Groep18.View
     /// </summary>
     public sealed partial class Navigation : Page
     {
+        private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
+        {
+            ("Home", typeof(MasterDetail)),
+            ("Add TravelList", typeof(AddTravelListView)),
+            ("Logout", typeof(MainPage))
+        };
         public Navigation()
         {
-            this.InitializeComponent();
-            this.Content.Navigate(typeof(MasterDetail));
+            InitializeComponent();
+            var page = _pages.FirstOrDefault(p => p.Tag.Equals("Home"));
+            Type _page = page.Page;
+            Content.Navigate(_page);
         }
 
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            switch (args.InvokedItem.ToString())
+            Type _page = null;
+            var item = _pages.FirstOrDefault(p => p.Tag.Equals(args.InvokedItem.ToString()));
+            _page = item.Page;
+            switch (item.Tag)
             {
                 case "Home":
-                    Content.Navigate(typeof(MasterDetail));
+                    Content.Navigate(_page);
                     break;
                 case "Add TravelList":
-                    Content.Navigate(typeof(AddTravelListView));
+                    Content.Navigate(_page);
                     break;
                 case "Logout":
-                    Content.Navigate(typeof(MainPage));
+                    Frame.Navigate(_page);
                     break;
                 default:
                     break;
