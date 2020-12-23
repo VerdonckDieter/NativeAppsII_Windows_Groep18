@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NativeAppsII_Windows_Groep18.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,36 +23,36 @@ namespace NativeAppsII_Windows_Groep18.View
     /// </summary>
     public sealed partial class AddTravelListView : Page
     {
-
+        public TravelListViewModel travelListViewModel;
 
         public AddTravelListView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+            travelListViewModel = new TravelListViewModel();
             InitializeElements();
-            CenterElements();
         }
 
         private void InitializeElements()
         {
-            pageAdd.FontFamily = new FontFamily("Helvetica");
-
-            startDateInput.MinDate = DateTimeOffset.Now;
-            endDateInput.MinDate = DateTimeOffset.Now;
+            StartDate.MinDate = DateTimeOffset.Now;
+            EndDate.MinDate = DateTimeOffset.Now;
         }
 
-        public void CenterElements()
+        private async void AddTravelList(object sender, RoutedEventArgs e)
         {
-            foreach(var child in stackPanelAdd.Children.OfType<FrameworkElement>())
+            string name = Name.Text;
+            DateTime startdate = StartDate.Date.Value.DateTime;
+            DateTime enddate = EndDate.Date.Value.DateTime;
+            try
             {
-                if(child is TextBox)
-                {
-                    child.HorizontalAlignment = HorizontalAlignment.Stretch;
-                }
-                else
-                {
-                    child.HorizontalAlignment = HorizontalAlignment.Left;
-                    child.Margin = new Thickness(0,20,0,5);
-                }
+                await travelListViewModel.AddTravelList(name, startdate, enddate);
+            }
+            catch (Exception ex)
+            {
+                var dialog = new ContentDialog();
+
+                dialog.CloseButtonText = "Close";
+                dialog.ShowAsync();
             }
         }
     }

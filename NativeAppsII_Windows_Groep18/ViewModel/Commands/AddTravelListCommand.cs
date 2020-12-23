@@ -39,7 +39,10 @@ namespace NativeAppsII_Windows_Groep18.ViewModel.Commands
 
         public void Execute(object parameter) => AddTravelList(parameter as String);
 
-        private async void AddTravelList(String t) => await ViewModel.AddTravelList(t); 
+        private void AddTravelList(String t)
+        {
+
+        }
         #endregion
     }
 }

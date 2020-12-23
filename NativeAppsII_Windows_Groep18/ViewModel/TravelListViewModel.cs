@@ -12,8 +12,6 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
     public class TravelListViewModel
     {
         #region Properties
-        public AddTravelListCommand AddCommand { get; set; }
-
         public ObservableCollection<TravelList> TravelLists { get; set; }
         #endregion
 
@@ -22,7 +20,6 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
         {
             TravelLists = new ObservableCollection<TravelList>();
             LoadTravelListsFromAPI();
-            AddCommand = new AddTravelListCommand(this);
         }
         #endregion
 
@@ -38,10 +35,9 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
             }
         }
 
-        public async Task AddTravelList(String name)
+        public async Task AddTravelList(String name, DateTime startdate, DateTime enddate)
         {
-            //Nog travelList aanmaken maar weet nog niet hoe
-            var travelList = new TravelList() { Name = name, StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) };
+            var travelList = new TravelList() { Name = name, StartDate = startdate, EndDate = enddate };
             var travelListJson = JsonConvert.SerializeObject(travelList);
 
             HttpClient client = new HttpClient();
