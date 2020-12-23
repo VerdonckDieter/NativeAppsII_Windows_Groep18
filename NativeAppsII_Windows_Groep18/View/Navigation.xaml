@@ -5,8 +5,13 @@
     xmlns:local="using:NativeAppsII_Windows_Groep18.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:NativeAppsII_Windows_Groep18.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:NavigationViewModel></vm:NavigationViewModel>
+    </Page.DataContext>
 
     <Grid>
         <NavigationView 
@@ -27,13 +32,17 @@
                     Content="Itinerary" 
                     Icon="Map">
                 </NavigationViewItem>
-            </NavigationView.MenuItems>
-            <NavigationView.PaneFooter>
                 <NavigationViewItem 
+                    VerticalAlignment="Bottom"
+                    Content="{Binding Client.Email}"
+                    Icon="Contact">
+                </NavigationViewItem>
+                <NavigationViewItem 
+                    VerticalAlignment="Bottom"
                     Content="Logout" 
                     Icon="BlockContact">
                 </NavigationViewItem>
-            </NavigationView.PaneFooter>
+            </NavigationView.MenuItems>
             <Frame x:Name="Content" />
         </NavigationView>
     </Grid>
