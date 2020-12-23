@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
                 <VisualState x:Name="Phone">
@@ -16,23 +16,38 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="RegisterTitle.FontSize" Value="25"></Setter>
+                        <Setter Target="NavigateButtonText.FontSize" Value="15"></Setter>
+                        <Setter Target="NavigateButton.FontSize" Value="15"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".05*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".9*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".05*"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Tablet">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600"/>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="RegisterTitle.FontSize" Value="30"></Setter>
+                        <Setter Target="NavigateButtonText.FontSize" Value="20"></Setter>
+                        <Setter Target="NavigateButton.FontSize" Value="20"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".125*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".75*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".125*"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Desktop">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="RegisterTitle.FontSize" Value="35"></Setter>
+                        <Setter Target="NavigateButtonText.FontSize" Value="25"></Setter>
+                        <Setter Target="NavigateButton.FontSize" Value="25"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".25*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".5*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".25*"></Setter>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -43,8 +58,13 @@
             <RowDefinition Height="3*" />
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Create an account" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="CornflowerBlue"/>
-        <Grid Grid.Row="1" x:Name="GridRegister" Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="RegisterTitle" Grid.Row="0" Grid.Column="1" Text="Create an account" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="CornflowerBlue"/>
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="GridRegister" Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
@@ -52,18 +72,18 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" x:Name="RegisterEmail" Header="E-mail" PlaceholderText="Enter your e-mail"/>
-            <TextBox Grid.Row="1" x:Name="RegisterFirstname" Header="First name" PlaceholderText="Enter your first name"/>
-            <TextBox Grid.Row="2" x:Name="RegisterLastname" Header="Last name" PlaceholderText="Enter your last name"/>
+            <TextBox Grid.Row="0" x:Name="RegisterEmail" Header="E-mail" PlaceholderText="Enter your e-mail" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" x:Name="RegisterFirstname" Header="First name" PlaceholderText="Enter your first name" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="2" x:Name="RegisterLastname" Header="Last name" PlaceholderText="Enter your last name" VerticalAlignment="Center"/>
             <DatePicker Grid.Row="3" x:Name="RegisterBirthdate" Header="Date of birth" HorizontalAlignment="Stretch" />
             <Button Grid.Row="4" x:Name="RegisterButton" Click="RegisterUser" Content="Create account" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White" />
         </Grid>
-        <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+        <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Already have an account?" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="CornflowerBlue"/>
+            <TextBlock x:Name="NavigateButtonText" Grid.Column="0" Text="Already have an account?" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="CornflowerBlue"/>
             <Button Grid.Column="1" x:Name="NavigateButton" Click="NavigateToLogin" Content="Login" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="CornflowerBlue" FontWeight="SemiBold">
                 <Button.Background>
                     <SolidColorBrush Opacity="0"/>
