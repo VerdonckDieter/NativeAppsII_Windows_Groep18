@@ -33,5 +33,10 @@ namespace NativeAppsII_Windows_Groep18
         {
             this.Frame.Navigate(typeof(Login));
         }
+
+        private void RegisterUser(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Register));
+        }
     }
 }

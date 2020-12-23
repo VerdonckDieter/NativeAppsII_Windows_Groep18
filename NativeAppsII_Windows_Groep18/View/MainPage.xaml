@@ -10,9 +10,9 @@
     <Page.Background>
         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
             <GradientStop Color="White" Offset="0.0" />
-            <GradientStop Color="#A3E8FE" Offset="0.19" />
-            <GradientStop Color="#86D7F1" Offset="1.0" />
-            <GradientStop Color="#FF86D7F1" Offset="0.286"/>
+            <GradientStop Color="#A3E8FE" Offset="0.25" />
+            <GradientStop Color="#86D7F1" Offset="0.75" />
+            <GradientStop Color="#FF86D7F1" Offset="1.0"/>
         </LinearGradientBrush>
     </Page.Background>
 
@@ -24,7 +24,8 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="Login.FontSize" Value="20"></Setter>
+                        <Setter Target="Register.FontSize" Value="20"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Tablet">
@@ -32,7 +33,8 @@
                         <AdaptiveTrigger MinWindowWidth="600"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="Login.FontSize" Value="15"></Setter>
+                        <Setter Target="Register.FontSize" Value="15"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Desktop">
@@ -40,7 +42,8 @@
                         <AdaptiveTrigger MinWindowWidth="1000"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="Login.FontSize" Value="15"></Setter>
+                        <Setter Target="Register.FontSize" Value="15"></Setter>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -51,6 +54,10 @@
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <TextBlock  Grid.Row="0" Text="Travel List App" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Grid.Row="1" x:Name="Login" Click="LoginUser" Content="Login" HorizontalAlignment="Center" CornerRadius="5" />
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button  x:Name="Login" Click="LoginUser" Content="Login" HorizontalAlignment="Center" CornerRadius="5" Margin="0,0,0,24"/>
+            <Button  x:Name="Register" Click="RegisterUser" Content="Register" HorizontalAlignment="Center" CornerRadius="5" />
+        </StackPanel>
+        
     </Grid>
 </Page>
