@@ -121,9 +121,11 @@
     </Compile>
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\Singleton\ClientSingleton.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\TravelList.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\NavigationViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
