@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
                 <VisualState x:Name="Phone">
@@ -15,23 +15,38 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="LoginTitle.FontSize" Value="25"></Setter>
+                        <Setter Target="NavigateButtonText.FontSize" Value="15"></Setter>
+                        <Setter Target="NavigateButton.FontSize" Value="15"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".05*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".9*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".05*"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Tablet">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600"/>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="LoginTitle.FontSize" Value="30"></Setter>
+                        <Setter Target="NavigateButtonText.FontSize" Value="20"></Setter>
+                        <Setter Target="NavigateButton.FontSize" Value="20"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".125*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".75*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".125*"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Desktop">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="LoginTitle.FontSize" Value="35"></Setter>
+                        <Setter Target="NavigateButtonText.FontSize" Value="25"></Setter>
+                        <Setter Target="NavigateButton.FontSize" Value="25"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".25*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".5*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".25*"></Setter>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -41,8 +56,13 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
-        <TextBlock  Grid.Row="0" Text="Travel List App" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="LoginTitle" Grid.Row="0" Grid.Column="1" Text="Travel List App" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50*"/>
                 <RowDefinition Height="50*"/>
@@ -54,7 +74,7 @@
                 <Button x:Name="LoginButton" Grid.Row="1" Click="LoginUser" Content="Login" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White"/>
             </StackPanel>
 
-            <TextBlock Grid.Row="1"  Text="Don't have an account yet?" VerticalAlignment="Bottom" HorizontalAlignment="Center"  />
+            <TextBlock Grid.Row="1" x:Name="NavigateButtonText" Text="Don't have an account yet?" VerticalAlignment="Bottom" HorizontalAlignment="Center"  />
 
             <Button Grid.Row="2" x:Name="NavigateButton" Click="NavigateToRegister" Content="Register" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="CornflowerBlue" FontWeight="SemiBold">
                 <Button.Background>
