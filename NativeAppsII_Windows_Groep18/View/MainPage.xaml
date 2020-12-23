@@ -16,7 +16,7 @@
         </LinearGradientBrush>
     </Page.Background>
 
-    <Grid>
+    <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
                 <VisualState x:Name="Phone">
@@ -24,26 +24,38 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="Login.FontSize" Value="20"></Setter>
-                        <Setter Target="Register.FontSize" Value="20"></Setter>
+                        <Setter Target="MainPageTitle.FontSize" Value="25"></Setter>
+                        <Setter Target="Login.FontSize" Value="15"></Setter>
+                        <Setter Target="Register.FontSize" Value="15"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".05*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".9*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".05*"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Tablet">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600"/>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="Login.FontSize" Value="15"></Setter>
-                        <Setter Target="Register.FontSize" Value="15"></Setter>
+                        <Setter Target="MainPageTitle.FontSize" Value="30"></Setter>
+                        <Setter Target="Login.FontSize" Value="20"></Setter>
+                        <Setter Target="Register.FontSize" Value="20"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".125*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".75*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".125*"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Desktop">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="Login.FontSize" Value="15"></Setter>
-                        <Setter Target="Register.FontSize" Value="15"></Setter>
+                        <Setter Target="MainPageTitle.FontSize" Value="35"></Setter>
+                        <Setter Target="Login.FontSize" Value="25"></Setter>
+                        <Setter Target="Register.FontSize" Value="25"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".25*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".5*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".25*"></Setter>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -53,10 +65,15 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
-        <TextBlock  Grid.Row="0" Text="Travel List App" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button  x:Name="Login" Click="LoginUser" Content="Login" HorizontalAlignment="Center" CornerRadius="5" Margin="0,0,0,24"/>
-            <Button  x:Name="Register" Click="RegisterUser" Content="Register" HorizontalAlignment="Center" CornerRadius="5" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock  Grid.Row="0" x:Name="MainPageTitle" Grid.Column="1" Text="Travel List App" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+            <Button  x:Name="Login" Click="LoginUser" Content="Login" HorizontalAlignment="Stretch" CornerRadius="5" Margin="0,0,0,24"/>
+            <Button  x:Name="Register" Click="RegisterUser" Content="Register" HorizontalAlignment="Stretch" CornerRadius="5" />
         </StackPanel>
         
     </Grid>
