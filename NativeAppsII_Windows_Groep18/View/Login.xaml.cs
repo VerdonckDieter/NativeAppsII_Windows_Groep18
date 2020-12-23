@@ -37,7 +37,7 @@ namespace NativeAppsII_Windows_Groep18.View
             try
             {
                 await LoginViewModel.Login(mail);
-                this.Frame.Navigate(typeof(MasterDetail));
+                this.Frame.Navigate(typeof(Navigation));
             }
             catch (Exception ex)
             {
