@@ -15,25 +15,85 @@
     <Page.DataContext>
         <vm:TravelListViewModel></vm:TravelListViewModel>
     </Page.DataContext>
+    <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ScreenSizes">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="AddTravelListTitle.FontSize" Value="25"></Setter>
+                        <Setter Target="Name.FontSize" Value="15"></Setter>
+                        <Setter Target="StartDate.FontSize" Value="15"></Setter>
+                        <Setter Target="EndDate.FontSize" Value="15"></Setter>
+                        <Setter Target="AddTravelListButton.FontSize" Value="15"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".05*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".9*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".05*"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="AddTravelListTitle.FontSize" Value="30"></Setter>
+                        <Setter Target="Name.FontSize" Value="20"></Setter>
+                        <Setter Target="StartDate.FontSize" Value="20"></Setter>
+                        <Setter Target="EndDate.FontSize" Value="20"></Setter>
+                        <Setter Target="AddTravelListButton.FontSize" Value="20"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".125*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".75*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".125*"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="AddTravelListTitle.FontSize" Value="35"></Setter>
+                        <Setter Target="Name.FontSize" Value="20"></Setter>
+                        <Setter Target="StartDate.FontSize" Value="20"></Setter>
+                        <Setter Target="EndDate.FontSize" Value="20"></Setter>
+                        <Setter Target="AddTravelListButton.FontSize" Value="20"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".25*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".5*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".25*"></Setter>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
-    <StackPanel x:Name="stackPanelAdd" Width="450" VerticalAlignment="Center" Orientation="Vertical" >
-        <TextBlock Text="Title" />
-        <TextBox x:Name="nameInput" PlaceholderText="Name of TravelList" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="AddTravelListTitle" Grid.Row="0" Grid.Column="1" Text="New travel list" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid x:Name="InputGrid" Grid.Row="1" Grid.Column="1" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBox Grid.Row="0" Grid.ColumnSpan="2" x:Name="Name" Header="Name" PlaceholderText="Name of the travel list" VerticalAlignment="Center"/>
+            <CalendarDatePicker Grid.Row="1" Grid.Column="0" x:Name="StartDate" Header="Start date" HorizontalAlignment="Stretch" />
+            <CalendarDatePicker Grid.Row="1" Grid.Column="1" x:Name="EndDate" Header="End date"  HorizontalAlignment="Stretch" />
+            <Button x:Name="AddTravelListButton" Grid.Row="2" Grid.ColumnSpan="2" Click="AddTravelList" Content="Add travel list" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White"/>
 
-      <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical" Width="220" Margin="0,0,5,0">
-                <TextBlock Text="Start date" />
-                <CalendarDatePicker x:Name="startDateInput" HorizontalAlignment="Stretch"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="5,0,0,0" Width="220">
-                <TextBlock Text="End date" />
-                <CalendarDatePicker x:Name="endDateInput" HorizontalAlignment="Stretch"/>
-            </StackPanel>
-      </StackPanel>
-    </StackPanel>
-    <Page.BottomAppBar>
-        <CommandBar>
-            <AppBarButton Icon="Add" Label="Add TravelList" Command="{Binding AddCommand}" CommandParameter="{x:Bind nameInput.Text, Mode=OneWay}" />
-        </CommandBar>
-    </Page.BottomAppBar>
+        </Grid>
+    </Grid>
 </Page>
