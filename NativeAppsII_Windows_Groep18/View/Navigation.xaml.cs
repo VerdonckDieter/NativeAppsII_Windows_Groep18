@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NativeAppsII_Windows_Groep18.Model.Singleton;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,11 +27,13 @@ namespace NativeAppsII_Windows_Groep18.View
         {
             ("Home", typeof(MasterDetail)),
             ("Add TravelList", typeof(AddTravelListView)),
+            ("Account", typeof(Account)),
             ("Logout", typeof(MainPage))
         };
         public Navigation()
         {
             InitializeComponent();
+            InitializeElements();
             var page = _pages.FirstOrDefault(p => p.Tag.Equals("Home"));
             Type _page = page.Page;
             Content.Navigate(_page);
@@ -49,12 +52,21 @@ namespace NativeAppsII_Windows_Groep18.View
                 case "Add TravelList":
                     Content.Navigate(_page);
                     break;
+                case "Account":
+                    Content.Navigate(_page);
+                    break;
                 case "Logout":
                     Frame.Navigate(_page);
                     break;
                 default:
                     break;
             }
+        }
+
+        private void InitializeElements()
+        {
+            var binding = new Binding { Source = ClientSingleton.Instance.Client.Email, Mode = BindingMode.OneWay };
+            ClientEmail.SetBinding(NavigationViewItem.ContentProperty, binding);
         }
     }
 }

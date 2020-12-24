@@ -32,15 +32,18 @@
                     Content="Itinerary" 
                     Icon="Map">
                 </NavigationViewItem>
-                <NavigationViewItem 
-                    VerticalAlignment="Bottom"
-                    Content="{Binding Client.Email}"
-                    Icon="Contact">
+                <NavigationViewItem
+                    Content="Account"
+                    Icon="Account">
                 </NavigationViewItem>
                 <NavigationViewItem 
                     VerticalAlignment="Bottom"
                     Content="Logout" 
                     Icon="BlockContact">
+                </NavigationViewItem>
+                <NavigationViewItem 
+                    x:Name="ClientEmail"
+                    Icon="Contact">
                 </NavigationViewItem>
             </NavigationView.MenuItems>
             <Frame x:Name="Content" />
