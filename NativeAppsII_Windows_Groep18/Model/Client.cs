@@ -8,6 +8,7 @@ namespace NativeAppsII_Windows_Groep18.Model
 {
     public class Client : INotifyPropertyChanged
     {
+        public int Id { get; set; }
         private string _email;
         public string Email
         {
