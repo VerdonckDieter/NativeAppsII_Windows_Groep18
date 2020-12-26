@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Travel_list_API.Models
 {
@@ -25,5 +23,9 @@ namespace Travel_list_API.Models
             FirstName = firstname;
             LastName = lastname;
         }
+
+        public void AddTravelList(TravelList travelList) => TravelLists.Add(travelList);
+
+        public void RemoveTravelList(TravelList travelList) => TravelLists.Remove(travelList);
     }
 }
