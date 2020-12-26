@@ -1,5 +1,5 @@
 ﻿using NativeAppsII_Windows_Groep18.DataModel;
-using NativeAppsII_Windows_Groep18.ViewModel.Commands;
+using NativeAppsII_Windows_Groep18.Model.Singleton;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -27,7 +27,7 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
         private async void LoadTravelListsFromAPI()
         {
             HttpClient client = new HttpClient();
-            var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/travelLists/"));
+            var json = await client.GetStringAsync(new Uri(String.Format("http://localhost:5000/api/travelLists/{0}/travelLists", ClientSingleton.Instance.Client.Id)));
             var travelLists = JsonConvert.DeserializeObject<IList<TravelList>>(json);
             foreach (var travelList in travelLists)
             {
@@ -41,7 +41,7 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
             var travelListJson = JsonConvert.SerializeObject(travelList);
 
             HttpClient client = new HttpClient();
-            var res = await client.PostAsync(new Uri("http://localhost:5000/api/travelLists/"), new HttpStringContent(travelListJson, Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
+            var res = await client.PostAsync(new Uri(String.Format("http://localhost:5000/api/travelLists/{0}", ClientSingleton.Instance.Client.Id)), new HttpStringContent(travelListJson, Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
 
             if (res.IsSuccessStatusCode)
             {
