@@ -26,13 +26,10 @@ namespace Travel_list_API
             services.AddControllers();
             services.AddMvc().AddXmlSerializerFormatters();
 
-            //services.AddScoped<TravelListDataInit>();
             services.AddScoped<ITravelListRepository, TravelListRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
             services.AddDbContext<TravelListContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            //services.AddDbContext<TravelListContext>(Options =>
-                //Options.UseSqlServer(Configuration.GetConnectionString("Context")));
 
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
 
@@ -66,8 +63,6 @@ namespace Travel_list_API
             {
                 endpoints.MapControllers();
             });
-
-            //init.InitializeData().Wait();
         }
     }
 }
