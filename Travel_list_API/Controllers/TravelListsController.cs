@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Travel_list_API.Models;
 
@@ -18,46 +14,51 @@ namespace Travel_list_API.Controllers
             _travelListRepository = travelListRepository;
         }
 
-        [HttpGet]
-        public IEnumerable<TravelList> GetTravelLists() => _travelListRepository.GetTravelLists();
-
-        [HttpGet("{id}")]
-        public TravelList GetTravelListById(int id) => _travelListRepository.GetTravelListById(id);
-
-        [HttpPost]
-        public ActionResult<TravelList> PostTravelList(TravelList travelList)
+        [HttpGet("{clientId}/travelLists")]
+        public IEnumerable<TravelList> GetTravelLists(int clientId)
         {
-            _travelListRepository.Add(travelList);
+            return _travelListRepository.GetTravelLists(clientId);
+        }
+
+        [HttpGet("{clientId}/travelLists/{travelListId}")]
+        public TravelList GetTravelListById(int clientId, int travelListId)
+        {
+            return _travelListRepository.GetTravelListById(clientId, travelListId);
+        }
+
+        [HttpPost("{clientId}")]
+        public ActionResult<TravelList> PostTravelList(int clientId, TravelList travelList)
+        {
+            _travelListRepository.AddTravelList(clientId, travelList);
             _travelListRepository.SaveChanges();
 
             return CreatedAtAction(nameof(GetTravelListById), new { id = travelList.Id }, travelList);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult PutTravelList(int id, TravelList travelList)
+        [HttpPut("{travelListId}")]
+        public IActionResult PutTravelList(int travelListId, TravelList travelList)
         {
-            if (id != travelList.Id)
+            if (travelListId != travelList.Id)
             {
                 return BadRequest();
             }
-            _travelListRepository.Update(travelList);
+            _travelListRepository.UpdateTravelList(travelList);
             _travelListRepository.SaveChanges();
 
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult<TravelList> DeleteTravelList(int id)
+        [HttpDelete("{clientId}/travelLists/{travelListId}")]
+        public ActionResult<TravelList> DeleteTravelList(int clientId, int travelListId)
         {
-            TravelList travelList = _travelListRepository.GetTravelListById(id);
+            TravelList travelList = _travelListRepository.GetTravelListById(clientId, travelListId);
             if (travelList == null)
             {
                 return NotFound();
             }
-            _travelListRepository.Delete(travelList);
+            _travelListRepository.DeleteTravelList(clientId, travelList);
             _travelListRepository.SaveChanges();
             return travelList;
         }
-
     }
 }
