@@ -46,10 +46,18 @@ namespace Travel_list_API.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2020, 12, 21, 23, 59, 41, 824, DateTimeKind.Local).AddTicks(3751),
+                            BirthDate = new DateTime(2020, 12, 26, 15, 37, 28, 827, DateTimeKind.Local).AddTicks(5803),
                             Email = "client@gmail.com",
                             FirstName = "Pog",
                             LastName = "Champ"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BirthDate = new DateTime(2020, 12, 26, 15, 37, 28, 829, DateTimeKind.Local).AddTicks(3426),
+                            Email = "client2@gmail.com",
+                            FirstName = "Ayaya",
+                            LastName = "Clap"
                         });
                 });
 
@@ -79,7 +87,7 @@ namespace Travel_list_API.Migrations
 
                     b.HasIndex("TravelListId");
 
-                    b.ToTable("Item");
+                    b.ToTable("Items");
 
                     b.HasData(
                         new
@@ -173,7 +181,7 @@ namespace Travel_list_API.Migrations
 
                     b.HasIndex("TravelListId");
 
-                    b.ToTable("Task");
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("Travel_list_API.Models.TravelList", b =>
@@ -206,41 +214,41 @@ namespace Travel_list_API.Migrations
                         {
                             Id = 1,
                             ClientId = 1,
-                            EndDate = new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(1923),
+                            EndDate = new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(3555),
                             Name = "Test1",
-                            StartDate = new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(1605)
+                            StartDate = new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(3236)
                         },
                         new
                         {
                             Id = 2,
                             ClientId = 1,
-                            EndDate = new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2491),
+                            EndDate = new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4192),
                             Name = "Test2",
-                            StartDate = new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2475)
+                            StartDate = new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4174)
                         },
                         new
                         {
                             Id = 3,
                             ClientId = 1,
-                            EndDate = new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2508),
+                            EndDate = new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4210),
                             Name = "Test3",
-                            StartDate = new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2505)
+                            StartDate = new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4207)
                         },
                         new
                         {
                             Id = 4,
-                            ClientId = 1,
-                            EndDate = new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2514),
+                            ClientId = 2,
+                            EndDate = new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4216),
                             Name = "Test4",
-                            StartDate = new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2512)
+                            StartDate = new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4214)
                         },
                         new
                         {
                             Id = 5,
-                            ClientId = 1,
-                            EndDate = new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2521),
+                            ClientId = 2,
+                            EndDate = new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4223),
                             Name = "Test5",
-                            StartDate = new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2518)
+                            StartDate = new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4220)
                         });
                 });
 

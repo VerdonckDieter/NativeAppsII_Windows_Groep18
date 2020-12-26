@@ -46,22 +46,22 @@ namespace Travel_list_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Item",
+                name: "Items",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    TravelListId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Amount = table.Column<int>(nullable: false),
                     Added = table.Column<bool>(nullable: false),
-                    Category = table.Column<int>(nullable: false),
-                    TravelListId = table.Column<int>(nullable: false)
+                    Category = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Item", x => x.Id);
+                    table.PrimaryKey("PK_Items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Item_TravelLists_TravelListId",
+                        name: "FK_Items_TravelLists_TravelListId",
                         column: x => x.TravelListId,
                         principalTable: "TravelLists",
                         principalColumn: "Id",
@@ -69,19 +69,19 @@ namespace Travel_list_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Task",
+                name: "Tasks",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    TravelListId = table.Column<int>(nullable: false)
+                    TravelListId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Task", x => x.Id);
+                    table.PrimaryKey("PK_Tasks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Task_TravelLists_TravelListId",
+                        name: "FK_Tasks_TravelLists_TravelListId",
                         column: x => x.TravelListId,
                         principalTable: "TravelLists",
                         principalColumn: "Id",
@@ -91,22 +91,27 @@ namespace Travel_list_API.Migrations
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "Id", "BirthDate", "Email", "FirstName", "LastName" },
-                values: new object[] { 1, new DateTime(2020, 12, 21, 23, 59, 41, 824, DateTimeKind.Local).AddTicks(3751), "client@gmail.com", "Pog", "Champ" });
+                values: new object[] { 1, new DateTime(2020, 12, 26, 15, 37, 28, 827, DateTimeKind.Local).AddTicks(5803), "client@gmail.com", "Pog", "Champ" });
+
+            migrationBuilder.InsertData(
+                table: "Clients",
+                columns: new[] { "Id", "BirthDate", "Email", "FirstName", "LastName" },
+                values: new object[] { 2, new DateTime(2020, 12, 26, 15, 37, 28, 829, DateTimeKind.Local).AddTicks(3426), "client2@gmail.com", "Ayaya", "Clap" });
 
             migrationBuilder.InsertData(
                 table: "TravelLists",
                 columns: new[] { "Id", "ClientId", "EndDate", "Name", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(1923), "Test1", new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(1605) },
-                    { 2, 1, new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2491), "Test2", new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2475) },
-                    { 3, 1, new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2508), "Test3", new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2505) },
-                    { 4, 1, new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2514), "Test4", new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2512) },
-                    { 5, 1, new DateTime(2020, 12, 26, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2521), "Test5", new DateTime(2020, 12, 21, 23, 59, 41, 827, DateTimeKind.Local).AddTicks(2518) }
+                    { 1, 1, new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(3555), "Test1", new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(3236) },
+                    { 2, 1, new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4192), "Test2", new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4174) },
+                    { 3, 1, new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4210), "Test3", new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4207) },
+                    { 4, 2, new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4216), "Test4", new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4214) },
+                    { 5, 2, new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4223), "Test5", new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4220) }
                 });
 
             migrationBuilder.InsertData(
-                table: "Item",
+                table: "Items",
                 columns: new[] { "Id", "Added", "Amount", "Category", "Name", "TravelListId" },
                 values: new object[,]
                 {
@@ -121,13 +126,13 @@ namespace Travel_list_API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Item_TravelListId",
-                table: "Item",
+                name: "IX_Items_TravelListId",
+                table: "Items",
                 column: "TravelListId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_TravelListId",
-                table: "Task",
+                name: "IX_Tasks_TravelListId",
+                table: "Tasks",
                 column: "TravelListId");
 
             migrationBuilder.CreateIndex(
@@ -139,10 +144,10 @@ namespace Travel_list_API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Item");
+                name: "Items");
 
             migrationBuilder.DropTable(
-                name: "Task");
+                name: "Tasks");
 
             migrationBuilder.DropTable(
                 name: "TravelLists");
