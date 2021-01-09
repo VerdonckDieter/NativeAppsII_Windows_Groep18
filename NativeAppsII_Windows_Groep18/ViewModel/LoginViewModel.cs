@@ -10,15 +10,25 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
     {
         public Client Client { get; set; }
         private readonly ClientSingleton clientSingleton = ClientSingleton.Instance;
+        public bool Succes;
         public async System.Threading.Tasks.Task Login(string email)
         {
             HttpClient client = new HttpClient();
             try
             {
                 var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/client/" + email));
-                var loggedInClient = JsonConvert.DeserializeObject<Client>(json);
-                Client = loggedInClient;
-                clientSingleton.Client = Client;
+                if (!string.IsNullOrEmpty(json))
+                {
+                    var loggedInClient = JsonConvert.DeserializeObject<Client>(json);
+                    Client = loggedInClient;
+                    clientSingleton.Client = Client;
+                    Succes = true;
+                }
+                else
+                {
+                    Succes = false;
+                }
+
             }
             catch (HttpRequestException)
             {

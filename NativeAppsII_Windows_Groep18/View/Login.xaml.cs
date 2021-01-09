@@ -27,7 +27,7 @@ namespace NativeAppsII_Windows_Groep18.View
         public LoginViewModel LoginViewModel;
         public Login()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             LoginViewModel = new LoginViewModel();
         }
 
@@ -37,7 +37,16 @@ namespace NativeAppsII_Windows_Groep18.View
             try
             {
                 await LoginViewModel.Login(mail);
-                this.Frame.Navigate(typeof(Navigation));
+                if (LoginViewModel.Succes)
+                {
+                    Frame.Navigate(typeof(Navigation));
+                }
+                else
+                {
+                    LoginMail.Text = string.Empty;
+                    LoginMail.PlaceholderText = "Could not find user";
+                    LoginMail.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                }
             }
             catch (Exception ex)
             {
@@ -51,7 +60,7 @@ namespace NativeAppsII_Windows_Groep18.View
 
         private void NavigateToRegister(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Register));
+            Frame.Navigate(typeof(Register));
         }
     }
 }
