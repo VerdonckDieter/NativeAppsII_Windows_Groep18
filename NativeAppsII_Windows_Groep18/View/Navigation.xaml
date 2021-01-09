@@ -14,11 +14,40 @@
     </Page.DataContext>
 
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ScreenSizes">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="navView.PaneDisplayMode" Value="LeftMinimal"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="navView.PaneDisplayMode" Value="LeftCompact"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="navView.PaneDisplayMode" Value="Top"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <NavigationView 
             x:Name="navView" 
             ItemInvoked="NavView_ItemInvoked" 
             IsSettingsVisible="False" 
-            IsBackButtonVisible="Collapsed">
+            IsBackButtonVisible="Collapsed"
+            >
             <NavigationView.MenuItems>
                 <NavigationViewItem 
                     Content="Home" 
@@ -37,13 +66,13 @@
                     Icon="Account">
                 </NavigationViewItem>
                 <NavigationViewItem 
-                    VerticalAlignment="Bottom"
-                    Content="Logout" 
-                    Icon="BlockContact">
-                </NavigationViewItem>
-                <NavigationViewItem 
                     x:Name="ClientEmail"
                     Icon="Contact">
+                </NavigationViewItem>
+                <NavigationViewItem 
+                    x:Name="Logout"
+                    Content="Logout" 
+                    Icon="BlockContact">
                 </NavigationViewItem>
             </NavigationView.MenuItems>
             <Frame x:Name="Content" />

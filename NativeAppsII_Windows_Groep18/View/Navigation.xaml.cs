@@ -25,7 +25,7 @@ namespace NativeAppsII_Windows_Groep18.View
     {
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
-            ("Home", typeof(MasterDetail)),
+            ("Home", typeof(TravelListOverview)),
             ("Add TravelList", typeof(AddTravelListView)),
             ("Account", typeof(Account)),
             ("Logout", typeof(MainPage))
