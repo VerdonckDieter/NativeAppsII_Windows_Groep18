@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Singleton\ClientSingleton.cs" />
@@ -143,8 +144,8 @@
     <Compile Include="View\AddTravelListView.xaml.cs">
       <DependentUpon>AddTravelListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MasterDetail.xaml.cs">
-      <DependentUpon>MasterDetail.xaml</DependentUpon>
+    <Compile Include="View\TravelListOverview.xaml.cs">
+      <DependentUpon>TravelListOverview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Navigation.xaml.cs">
       <DependentUpon>Navigation.xaml</DependentUpon>
@@ -193,7 +194,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MasterDetail.xaml">
+    <Page Include="View\TravelListOverview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
