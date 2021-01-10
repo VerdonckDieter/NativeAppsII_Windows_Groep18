@@ -17,54 +17,109 @@
 
     <Page.Resources>
         <converters:StringFormatConverter x:Key="StringFormatConverter" />
+        <Style x:Key="StretchedListViewItemStyle"
+           TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+            <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        </Style>
     </Page.Resources>
 
     <Grid>
         <controls:MasterDetailsView BackButtonBehavior="Automatic"
                                     ItemsSource="{Binding TravelLists}"
-                                    NoSelectionContent="No travel lists found"
+                                    NoSelectionContent="Select an item to view"
                                     CompactModeThresholdWidth="720">
+            <controls:MasterDetailsView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </controls:MasterDetailsView.ItemContainerStyle>
             <controls:MasterDetailsView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="0,8" >
-                        <TextBlock Text="{Binding Name}" 
+                    <Grid Margin="8,8" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.05*" />
+                            <ColumnDefinition Width="0.9*" />
+                            <ColumnDefinition Width="0.05*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch">
+                            <TextBlock Text="{Binding Name}" 
                                    Style="{ThemeResource TitleTextBlockStyle}"
                                    HorizontalAlignment="Center"/>
-                        <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="1" HorizontalAlignment="Center">
+                            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="1" HorizontalAlignment="Center">
                             <Run Text="{Binding StartDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:dd/MM/yyyy}'}" />
                             <Run Text=" - " />
                             <Run Text="{Binding EndDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:dd/MM/yyyy}'}" />
-                        </TextBlock>
-                    </StackPanel>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </controls:MasterDetailsView.ItemTemplate>
             <controls:MasterDetailsView.DetailsTemplate>
                 <DataTemplate>
-                    <RelativePanel Margin="24">
-                        <TextBlock x:Name="travelListName" Text="{Binding Name}" 
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.05*" />
+                            <ColumnDefinition Width="0.9*" />
+                            <ColumnDefinition Width="0.05*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="1" Margin="24" Orientation="Vertical" HorizontalAlignment="Stretch">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <TextBlock x:Name="travelListName" Text="{Binding Name}" 
                                    Style="{ThemeResource TitleTextBlockStyle}" 
-                                   />
-                        <TextBlock x:Name="travelListStartDate"
+                                   HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="travelListStartDate"
                                    Style="{ThemeResource SubtitleTextBlockStyle}" 
-                                   RelativePanel.Below="travelListName">
+                                   >
                             <Run Text="{Binding StartDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:dd/MM/yyyy}'}" />
                             <Run Text=" - " />
                             <Run Text="{Binding EndDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:dd/MM/yyyy}'}" />
-                        </TextBlock>
-                        <ListView ItemsSource="{Binding Items}" RelativePanel.Below="travelListStartDate">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <!-- TO DO veranderen naar aparte view voor item en die dan aanroepen-->
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Name}" />
-                                        <TextBlock Text="{Binding Added}" />
-                                        <TextBlock Text="{Binding Amount}" />
-                                        <TextBlock Text="{Binding Category}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </RelativePanel>
+                                </TextBlock>
+                            </StackPanel>
+                            <ListView ItemsSource="{Binding ItemsGrouped}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ItemContainerStyle="{StaticResource StretchedListViewItemStyle}">
+                                <ListView.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="12" Background="{ThemeResource SystemBaseLowColor}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.6*" />
+                                                <ColumnDefinition Width="0.2*" />
+                                                <ColumnDefinition Width="0.2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="Item" Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="NoWrap" MaxLines="1"/>
+                                            <TextBlock Grid.Column="1" Text="Amount" Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="NoWrap" MaxLines="1" HorizontalAlignment="Center"/>
+                                            <TextBlock Grid.Column="2" Text="Completed" Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="NoWrap" MaxLines="1" HorizontalAlignment="Center"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.HeaderTemplate>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <TextBlock Text="{Binding Key}" />
+                                            <ListView ItemsSource="{Binding Value}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ItemContainerStyle="{StaticResource StretchedListViewItemStyle}">
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Padding="6">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="0.6*" />
+                                                                <ColumnDefinition Width="0.2*" />
+                                                                <ColumnDefinition Width="0.2*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" />
+                                                            <TextBlock Grid.Column="1" Text="{Binding Amount}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                            <CheckBox Grid.Column="2" IsChecked="{Binding Added}" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="0" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </controls:MasterDetailsView.DetailsTemplate>
             <controls:MasterDetailsView.NoSelectionContentTemplate>
@@ -79,6 +134,9 @@
                                   ScaleY="2"/>
                             </SymbolIcon.RenderTransform>
                         </SymbolIcon>
+                        <TextBlock Text="{Binding}" 
+                                   FontSize="24" 
+                                   Margin="0,12"/>
                     </StackPanel>
                 </DataTemplate>
             </controls:MasterDetailsView.NoSelectionContentTemplate>

@@ -1,7 +1,9 @@
 ﻿using NativeAppsII_Windows_Groep18.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace NativeAppsII_Windows_Groep18.DataModel
@@ -51,15 +53,14 @@ namespace NativeAppsII_Windows_Groep18.DataModel
         }
 
         public ObservableCollection<Item> Items { get; set; }
+        public Dictionary<string, List<Item>> ItemsGrouped { get; set; }
+        public ObservableCollection<Category> Categories { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
