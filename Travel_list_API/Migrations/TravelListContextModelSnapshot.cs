@@ -19,6 +19,76 @@ namespace Travel_list_API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Travel_list_API.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TravelListId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TravelListId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Opmaak",
+                            TravelListId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Technologie",
+                            TravelListId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Bad",
+                            TravelListId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Kledij",
+                            TravelListId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Opmaak",
+                            TravelListId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Technologie",
+                            TravelListId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Bad",
+                            TravelListId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Kledij",
+                            TravelListId = 2
+                        });
+                });
+
             modelBuilder.Entity("Travel_list_API.Models.Client", b =>
                 {
                     b.Property<int>("Id")
@@ -46,7 +116,7 @@ namespace Travel_list_API.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2020, 12, 26, 15, 37, 28, 827, DateTimeKind.Local).AddTicks(5803),
+                            BirthDate = new DateTime(2021, 1, 10, 21, 32, 48, 82, DateTimeKind.Local).AddTicks(7272),
                             Email = "client@gmail.com",
                             FirstName = "Pog",
                             LastName = "Champ"
@@ -54,7 +124,7 @@ namespace Travel_list_API.Migrations
                         new
                         {
                             Id = 2,
-                            BirthDate = new DateTime(2020, 12, 26, 15, 37, 28, 829, DateTimeKind.Local).AddTicks(3426),
+                            BirthDate = new DateTime(2021, 1, 10, 21, 32, 48, 84, DateTimeKind.Local).AddTicks(5347),
                             Email = "client2@gmail.com",
                             FirstName = "Ayaya",
                             LastName = "Clap"
@@ -74,8 +144,8 @@ namespace Travel_list_API.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -95,8 +165,8 @@ namespace Travel_list_API.Migrations
                             Id = 1,
                             Added = false,
                             Amount = 1,
-                            Category = 0,
-                            Name = "Item 1",
+                            Category = "Opmaak",
+                            Name = "Kam",
                             TravelListId = 1
                         },
                         new
@@ -104,8 +174,8 @@ namespace Travel_list_API.Migrations
                             Id = 2,
                             Added = true,
                             Amount = 2,
-                            Category = 0,
-                            Name = "Item 2",
+                            Category = "Technologie",
+                            Name = "Laptop",
                             TravelListId = 1
                         },
                         new
@@ -113,8 +183,8 @@ namespace Travel_list_API.Migrations
                             Id = 3,
                             Added = true,
                             Amount = 5,
-                            Category = 0,
-                            Name = "Item 3",
+                            Category = "Bad",
+                            Name = "Handdoek",
                             TravelListId = 2
                         },
                         new
@@ -122,8 +192,8 @@ namespace Travel_list_API.Migrations
                             Id = 4,
                             Added = false,
                             Amount = 3,
-                            Category = 0,
-                            Name = "Item 4",
+                            Category = "Bad",
+                            Name = "Tandenborstel",
                             TravelListId = 2
                         },
                         new
@@ -131,8 +201,8 @@ namespace Travel_list_API.Migrations
                             Id = 5,
                             Added = false,
                             Amount = 1,
-                            Category = 0,
-                            Name = "Item 5",
+                            Category = "Technologie",
+                            Name = "Batterij",
                             TravelListId = 3
                         },
                         new
@@ -140,8 +210,8 @@ namespace Travel_list_API.Migrations
                             Id = 6,
                             Added = true,
                             Amount = 8,
-                            Category = 0,
-                            Name = "Item 6",
+                            Category = "Bad",
+                            Name = "Shampoo",
                             TravelListId = 4
                         },
                         new
@@ -149,8 +219,8 @@ namespace Travel_list_API.Migrations
                             Id = 7,
                             Added = false,
                             Amount = 6,
-                            Category = 0,
-                            Name = "Item 7",
+                            Category = "Kledij",
+                            Name = "Broek",
                             TravelListId = 4
                         },
                         new
@@ -158,8 +228,8 @@ namespace Travel_list_API.Migrations
                             Id = 8,
                             Added = true,
                             Amount = 9,
-                            Category = 0,
-                            Name = "Item 8",
+                            Category = "Kledij",
+                            Name = "Sjaal",
                             TravelListId = 5
                         });
                 });
@@ -214,42 +284,51 @@ namespace Travel_list_API.Migrations
                         {
                             Id = 1,
                             ClientId = 1,
-                            EndDate = new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(3555),
-                            Name = "Test1",
-                            StartDate = new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(3236)
+                            EndDate = new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5263),
+                            Name = "Spanje",
+                            StartDate = new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(4959)
                         },
                         new
                         {
                             Id = 2,
                             ClientId = 1,
-                            EndDate = new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4192),
-                            Name = "Test2",
-                            StartDate = new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4174)
+                            EndDate = new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5831),
+                            Name = "Frankrijk",
+                            StartDate = new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5813)
                         },
                         new
                         {
                             Id = 3,
                             ClientId = 1,
-                            EndDate = new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4210),
-                            Name = "Test3",
-                            StartDate = new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4207)
+                            EndDate = new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5847),
+                            Name = "Nederland",
+                            StartDate = new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5844)
                         },
                         new
                         {
                             Id = 4,
                             ClientId = 2,
-                            EndDate = new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4216),
-                            Name = "Test4",
-                            StartDate = new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4214)
+                            EndDate = new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5853),
+                            Name = "Duitsland",
+                            StartDate = new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5851)
                         },
                         new
                         {
                             Id = 5,
                             ClientId = 2,
-                            EndDate = new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4223),
-                            Name = "Test5",
-                            StartDate = new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4220)
+                            EndDate = new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5859),
+                            Name = "Noorwegen",
+                            StartDate = new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5857)
                         });
+                });
+
+            modelBuilder.Entity("Travel_list_API.Models.Category", b =>
+                {
+                    b.HasOne("Travel_list_API.Models.TravelList", null)
+                        .WithMany("Categories")
+                        .HasForeignKey("TravelListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Travel_list_API.Models.Item", b =>

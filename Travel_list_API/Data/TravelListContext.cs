@@ -9,6 +9,7 @@ namespace Travel_list_API.Data
         public DbSet<TravelList> TravelLists { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Models.Task> Tasks { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Client> Clients { get; set; }
 
         public TravelListContext(DbContextOptions<TravelListContext> options) : base(options) { }
@@ -25,6 +26,11 @@ namespace Travel_list_API.Data
                 .WithOne()
                 .IsRequired();
 
+            builder.Entity<TravelList>()
+                .HasMany(t => t.Categories)
+                .WithOne()
+                .IsRequired();
+
             builder.Entity<Client>()
                 .HasMany(c => c.TravelLists)
                 .WithOne()
@@ -36,22 +42,42 @@ namespace Travel_list_API.Data
                 );
 
             builder.Entity<TravelList>().HasData(
-                new TravelList() { Id = 1, Name = "Test1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
-                new TravelList() { Id = 2, Name = "Test2", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
-                new TravelList() { Id = 3, Name = "Test3", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
-                new TravelList() { Id = 4, Name = "Test4", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 2 },
-                new TravelList() { Id = 5, Name = "Test5", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 2 }
+                new TravelList() { Id = 1, Name = "Spanje", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
+                new TravelList() { Id = 2, Name = "Frankrijk", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
+                new TravelList() { Id = 3, Name = "Nederland", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
+                new TravelList() { Id = 4, Name = "Duitsland", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 2 },
+                new TravelList() { Id = 5, Name = "Noorwegen", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 2 }
+                );
+
+            Category one = new Category() { Id = 1, Name = "Opmaak", TravelListId = 1 };
+            Category two = new Category() { Id = 2, Name = "Technologie", TravelListId = 1 };
+            Category three = new Category() { Id = 3, Name = "Bad", TravelListId = 1 };
+            Category four = new Category() { Id = 4, Name = "Kledij", TravelListId = 1 };
+            Category five = new Category() { Id = 5, Name = "Opmaak", TravelListId = 2 };
+            Category six = new Category() { Id = 6, Name = "Technologie", TravelListId = 2 };
+            Category seven = new Category() { Id = 7, Name = "Bad", TravelListId = 2 };
+            Category eight = new Category() { Id = 8, Name = "Kledij", TravelListId = 2 };
+
+            builder.Entity<Category>().HasData(
+                one,
+                two,
+                three,
+                four,
+                five,
+                six,
+                seven,
+                eight
                 );
 
             builder.Entity<Item>().HasData(
-                new Item() { Id = 1, Name = "Item 1", Added = false, Amount = 1, Category = Item.ItemCategory.Kledij, TravelListId = 1 },
-                new Item() { Id = 2, Name = "Item 2", Added = true, Amount = 2, Category = Item.ItemCategory.Kledij, TravelListId = 1 },
-                new Item() { Id = 3, Name = "Item 3", Added = true, Amount = 5, Category = Item.ItemCategory.Kledij, TravelListId = 2 },
-                new Item() { Id = 4, Name = "Item 4", Added = false, Amount = 3, Category = Item.ItemCategory.Kledij, TravelListId = 2 },
-                new Item() { Id = 5, Name = "Item 5", Added = false, Amount = 1, Category = Item.ItemCategory.Kledij, TravelListId = 3 },
-                new Item() { Id = 6, Name = "Item 6", Added = true, Amount = 8, Category = Item.ItemCategory.Kledij, TravelListId = 4 },
-                new Item() { Id = 7, Name = "Item 7", Added = false, Amount = 6, Category = Item.ItemCategory.Kledij, TravelListId = 4 },
-                new Item(){ Id = 8, Name = "Item 8", Added = true, Amount = 9, Category = Item.ItemCategory.Kledij, TravelListId = 5 }
+                new Item() { Id = 1, Name = "Kam", Added = false, Amount = 1, Category = "Opmaak", TravelListId = 1 },
+                new Item() { Id = 2, Name = "Laptop", Added = true, Amount = 2, Category = "Technologie", TravelListId = 1 },
+                new Item() { Id = 3, Name = "Handdoek", Added = true, Amount = 5, Category = "Bad", TravelListId = 2 },
+                new Item() { Id = 4, Name = "Tandenborstel", Added = false, Amount = 3, Category = "Bad", TravelListId = 2 },
+                new Item() { Id = 5, Name = "Batterij", Added = false, Amount = 1, Category = "Technologie", TravelListId = 3 },
+                new Item() { Id = 6, Name = "Shampoo", Added = true, Amount = 8, Category = "Bad", TravelListId = 4 },
+                new Item() { Id = 7, Name = "Broek", Added = false, Amount = 6, Category = "Kledij", TravelListId = 4 },
+                new Item() { Id = 8, Name = "Sjaal", Added = true, Amount = 9, Category = "Kledij", TravelListId = 5 }
                 );
         }
     }

@@ -23,7 +23,7 @@ namespace Travel_list_API.Data
 
         private void SeedData()
         {
-            TravelList travelList = new TravelList() { Name = "Spanje", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) };
+            /*TravelList travelList = new TravelList() { Name = "Spanje", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) };
             _dbContext.SaveChanges();
             Item item = new Item { Name = "Item 1", Added = false, Amount = 1, Category = Item.ItemCategory.Kledij };
             travelList.AddItem(item);
@@ -53,7 +53,7 @@ namespace Travel_list_API.Data
             travelList.AddItem(item);
             item = new Item { Name = "Item 8", Added = true, Amount = 9, Category = Item.ItemCategory.Kledij };
             travelList.AddItem(item);
-            _dbContext.SaveChanges();
+            _dbContext.SaveChanges();*/
         }
     }
 }

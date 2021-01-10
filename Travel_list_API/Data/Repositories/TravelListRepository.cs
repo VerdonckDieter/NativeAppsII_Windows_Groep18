@@ -58,8 +58,17 @@ namespace Travel_list_API.Data.Repositories
 
         private Client GetClientById(int id, bool tracking)
         {
-            return tracking ? _clients.Include(c => c.TravelLists).ThenInclude(t => t.Items).Include(c => c.TravelLists).ThenInclude(t => t.Tasks).First(c => c.Id == id) :
-                _clients.Include(c => c.TravelLists).ThenInclude(t => t.Items).Include(c => c.TravelLists).ThenInclude(t => t.Tasks).AsNoTracking().First(c => c.Id == id);
+            return tracking ? _clients
+                .Include(c => c.TravelLists).ThenInclude(t => t.Items)
+                .Include(c => c.TravelLists).ThenInclude(t => t.Tasks)
+                .Include(c => c.TravelLists).ThenInclude(t => t.Categories)
+                .First(c => c.Id == id) :
+                _clients
+                .Include(c => c.TravelLists).ThenInclude(t => t.Items)
+                .Include(c => c.TravelLists).ThenInclude(t => t.Tasks)
+                .Include(c => c.TravelLists).ThenInclude(t => t.Categories)
+                .AsNoTracking()
+                .First(c => c.Id == id);
         }
     }
 }

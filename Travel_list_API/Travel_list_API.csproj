@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20201119165118_Test.Designer.cs" />
     <Compile Remove="Migrations\20201221223631_Test2.cs" />
     <Compile Remove="Migrations\20201221223631_Test2.Designer.cs" />
+    <Compile Remove="Migrations\20201226143729_Initial.cs" />
+    <Compile Remove="Migrations\20201226143729_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +23,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NSwag.AspNetCore" Version="13.9.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 

@@ -46,6 +46,26 @@ namespace Travel_list_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TravelListId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Categories_TravelLists_TravelListId",
+                        column: x => x.TravelListId,
+                        principalTable: "TravelLists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Items",
                 columns: table => new
                 {
@@ -55,7 +75,7 @@ namespace Travel_list_API.Migrations
                     Name = table.Column<string>(nullable: true),
                     Amount = table.Column<int>(nullable: false),
                     Added = table.Column<bool>(nullable: false),
-                    Category = table.Column<int>(nullable: false)
+                    Category = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -91,23 +111,38 @@ namespace Travel_list_API.Migrations
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "Id", "BirthDate", "Email", "FirstName", "LastName" },
-                values: new object[] { 1, new DateTime(2020, 12, 26, 15, 37, 28, 827, DateTimeKind.Local).AddTicks(5803), "client@gmail.com", "Pog", "Champ" });
+                values: new object[] { 1, new DateTime(2021, 1, 10, 21, 32, 48, 82, DateTimeKind.Local).AddTicks(7272), "client@gmail.com", "Pog", "Champ" });
 
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "Id", "BirthDate", "Email", "FirstName", "LastName" },
-                values: new object[] { 2, new DateTime(2020, 12, 26, 15, 37, 28, 829, DateTimeKind.Local).AddTicks(3426), "client2@gmail.com", "Ayaya", "Clap" });
+                values: new object[] { 2, new DateTime(2021, 1, 10, 21, 32, 48, 84, DateTimeKind.Local).AddTicks(5347), "client2@gmail.com", "Ayaya", "Clap" });
 
             migrationBuilder.InsertData(
                 table: "TravelLists",
                 columns: new[] { "Id", "ClientId", "EndDate", "Name", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(3555), "Test1", new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(3236) },
-                    { 2, 1, new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4192), "Test2", new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4174) },
-                    { 3, 1, new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4210), "Test3", new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4207) },
-                    { 4, 2, new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4216), "Test4", new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4214) },
-                    { 5, 2, new DateTime(2020, 12, 31, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4223), "Test5", new DateTime(2020, 12, 26, 15, 37, 28, 830, DateTimeKind.Local).AddTicks(4220) }
+                    { 1, 1, new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5263), "Spanje", new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(4959) },
+                    { 2, 1, new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5831), "Frankrijk", new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5813) },
+                    { 3, 1, new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5847), "Nederland", new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5844) },
+                    { 4, 2, new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5853), "Duitsland", new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5851) },
+                    { 5, 2, new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5859), "Noorwegen", new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5857) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name", "TravelListId" },
+                values: new object[,]
+                {
+                    { 1, "Opmaak", 1 },
+                    { 2, "Technologie", 1 },
+                    { 3, "Bad", 1 },
+                    { 4, "Kledij", 1 },
+                    { 5, "Opmaak", 2 },
+                    { 6, "Technologie", 2 },
+                    { 7, "Bad", 2 },
+                    { 8, "Kledij", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -115,15 +150,20 @@ namespace Travel_list_API.Migrations
                 columns: new[] { "Id", "Added", "Amount", "Category", "Name", "TravelListId" },
                 values: new object[,]
                 {
-                    { 1, false, 1, 0, "Item 1", 1 },
-                    { 2, true, 2, 0, "Item 2", 1 },
-                    { 3, true, 5, 0, "Item 3", 2 },
-                    { 4, false, 3, 0, "Item 4", 2 },
-                    { 5, false, 1, 0, "Item 5", 3 },
-                    { 6, true, 8, 0, "Item 6", 4 },
-                    { 7, false, 6, 0, "Item 7", 4 },
-                    { 8, true, 9, 0, "Item 8", 5 }
+                    { 1, false, 1, "Opmaak", "Kam", 1 },
+                    { 2, true, 2, "Technologie", "Laptop", 1 },
+                    { 3, true, 5, "Bad", "Handdoek", 2 },
+                    { 4, false, 3, "Bad", "Tandenborstel", 2 },
+                    { 5, false, 1, "Technologie", "Batterij", 3 },
+                    { 6, true, 8, "Bad", "Shampoo", 4 },
+                    { 7, false, 6, "Kledij", "Broek", 4 },
+                    { 8, true, 9, "Kledij", "Sjaal", 5 }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_TravelListId",
+                table: "Categories",
+                column: "TravelListId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_TravelListId",
@@ -143,6 +183,9 @@ namespace Travel_list_API.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Categories");
+
             migrationBuilder.DropTable(
                 name: "Items");
 
