@@ -15,6 +15,7 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
     {
         #region Properties
         public ObservableCollection<TravelList> TravelLists { get; set; } 
+        public ObservableCollection<Category> Categories { get; set; }
         #endregion
 
         #region Constructor
@@ -22,6 +23,7 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
         {
             TravelLists = new ObservableCollection<TravelList>();
             LoadTravelListsFromAPI();
+            InitializeCategories();
         }
         #endregion
 
@@ -58,6 +60,17 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
             {
                 t.ItemsGrouped = t.Items.GroupBy(i => i.Category).ToDictionary(i => i.Key, i => i.ToList());
             }
+        }
+
+        public void InitializeCategories()
+        {
+            Categories = new ObservableCollection<Category>
+            {
+                new Category() { Name = "Opmaak" },
+                new Category() { Name = "Technologie" },
+                new Category() { Name = "Bad" },
+                new Category() { Name = "Kledij" }
+            };
         }
         #endregion
     }

@@ -55,5 +55,84 @@ namespace NativeAppsII_Windows_Groep18.View
                 dialog.ShowAsync();
             }
         }
+
+        private void AddItemInputFields(object sender, RoutedEventArgs e)
+        {
+            Grid grid = new Grid()
+            {
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                ColumnSpacing = 8,
+                ColumnDefinitions =
+                {
+                    new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) }
+                }
+            };
+
+            TextBox ItemName = new TextBox
+            {
+                Header = "Name",
+                PlaceholderText = "Name of the item",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+
+            ItemName.HeaderTemplate = (DataTemplate)Resources["HeaderTemplate"];
+
+            TextBox ItemAmount = new TextBox
+            {
+                Header = "Amount",
+                PlaceholderText = "Amount",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+
+            ItemAmount.HeaderTemplate = (DataTemplate)Resources["HeaderTemplate"];
+
+            ComboBox ItemCategories = new ComboBox
+            {
+                Header = "Category",
+                PlaceholderText = "Pick a category",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+            var binding = new Binding { Source = travelListViewModel.Categories };
+            ItemCategories.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+
+            grid.Children.Add(ItemName);
+            grid.Children.Add(ItemAmount);
+            grid.Children.Add(ItemCategories);
+
+            Grid.SetColumn(ItemName, 0);
+            Grid.SetColumn(ItemAmount, 1);
+            Grid.SetColumn(ItemCategories, 2);
+
+            ItemStackPanel.Children.Add(grid);
+        }
+
+        private void AddTaskInputFields(object sender, RoutedEventArgs e)
+        {
+            Grid grid = new Grid()
+            {
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+
+            TextBox TaskName = new TextBox
+            {
+                Header = "Name",
+                PlaceholderText = "Name of the task",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+
+            TaskName.HeaderTemplate = (DataTemplate)Resources["HeaderTemplate"];
+
+            grid.Children.Add(TaskName);
+
+            Grid.SetRow(TaskName, 0);
+
+            TaskStackPanel.Children.Add(grid);
+        }
     }
 }

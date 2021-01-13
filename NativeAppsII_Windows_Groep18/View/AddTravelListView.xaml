@@ -15,6 +15,12 @@
     <Page.DataContext>
         <vm:TravelListViewModel></vm:TravelListViewModel>
     </Page.DataContext>
+
+    <Page.Resources>
+        <DataTemplate x:Key="HeaderTemplate">
+            <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding}"/>
+        </DataTemplate>
+    </Page.Resources>
     <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
@@ -28,9 +34,21 @@
                         <Setter Target="StartDate.FontSize" Value="15"></Setter>
                         <Setter Target="EndDate.FontSize" Value="15"></Setter>
                         <Setter Target="AddTravelListButton.FontSize" Value="15"></Setter>
+                        <Setter Target="ItemTitle.FontSize" Value="15"></Setter>
+                        <Setter Target="TaskTitle.FontSize" Value="15"></Setter>
+                        
                         <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".05*"></Setter>
                         <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".9*"></Setter>
                         <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".05*"></Setter>
+
+                        <Setter Target="ItemAndTaskInputGrid.RowDefinitions[0].Height" Value=".5*"></Setter>
+                        <Setter Target="ItemAndTaskInputGrid.RowDefinitions[1].Height" Value=".5*"></Setter>
+                        <Setter Target="ItemInputGrid.(Grid.Row)" Value="0"></Setter>
+                        <Setter Target="TaskInputGrid.(Grid.Row)" Value="1"></Setter>
+                        <Setter Target="ItemInputGrid.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="TaskInputGrid.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="ItemInputGrid.(Grid.ColumnSpan)" Value="2"></Setter>
+                        <Setter Target="TaskInputGrid.(Grid.ColumnSpan)" Value="2"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Tablet">
@@ -39,13 +57,25 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="AddTravelListTitle.FontSize" Value="30"></Setter>
-                        <Setter Target="Name.FontSize" Value="20"></Setter>
-                        <Setter Target="StartDate.FontSize" Value="20"></Setter>
-                        <Setter Target="EndDate.FontSize" Value="20"></Setter>
+                        <Setter Target="Name.FontSize" Value="15"></Setter>
+                        <Setter Target="StartDate.FontSize" Value="15"></Setter>
+                        <Setter Target="EndDate.FontSize" Value="15"></Setter>
                         <Setter Target="AddTravelListButton.FontSize" Value="20"></Setter>
+                        <Setter Target="ItemTitle.FontSize" Value="15"></Setter>
+                        <Setter Target="TaskTitle.FontSize" Value="15"></Setter>
+                        
                         <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".125*"></Setter>
                         <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".75*"></Setter>
                         <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".125*"></Setter>
+
+                        <Setter Target="ItemAndTaskInputGrid.RowDefinitions[0].Height" Value=".5*"></Setter>
+                        <Setter Target="ItemAndTaskInputGrid.RowDefinitions[1].Height" Value=".5*"></Setter>
+                        <Setter Target="ItemInputGrid.(Grid.Row)" Value="0"></Setter>
+                        <Setter Target="TaskInputGrid.(Grid.Row)" Value="1"></Setter>
+                        <Setter Target="ItemInputGrid.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="TaskInputGrid.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="ItemInputGrid.(Grid.ColumnSpan)" Value="2"></Setter>
+                        <Setter Target="TaskInputGrid.(Grid.ColumnSpan)" Value="2"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Desktop">
@@ -54,14 +84,23 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="AddTravelListTitle.FontSize" Value="35"></Setter>
-                        <Setter Target="Name.FontSize" Value="20"></Setter>
-                        <Setter Target="StartDate.FontSize" Value="20"></Setter>
-                        <Setter Target="EndDate.FontSize" Value="20"></Setter>
+                        <Setter Target="Name.FontSize" Value="15"></Setter>
+                        <Setter Target="StartDate.FontSize" Value="15"></Setter>
+                        <Setter Target="EndDate.FontSize" Value="15"></Setter>
                         <Setter Target="AddTravelListButton.FontSize" Value="20"></Setter>
+                        <Setter Target="ItemTitle.FontSize" Value="15"></Setter>
+                        <Setter Target="TaskTitle.FontSize" Value="15"></Setter>
+                        
                         <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".25*"></Setter>
                         <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".5*"></Setter>
                         <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".25*"></Setter>
-                        
+
+                        <Setter Target="ItemAndTaskInputGrid.ColumnDefinitions[0].Width" Value=".5*"></Setter>
+                        <Setter Target="ItemAndTaskInputGrid.ColumnDefinitions[1].Width" Value=".5*"></Setter>
+                        <Setter Target="ItemInputGrid.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="TaskInputGrid.(Grid.Column)" Value="1"></Setter>
+                        <Setter Target="ItemInputGrid.(Grid.Row)" Value="0"></Setter>
+                        <Setter Target="TaskInputGrid.(Grid.Row)" Value="0"></Setter>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -81,18 +120,86 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="3*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
             
-            <TextBox Grid.Row="0" Grid.ColumnSpan="2" x:Name="Name" Header="Name" PlaceholderText="Name of the travel list" VerticalAlignment="Center"/>
-            <CalendarDatePicker Grid.Row="1" Grid.Column="0" x:Name="StartDate" Header="Start date" HorizontalAlignment="Stretch" />
-            <CalendarDatePicker Grid.Row="1" Grid.Column="1" x:Name="EndDate" Header="End date"  HorizontalAlignment="Stretch" />
-            <Button x:Name="AddTravelListButton" Grid.Row="2" Grid.ColumnSpan="2" Click="AddTravelList" Content="Add travel list" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White"/>
+            
+            <TextBox Grid.Row="0" x:Name="Name" Header="Name" PlaceholderText="Name of the travel list" VerticalAlignment="Center"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <CalendarDatePicker Grid.Column="0" x:Name="StartDate" Header="Start date" HorizontalAlignment="Stretch" />
+                <CalendarDatePicker Grid.Column="1" x:Name="EndDate" Header="End date"  HorizontalAlignment="Stretch" />
+            </Grid>
+
+            <Grid Grid.Row="2" x:Name="ItemAndTaskInputGrid" RowSpacing="8" ColumnSpacing="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="ItemInputGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" x:Name="ItemTitle" Text="Items" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button x:Name="ItemAddFields" Grid.Column="1" HorizontalAlignment="Center" Click="AddItemInputFields">
+                            <SymbolIcon Symbol="Add" />
+                        </Button>
+                    </Grid>
+
+
+                    <StackPanel Grid.Row="1" x:Name="ItemStackPanel" Orientation="Vertical" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Header="Name" PlaceholderText="Name of the item" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                            <TextBox Grid.Column="1" Header="Amount" PlaceholderText="Amount" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                            <ComboBox Grid.Column="2" Header="Category" VerticalAlignment="Center" HorizontalAlignment="Stretch" PlaceholderText="Pick a category" ItemsSource="{Binding Categories}"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+
+                <Grid x:Name="TaskInputGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" x:Name="TaskTitle" Text="Tasks" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button x:Name="TaskAddFields" Grid.Column="1" HorizontalAlignment="Center" Click="AddTaskInputFields">
+                            <SymbolIcon Symbol="Add" />
+                        </Button>
+                    </Grid>
+
+                    <StackPanel Grid.Row="1" x:Name="TaskStackPanel">
+                        <Grid>
+                            <TextBox Header="Name" PlaceholderText="Name of the task" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            <Button x:Name="AddTravelListButton" Grid.Row="3" Grid.ColumnSpan="2" Click="AddTravelList" Content="Add travel list" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White"/>
 
         </Grid>
     </Grid>
