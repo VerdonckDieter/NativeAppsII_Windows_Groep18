@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Travel_list_API.Models;
+using Travel_list_API.Models.DTO;
 
 namespace Travel_list_API.Controllers
 {
@@ -27,12 +28,23 @@ namespace Travel_list_API.Controllers
         }
 
         [HttpPost("{clientId}")]
-        public ActionResult<TravelList> PostTravelList(int clientId, TravelList travelList)
+        public ActionResult<TravelList> PostTravelList(int clientId, TravelListDTO travelListDTO)
         {
+            var travelList = new TravelList()
+            {
+                Id = travelListDTO.Id,
+                ClientId = clientId,
+                Name = travelListDTO.Name,
+                StartDate = travelListDTO.StartDate,
+                EndDate = travelListDTO.EndDate,
+                Items = travelListDTO.Items,
+                Tasks = travelListDTO.Tasks,
+                Categories = travelListDTO.Categories
+            };
             _travelListRepository.AddTravelList(clientId, travelList);
             _travelListRepository.SaveChanges();
 
-            return CreatedAtAction(nameof(GetTravelListById), new { id = travelList.Id }, travelList);
+            return CreatedAtAction(nameof(GetTravelListById), new { clientId, travelListId = travelList.Id }, travelList);
         }
 
         [HttpPut("{travelListId}")]
