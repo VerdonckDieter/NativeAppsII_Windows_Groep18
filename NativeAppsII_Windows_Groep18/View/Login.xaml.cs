@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -29,6 +30,7 @@ namespace NativeAppsII_Windows_Groep18.View
         {
             InitializeComponent();
             LoginViewModel = new LoginViewModel();
+            LoginMail.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
         }
 
         private async void LoginUser(object sender, RoutedEventArgs e)
@@ -43,9 +45,7 @@ namespace NativeAppsII_Windows_Groep18.View
                 }
                 else
                 {
-                    LoginMail.Text = string.Empty;
-                    LoginMail.PlaceholderText = "Could not find user";
-                    LoginMail.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                    LoginError();
                 }
             }
             catch (Exception ex)
@@ -61,6 +61,19 @@ namespace NativeAppsII_Windows_Groep18.View
         private void NavigateToRegister(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Register));
+        }
+
+        private void LoginError()
+        {
+            LoginMail.Text = string.Empty;
+            LoginMail.Header = "Could not find user";
+            LoginMail.BorderBrush = new SolidColorBrush(Colors.Red);
+        }
+
+        private void ResetErrors(object sender, TappedRoutedEventArgs e)
+        {
+            LoginMail.Header = "E-mail";
+            LoginMail.ClearValue(TextBox.BorderBrushProperty);
         }
     }
 }
