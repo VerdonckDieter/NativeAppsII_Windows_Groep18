@@ -10,8 +10,8 @@ namespace Travel_list_API.Models
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public List<Item> Items { get; private set; }
-        public List<Task> Tasks { get; private set; }
+        public List<Item> Items { get; set; }
+        public List<Task> Tasks { get; set; }
         public List<Category> Categories { get; set; }
 
         public TravelList() {
