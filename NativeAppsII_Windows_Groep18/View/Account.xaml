@@ -141,47 +141,47 @@
         <TextBlock x:Name="AccountTitle" Grid.Row="0" Grid.Column="1" Text="Manage account" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="CornflowerBlue"/>
         <Grid Grid.Row="1" Grid.Column="1" x:Name="GridAccount" Margin="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" x:Name="GridEmail" VerticalAlignment="Center">
+            <Grid Grid.Row="0" x:Name="GridEmail" VerticalAlignment="Center" Margin="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="AccountEmailText" Text="Email" VerticalAlignment="Center"/>
-                <TextBox IsEnabled="False" x:Name="AccountEmail" />
+                <TextBox IsEnabled="False" x:Name="AccountEmail" Tapped="ResetErrors" />
             </Grid>
-            <Grid Grid.Row="1" x:Name="GridFirstname" VerticalAlignment="Center">
+            <Grid Grid.Row="1" x:Name="GridFirstname" VerticalAlignment="Center" Margin="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="AccountFirstnameText" Text="First name" VerticalAlignment="Center"/>
-                <TextBox IsEnabled="False" x:Name="AccountFirstname" />
+                <TextBox IsEnabled="False" x:Name="AccountFirstname" Tapped="ResetErrors" />
             </Grid>
-            <Grid Grid.Row="2" x:Name="GridLastname" VerticalAlignment="Center">
+            <Grid Grid.Row="2" x:Name="GridLastname" VerticalAlignment="Center" Margin="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="AccountLastnameText" Text="Last name" VerticalAlignment="Center"/>
-                <TextBox IsEnabled="False" x:Name="AccountLastname" />
+                <TextBox IsEnabled="False" x:Name="AccountLastname" Tapped="ResetErrors" />
             </Grid>
-            <Grid Grid.Row="3" x:Name="GridBirthdate" HorizontalAlignment="Stretch">
+            <Grid Grid.Row="3" x:Name="GridBirthdate" HorizontalAlignment="Stretch" Margin="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="AccountBirthdateText" Text="Date of birth" VerticalAlignment="Center"/>
-                <DatePicker IsEnabled="False" x:Name="AccountBirthdate" HorizontalAlignment="Stretch"/>
+                <DatePicker IsEnabled="False" x:Name="AccountBirthdate" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
             </Grid>
-            <Button IsEnabled="False" Grid.Row="4" x:Name="AccountButton" Click="UpdateUser" Content="Save changes" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White" />
-            <Button Grid.Row="5" x:Name="EditButton" Click="EditAccount" Content="Edit" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="CornflowerBlue" FontWeight="SemiBold">
+            <Button IsEnabled="False" Grid.Row="4" x:Name="AccountButton" Click="UpdateUser" Content="Save changes" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White" Margin="2"/>
+            <Button Grid.Row="5" x:Name="EditButton" Click="EditAccount" Content="Edit" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="CornflowerBlue" FontWeight="SemiBold" Margin="2">
                 <Button.Background>
                     <SolidColorBrush Opacity="0"/>
                 </Button.Background>
