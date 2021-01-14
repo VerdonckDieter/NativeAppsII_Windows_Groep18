@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -29,32 +30,102 @@ namespace NativeAppsII_Windows_Groep18.View
         {
             InitializeComponent();
             RegisterViewModel = new RegisterViewModel();
+            RegisterEmail.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
+            RegisterFirstname.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
+            RegisterLastname.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
         }
 
         private async void RegisterUser(object sender, RoutedEventArgs e)
         {
-            string email = RegisterEmail.Text;
-            string firstname = RegisterFirstname.Text;
-            string lastname = RegisterLastname.Text;
-            DateTime birthdate = RegisterBirthdate.Date.DateTime;
-            try
+            if (String.IsNullOrEmpty(RegisterEmail.Text) ||
+                String.IsNullOrEmpty(RegisterFirstname.Text) ||
+                String.IsNullOrEmpty(RegisterLastname.Text) ||
+                RegisterBirthdate.SelectedDate == null)
             {
-                await RegisterViewModel.Register(email, firstname, lastname, birthdate);
-                Frame.Navigate(typeof(Login));
+                AddRegisterError();
             }
-            catch (Exception ex)
+            else
             {
-                var dialog = new ContentDialog();
+                string email = RegisterEmail.Text;
+                string firstname = RegisterFirstname.Text;
+                string lastname = RegisterLastname.Text;
+                DateTime birthdate = RegisterBirthdate.Date.DateTime;
+                try
+                {
+                    await RegisterViewModel.Register(email, firstname, lastname, birthdate);
+                    Frame.Navigate(typeof(Login));
+                }
+                catch (Exception ex)
+                {
+                    var dialog = new ContentDialog();
 
-                dialog.CloseButtonText = "Close";
-                dialog.ShowAsync();
+                    dialog.CloseButtonText = "Close";
+                    dialog.ShowAsync();
+                }
             }
+        }
 
+        private void AddRegisterError()
+        {
+            if (String.IsNullOrEmpty(RegisterEmail.Text))
+            {
+                RegisterEmail.Text = string.Empty;
+                RegisterEmail.Header = "E-mail is required";
+                RegisterEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            if (String.IsNullOrEmpty(RegisterFirstname.Text))
+            {
+                RegisterFirstname.Text = string.Empty;
+                RegisterFirstname.Header = "First name is required";
+                RegisterFirstname.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            if (String.IsNullOrEmpty(RegisterLastname.Text))
+            {
+                RegisterLastname.Text = string.Empty;
+                RegisterLastname.Header = "Last name is required";
+                RegisterLastname.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            if (RegisterBirthdate.SelectedDate == null)
+            {
+                RegisterBirthdate.SelectedDate = null;
+                RegisterBirthdate.Header = "Birth date is required";
+                RegisterBirthdate.Foreground = new SolidColorBrush(Colors.Red);
+                RegisterBirthdate.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+        }
+
+        private void ResetErrors(object sender, TappedRoutedEventArgs e)
+        {
+            switch (sender.GetType().Name)
+            {
+                case "TextBox":
+                    if (((TextBox)sender).Name.Equals("RegisterEmail"))
+                    {
+                        RegisterEmail.Header = "E-mail";
+                        RegisterEmail.ClearValue(TextBox.BorderBrushProperty);
+                    }
+                    else if (((TextBox)sender).Name.Equals("RegisterFirstname"))
+                    {
+                        RegisterFirstname.Header = "First name";
+                        RegisterFirstname.ClearValue(TextBox.BorderBrushProperty);
+                    }
+                    else
+                    {
+                        RegisterLastname.Header = "Last name";
+                        RegisterLastname.ClearValue(TextBox.BorderBrushProperty);
+                    }
+                    break;
+                case "DatePicker":
+                    RegisterBirthdate.Header = "Birth date";
+                    RegisterBirthdate.ClearValue(DatePicker.ForegroundProperty);
+                    RegisterBirthdate.ClearValue(DatePicker.BorderBrushProperty);
+                    break;
+            }
         }
 
         private void NavigateToLogin(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Login));
+            Frame.Navigate(typeof(Login));
         }
     }
 }
