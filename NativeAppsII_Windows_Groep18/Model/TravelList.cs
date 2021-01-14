@@ -54,6 +54,7 @@ namespace NativeAppsII_Windows_Groep18.DataModel
 
         public ObservableCollection<Item> Items { get; set; }
         public Dictionary<string, List<Item>> ItemsGrouped { get; set; }
+        public ObservableCollection<Task> Tasks { get; set; }
         public ObservableCollection<Category> Categories { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
