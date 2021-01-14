@@ -116,7 +116,7 @@ namespace Travel_list_API.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2021, 1, 10, 21, 32, 48, 82, DateTimeKind.Local).AddTicks(7272),
+                            BirthDate = new DateTime(2021, 1, 14, 23, 15, 43, 949, DateTimeKind.Local).AddTicks(117),
                             Email = "client@gmail.com",
                             FirstName = "Pog",
                             LastName = "Champ"
@@ -124,7 +124,7 @@ namespace Travel_list_API.Migrations
                         new
                         {
                             Id = 2,
-                            BirthDate = new DateTime(2021, 1, 10, 21, 32, 48, 84, DateTimeKind.Local).AddTicks(5347),
+                            BirthDate = new DateTime(2021, 1, 14, 23, 15, 43, 950, DateTimeKind.Local).AddTicks(7660),
                             Email = "client2@gmail.com",
                             FirstName = "Ayaya",
                             LastName = "Clap"
@@ -284,41 +284,41 @@ namespace Travel_list_API.Migrations
                         {
                             Id = 1,
                             ClientId = 1,
-                            EndDate = new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5263),
+                            EndDate = new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(7609),
                             Name = "Spanje",
-                            StartDate = new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(4959)
+                            StartDate = new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(7311)
                         },
                         new
                         {
                             Id = 2,
                             ClientId = 1,
-                            EndDate = new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5831),
+                            EndDate = new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8170),
                             Name = "Frankrijk",
-                            StartDate = new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5813)
+                            StartDate = new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8151)
                         },
                         new
                         {
                             Id = 3,
                             ClientId = 1,
-                            EndDate = new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5847),
+                            EndDate = new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8187),
                             Name = "Nederland",
-                            StartDate = new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5844)
+                            StartDate = new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8183)
                         },
                         new
                         {
                             Id = 4,
                             ClientId = 2,
-                            EndDate = new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5853),
+                            EndDate = new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8193),
                             Name = "Duitsland",
-                            StartDate = new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5851)
+                            StartDate = new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8190)
                         },
                         new
                         {
                             Id = 5,
                             ClientId = 2,
-                            EndDate = new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5859),
+                            EndDate = new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8199),
                             Name = "Noorwegen",
-                            StartDate = new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5857)
+                            StartDate = new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8197)
                         });
                 });
 

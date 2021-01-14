@@ -111,23 +111,23 @@ namespace Travel_list_API.Migrations
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "Id", "BirthDate", "Email", "FirstName", "LastName" },
-                values: new object[] { 1, new DateTime(2021, 1, 10, 21, 32, 48, 82, DateTimeKind.Local).AddTicks(7272), "client@gmail.com", "Pog", "Champ" });
+                values: new object[] { 1, new DateTime(2021, 1, 14, 23, 15, 43, 949, DateTimeKind.Local).AddTicks(117), "client@gmail.com", "Pog", "Champ" });
 
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "Id", "BirthDate", "Email", "FirstName", "LastName" },
-                values: new object[] { 2, new DateTime(2021, 1, 10, 21, 32, 48, 84, DateTimeKind.Local).AddTicks(5347), "client2@gmail.com", "Ayaya", "Clap" });
+                values: new object[] { 2, new DateTime(2021, 1, 14, 23, 15, 43, 950, DateTimeKind.Local).AddTicks(7660), "client2@gmail.com", "Ayaya", "Clap" });
 
             migrationBuilder.InsertData(
                 table: "TravelLists",
                 columns: new[] { "Id", "ClientId", "EndDate", "Name", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5263), "Spanje", new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(4959) },
-                    { 2, 1, new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5831), "Frankrijk", new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5813) },
-                    { 3, 1, new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5847), "Nederland", new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5844) },
-                    { 4, 2, new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5853), "Duitsland", new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5851) },
-                    { 5, 2, new DateTime(2021, 1, 15, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5859), "Noorwegen", new DateTime(2021, 1, 10, 21, 32, 48, 85, DateTimeKind.Local).AddTicks(5857) }
+                    { 1, 1, new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(7609), "Spanje", new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(7311) },
+                    { 2, 1, new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8170), "Frankrijk", new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8151) },
+                    { 3, 1, new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8187), "Nederland", new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8183) },
+                    { 4, 2, new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8193), "Duitsland", new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8190) },
+                    { 5, 2, new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8199), "Noorwegen", new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8197) }
                 });
 
             migrationBuilder.InsertData(
