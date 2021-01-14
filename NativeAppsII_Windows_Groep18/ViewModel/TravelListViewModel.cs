@@ -1,5 +1,6 @@
 ﻿using NativeAppsII_Windows_Groep18.DataModel;
 using NativeAppsII_Windows_Groep18.Model;
+using NativeAppsII_Windows_Groep18.Model.DTO;
 using NativeAppsII_Windows_Groep18.Model.Singleton;
 using Newtonsoft.Json;
 using System;
@@ -40,9 +41,15 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
             GroupBy();
         }
 
-        public async System.Threading.Tasks.Task AddTravelList(String name, DateTime startdate, DateTime enddate)
+        public async System.Threading.Tasks.Task AddTravelList(String name, DateTime startdate, DateTime enddate, List<Item> items = null, List<Model.Task> tasks = null)
         {
-            var travelList = new TravelList() { Name = name, StartDate = startdate, EndDate = enddate };
+            var travelList = new TravelListDTO() { 
+                Name = name, 
+                StartDate = startdate, 
+                EndDate = enddate, 
+                Items = items, 
+                Tasks = tasks
+            };
             var travelListJson = JsonConvert.SerializeObject(travelList);
 
             HttpClient client = new HttpClient();
