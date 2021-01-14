@@ -1,18 +1,14 @@
-﻿using NativeAppsII_Windows_Groep18.ViewModel;
+﻿using NativeAppsII_Windows_Groep18.Model;
+using NativeAppsII_Windows_Groep18.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -36,23 +32,111 @@ namespace NativeAppsII_Windows_Groep18.View
         {
             StartDate.MinDate = DateTimeOffset.Now;
             EndDate.MinDate = DateTimeOffset.Now;
+            Name.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
+
         }
 
         private async void AddTravelList(object sender, RoutedEventArgs e)
         {
-            string name = Name.Text;
-            DateTime startdate = StartDate.Date.Value.DateTime;
-            DateTime enddate = EndDate.Date.Value.DateTime;
-            try
+            if (String.IsNullOrEmpty(Name.Text) || StartDate.Date == null || EndDate.Date == null)
             {
-                await travelListViewModel.AddTravelList(name, startdate, enddate);
+                AddTravelListError();
             }
-            catch (Exception ex)
+            else
             {
-                var dialog = new ContentDialog();
+                string name = Name.Text;
+                DateTime startdate = StartDate.Date.Value.DateTime;
+                DateTime enddate = EndDate.Date.Value.DateTime;
+                List<Item> items = GetItemsFromInput();
+                List<Task> tasks = GetTasksFromInput();                
+                try
+                {
+                    await travelListViewModel.AddTravelList(name, startdate, enddate, items, tasks);
+                }
+                catch (Exception ex)
+                {
+                    var dialog = new ContentDialog();
 
-                dialog.CloseButtonText = "Close";
-                dialog.ShowAsync();
+                    dialog.CloseButtonText = "Close";
+                    dialog.ShowAsync();
+                }
+            }
+        }
+
+        private List<Item> GetItemsFromInput()
+        {
+            List<Item> items = new List<Item>();
+            foreach (var item in ItemListView.Items)
+            {
+                Grid grid = (Grid)item;
+                var name = ((TextBox)grid.Children.ElementAt(0)).Text;
+                var amount = int.Parse(((TextBox)grid.Children.ElementAt(1)).Text);
+                var category = ((Category)((ComboBox)grid.Children.ElementAt(2)).SelectedItem).Name;
+                var newItem = new Item() { Name = name, Amount = amount, Category = category };
+                items.Add(newItem);
+            }
+            return items;
+        }
+
+        private List<Task> GetTasksFromInput()
+        {
+            List<Task> tasks = new List<Task>();
+            foreach (var task in TaskListView.Items)
+            {
+                Grid grid = (Grid)task;
+                var name = ((TextBox)grid.Children.ElementAt(0)).Text;
+                var newTask = new Task() { Name = name };
+                tasks.Add(newTask);
+            }
+            return tasks;
+        }
+
+        private void AddTravelListError()
+        {
+            if (String.IsNullOrEmpty(Name.Text))
+            {
+                Name.Text = string.Empty;
+                Name.Header = "Name is required";
+                Name.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            if (StartDate.Date == null)
+            {
+                StartDate.Date = null;
+                StartDate.Header = "Start date is required";
+                StartDate.Foreground = new SolidColorBrush(Colors.Red);
+                StartDate.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            if (EndDate.Date == null)
+            {
+                EndDate.Date = null;
+                EndDate.Header = "End date is required";
+                EndDate.Foreground = new SolidColorBrush(Colors.Red);
+                EndDate.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+        }
+
+        private void ResetErrors(object sender, TappedRoutedEventArgs e)
+        {
+            switch (sender.GetType().Name)
+            {
+                case "TextBox":
+                    Name.Header = "Name";
+                    Name.ClearValue(TextBox.BorderBrushProperty);
+                    break;
+                case "CalendarDatePicker":
+                    if (((CalendarDatePicker)sender).Name.Equals("StartDate"))
+                    {
+                        StartDate.Header = "Start date";
+                        StartDate.ClearValue(CalendarDatePicker.ForegroundProperty);
+                        StartDate.ClearValue(CalendarDatePicker.BorderBrushProperty);
+                    }
+                    else
+                    {
+                        EndDate.Header = "End date";
+                        EndDate.ClearValue(CalendarDatePicker.ForegroundProperty);
+                        EndDate.ClearValue(CalendarDatePicker.BorderBrushProperty);
+                    }
+                    break;
             }
         }
 
@@ -99,6 +183,7 @@ namespace NativeAppsII_Windows_Groep18.View
             };
             var binding = new Binding { Source = travelListViewModel.Categories };
             ItemCategories.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+            ItemCategories.ItemTemplate = (DataTemplate)Resources["ComboBoxTemplate"];
 
             grid.Children.Add(ItemName);
             grid.Children.Add(ItemAmount);
@@ -108,7 +193,15 @@ namespace NativeAppsII_Windows_Groep18.View
             Grid.SetColumn(ItemAmount, 1);
             Grid.SetColumn(ItemCategories, 2);
 
-            ItemStackPanel.Children.Add(grid);
+            ItemListView.Items.Add(grid);
+        }
+
+        private void RemoveItemInputFields(object sender, RoutedEventArgs e)
+        {
+            if (ItemListView.Items.Count > 0)
+            {
+                ItemListView.Items.RemoveAt(ItemListView.Items.Count - 1);
+            }
         }
 
         private void AddTaskInputFields(object sender, RoutedEventArgs e)
@@ -132,7 +225,15 @@ namespace NativeAppsII_Windows_Groep18.View
 
             Grid.SetRow(TaskName, 0);
 
-            TaskStackPanel.Children.Add(grid);
+            TaskListView.Items.Add(grid);
+        }
+
+        private void RemoveTaskInputFields(object sender, RoutedEventArgs e)
+        {
+            if (TaskListView.Items.Count > 0)
+            {
+                TaskListView.Items.RemoveAt(TaskListView.Items.Count - 1);
+            }
         }
     }
 }

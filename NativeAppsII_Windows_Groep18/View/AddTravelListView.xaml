@@ -20,6 +20,18 @@
         <DataTemplate x:Key="HeaderTemplate">
             <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding}"/>
         </DataTemplate>
+        <DataTemplate x:Key="ComboBoxTemplate">
+            <TextBlock Text="{Binding Name}" />
+        </DataTemplate>
+
+        <Style x:Key="StretchedListViewItemStyle"
+           TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+            <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+            <Setter Property="MinWidth" Value="0" />
+        </Style>
     </Page.Resources>
     <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <VisualStateManager.VisualStateGroups>
@@ -97,6 +109,8 @@
 
                         <Setter Target="ItemAndTaskInputGrid.ColumnDefinitions[0].Width" Value=".5*"></Setter>
                         <Setter Target="ItemAndTaskInputGrid.ColumnDefinitions[1].Width" Value=".5*"></Setter>
+                        <Setter Target="ItemAndTaskInputGrid.RowDefinitions[0].Height" Value="*"></Setter>
+                        <Setter Target="ItemAndTaskInputGrid.RowDefinitions[1].Height" Value="0"></Setter>
                         <Setter Target="ItemInputGrid.(Grid.Column)" Value="0"></Setter>
                         <Setter Target="TaskInputGrid.(Grid.Column)" Value="1"></Setter>
                         <Setter Target="ItemInputGrid.(Grid.Row)" Value="0"></Setter>
@@ -120,19 +134,19 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             
             
-            <TextBox Grid.Row="0" x:Name="Name" Header="Name" PlaceholderText="Name of the travel list" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="0" x:Name="Name" Header="Name" PlaceholderText="Name of the travel list" VerticalAlignment="Center" Tapped="ResetErrors"/>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <CalendarDatePicker Grid.Column="0" x:Name="StartDate" Header="Start date" HorizontalAlignment="Stretch" />
-                <CalendarDatePicker Grid.Column="1" x:Name="EndDate" Header="End date"  HorizontalAlignment="Stretch" />
+                <CalendarDatePicker Grid.Column="0" x:Name="StartDate" Header="Start date" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
+                <CalendarDatePicker Grid.Column="1" x:Name="EndDate" Header="End date"  HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
             </Grid>
 
             <Grid Grid.Row="2" x:Name="ItemAndTaskInputGrid" RowSpacing="8" ColumnSpacing="8">
@@ -146,8 +160,8 @@
                 </Grid.ColumnDefinitions>
                 <Grid x:Name="ItemInputGrid">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="5*" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -155,30 +169,30 @@
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" x:Name="ItemTitle" Text="Items" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Button x:Name="ItemAddFields" Grid.Column="1" HorizontalAlignment="Center" Click="AddItemInputFields">
-                            <SymbolIcon Symbol="Add" />
-                        </Button>
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="ItemAddFields" Grid.Column="0" HorizontalAlignment="Center" Click="AddItemInputFields">
+                                <SymbolIcon Symbol="Add" />
+                            </Button>
+                            <Button x:Name="ItemRemoveFields" Grid.Column="1" HorizontalAlignment="Center" Click="RemoveItemInputFields">
+                                <SymbolIcon Symbol="Remove" />
+                            </Button>
+                        </Grid>
                     </Grid>
 
-
-                    <StackPanel Grid.Row="1" x:Name="ItemStackPanel" Orientation="Vertical" >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="2*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" Header="Name" PlaceholderText="Name of the item" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
-                            <TextBox Grid.Column="1" Header="Amount" PlaceholderText="Amount" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
-                            <ComboBox Grid.Column="2" Header="Category" VerticalAlignment="Center" HorizontalAlignment="Stretch" PlaceholderText="Pick a category" ItemsSource="{Binding Categories}"/>
-                        </Grid>
-                    </StackPanel>
+                    <ListView Grid.Row="1" x:Name="ItemListView" ItemContainerStyle="{StaticResource StretchedListViewItemStyle}">
+                        
+                    </ListView>
+                    
                 </Grid>
 
                 <Grid x:Name="TaskInputGrid">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="5*" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -186,16 +200,24 @@
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" x:Name="TaskTitle" Text="Tasks" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Button x:Name="TaskAddFields" Grid.Column="1" HorizontalAlignment="Center" Click="AddTaskInputFields">
-                            <SymbolIcon Symbol="Add" />
-                        </Button>
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="TaskAddFields" Grid.Column="0" HorizontalAlignment="Center" Click="AddTaskInputFields">
+                                <SymbolIcon Symbol="Add" />
+                            </Button>
+                            <Button x:Name="TaskRemoveFields" Grid.Column="1" HorizontalAlignment="Center" Click="RemoveTaskInputFields">
+                                <SymbolIcon Symbol="Remove" />
+                            </Button>
+                        </Grid>
                     </Grid>
 
-                    <StackPanel Grid.Row="1" x:Name="TaskStackPanel">
-                        <Grid>
-                            <TextBox Header="Name" PlaceholderText="Name of the task" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
-                        </Grid>
-                    </StackPanel>
+                    <ListView Grid.Row="1" x:Name="TaskListView" ItemContainerStyle="{StaticResource StretchedListViewItemStyle}">
+                        
+                    </ListView>
+
                 </Grid>
             </Grid>
 
