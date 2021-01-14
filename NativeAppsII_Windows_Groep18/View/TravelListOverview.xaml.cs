@@ -24,7 +24,7 @@ namespace NativeAppsII_Windows_Groep18.View
     {
         public TravelListOverview()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }
