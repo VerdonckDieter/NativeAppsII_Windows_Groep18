@@ -7,22 +7,24 @@ namespace Travel_list_API.Models
 {
     public class Itinerary
     {
-        public String StartLocation { get;  set;  }
-        public String Destination { get; set; }
-        public List<String> StopOvers { get;  set;  }
-        public String Transport { get;  set; }
+        public int Id { get; set; }
+        public int TravelListId { get; set; }
+        public double StartLatitude { get;  set;  }
+        public double StartLongitude { get; set; }
+        public double EndLatitude { get; set; }
+        public double EndLongitude { get; set; }
 
         public Itinerary()
         {
 
         }
 
-        public Itinerary(String StartLocation, String Destination, String Transport)
+        public Itinerary(double startLatitude, double startLongitude, double endLatitude, double endLongitude)
         {
-            this.StartLocation = StartLocation;
-            this.Destination = Destination;
-            this.Transport = Transport;
+            StartLatitude = startLatitude;
+            StartLongitude = startLongitude;
+            EndLatitude = endLatitude;
+            EndLongitude = endLongitude;
         }
-
     }
 }

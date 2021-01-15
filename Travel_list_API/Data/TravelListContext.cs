@@ -10,6 +10,7 @@ namespace Travel_list_API.Data
         public DbSet<Item> Items { get; set; }
         public DbSet<Models.Task> Tasks { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Itinerary> Itineraries { get; set; }
         public DbSet<Client> Clients { get; set; }
 
         public TravelListContext(DbContextOptions<TravelListContext> options) : base(options) { }
@@ -31,6 +32,12 @@ namespace Travel_list_API.Data
                 .WithOne()
                 .IsRequired();
 
+            builder.Entity<TravelList>()
+                .HasOne(t => t.Itinerary)
+                .WithOne()
+                .HasForeignKey<Itinerary>(i => i.TravelListId)
+                .IsRequired();
+
             builder.Entity<Client>()
                 .HasMany(c => c.TravelLists)
                 .WithOne()
@@ -42,11 +49,19 @@ namespace Travel_list_API.Data
                 );
 
             builder.Entity<TravelList>().HasData(
-                new TravelList() { Id = 1, Name = "Spanje", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
-                new TravelList() { Id = 2, Name = "Frankrijk", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
+                new TravelList() { Id = 1, Name = "Spanje", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1},
+                new TravelList() { Id = 2, Name = "Frankrijk", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1},
                 new TravelList() { Id = 3, Name = "Nederland", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 1 },
                 new TravelList() { Id = 4, Name = "Duitsland", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 2 },
                 new TravelList() { Id = 5, Name = "Noorwegen", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5), ClientId = 2 }
+                );
+
+            Itinerary une = new Itinerary() { Id = 1, TravelListId = 1, StartLatitude = 51.054340, StartLongitude = 3.717424, EndLatitude = 41.385063, EndLongitude = 2.173404 };
+            Itinerary deux = new Itinerary() { Id = 2, TravelListId = 2, StartLatitude = 51.054340, StartLongitude = 3.717424, EndLatitude = 48.856613, EndLongitude = 2.352222 };
+            Itinerary trois = new Itinerary() { Id = 3, TravelListId = 3, StartLatitude = 51.054340, StartLongitude = 3.717424, EndLatitude = 52.370216, EndLongitude = 4.895168 };
+
+            builder.Entity<Itinerary>().HasData(
+                une, deux, trois
                 );
 
             Category one = new Category() { Id = 1, Name = "Opmaak", TravelListId = 1 };

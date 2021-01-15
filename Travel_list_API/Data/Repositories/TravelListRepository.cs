@@ -62,11 +62,13 @@ namespace Travel_list_API.Data.Repositories
                 .Include(c => c.TravelLists).ThenInclude(t => t.Items)
                 .Include(c => c.TravelLists).ThenInclude(t => t.Tasks)
                 .Include(c => c.TravelLists).ThenInclude(t => t.Categories)
+                .Include(c => c.TravelLists).ThenInclude(t => t.Itinerary)
                 .First(c => c.Id == id) :
                 _clients
                 .Include(c => c.TravelLists).ThenInclude(t => t.Items)
                 .Include(c => c.TravelLists).ThenInclude(t => t.Tasks)
                 .Include(c => c.TravelLists).ThenInclude(t => t.Categories)
+                .Include(c => c.TravelLists).ThenInclude(t => t.Itinerary)
                 .AsNoTracking()
                 .First(c => c.Id == id);
         }

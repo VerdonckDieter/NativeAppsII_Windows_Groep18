@@ -14,5 +14,6 @@ namespace Travel_list_API.Models.DTO
         public List<Item> Items { get; set; } = new List<Item>();
         public List<Task> Tasks { get; set; } = new List<Task>();
         public List<Category> Categories { get; set; } = new List<Category>();
+        public Itinerary Itinerary { get; set; }
     }
 }

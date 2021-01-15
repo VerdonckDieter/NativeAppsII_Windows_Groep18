@@ -39,7 +39,8 @@ namespace Travel_list_API.Controllers
                 EndDate = travelListDTO.EndDate,
                 Items = travelListDTO.Items,
                 Tasks = travelListDTO.Tasks,
-                Categories = travelListDTO.Categories
+                Categories = travelListDTO.Categories,
+                Itinerary = travelListDTO.Itinerary
             };
             _travelListRepository.AddTravelList(clientId, travelList);
             _travelListRepository.SaveChanges();

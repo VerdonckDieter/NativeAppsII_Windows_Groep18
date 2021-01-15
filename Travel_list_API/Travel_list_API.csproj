@@ -15,6 +15,16 @@
     <Compile Remove="Migrations\20201226143729_Initial.Designer.cs" />
     <Compile Remove="Migrations\20210110203248_Initial.cs" />
     <Compile Remove="Migrations\20210110203248_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210114221544_Initial.cs" />
+    <Compile Remove="Migrations\20210114221544_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210115192835_Initial.cs" />
+    <Compile Remove="Migrations\20210115192835_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210115194112_Initial.cs" />
+    <Compile Remove="Migrations\20210115194112_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210115194957_Initial.cs" />
+    <Compile Remove="Migrations\20210115194957_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210115200538_Initial.cs" />
+    <Compile Remove="Migrations\20210115200538_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,10 +35,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NSwag.AspNetCore" Version="13.9.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 

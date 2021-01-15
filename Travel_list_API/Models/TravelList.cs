@@ -13,6 +13,7 @@ namespace Travel_list_API.Models
         public List<Item> Items { get; set; }
         public List<Task> Tasks { get; set; }
         public List<Category> Categories { get; set; }
+        public Itinerary Itinerary { get; set; }
 
         public TravelList() {
             Items = new List<Item>();
