@@ -3,6 +3,8 @@ using NativeAppsII_Windows_Groep18.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.Devices.Geolocation;
+using Windows.Services.Maps;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -21,11 +23,17 @@ namespace NativeAppsII_Windows_Groep18.View
     {
         public TravelListViewModel travelListViewModel;
 
+        private double StartLatitude;
+        private double StartLongitude;
+        private double EndLatitude;
+        private double EndLongitude;
+
         public AddTravelListView()
         {
             InitializeComponent();
             travelListViewModel = new TravelListViewModel();
             InitializeElements();
+            MapService.ServiceToken = "kiMTfBjS18oItbEwSQsi~V30ULXHdubcpoIgp7E9GjA~AhlM7Rp6OqMz_O06wAnydivBQG4XpUEUJKwS9nPg-y5tajWHqTi5VJ9fnOUiUQTD";
         }
 
         private void InitializeElements()
@@ -47,11 +55,16 @@ namespace NativeAppsII_Windows_Groep18.View
                 string name = Name.Text;
                 DateTime startdate = StartDate.Date.Value.DateTime;
                 DateTime enddate = EndDate.Date.Value.DateTime;
+                await GetPosition(StartPosition.Text, EndPosition.Text);
+                double startLatitude = StartLatitude;
+                double startLongitude = StartLongitude;
+                double endLatitude = EndLatitude;
+                double endLongitude = EndLongitude;
                 List<Item> items = GetItemsFromInput();
-                List<Task> tasks = GetTasksFromInput();                
+                List<Task> tasks = GetTasksFromInput();
                 try
                 {
-                    await travelListViewModel.AddTravelList(name, startdate, enddate, items, tasks);
+                    await travelListViewModel.AddTravelList(name, startdate, enddate, startLatitude, startLongitude, endLatitude, endLongitude, items, tasks);
                 }
                 catch (Exception ex)
                 {
@@ -234,6 +247,28 @@ namespace NativeAppsII_Windows_Groep18.View
             {
                 TaskListView.Items.RemoveAt(TaskListView.Items.Count - 1);
             }
+        }
+
+        private async System.Threading.Tasks.Task GetPosition(string startPosition, string endPosition)
+        {
+            StartLatitude = (await GetPosition(startPosition))[0];
+            StartLongitude = (await GetPosition(startPosition))[1];
+            EndLatitude = (await GetPosition(endPosition))[0];
+            EndLongitude = (await GetPosition(endPosition))[1];
+        }
+
+        private async System.Threading.Tasks.Task<List<double>> GetPosition(string address)
+        {
+            List<double> positions = new List<double>();
+            MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(
+                                    address, null, 1);
+
+            if (result.Status == MapLocationFinderStatus.Success)
+            {
+                positions.Add(result.Locations[0].Point.Position.Latitude);
+                positions.Add(result.Locations[0].Point.Position.Longitude);
+            }
+            return positions;
         }
     }
 }

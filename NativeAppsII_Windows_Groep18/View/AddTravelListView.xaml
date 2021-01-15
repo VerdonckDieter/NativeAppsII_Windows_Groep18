@@ -134,13 +134,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
                 <RowDefinition Height="6*" />
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             
             
             <TextBox Grid.Row="0" x:Name="Name" Header="Name" PlaceholderText="Name of the travel list" VerticalAlignment="Center" Tapped="ResetErrors"/>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" ColumnSpacing="8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
@@ -149,7 +150,16 @@
                 <CalendarDatePicker Grid.Column="1" x:Name="EndDate" Header="End date"  HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
             </Grid>
 
-            <Grid Grid.Row="2" x:Name="ItemAndTaskInputGrid" RowSpacing="8" ColumnSpacing="8">
+            <Grid Grid.Row="2" ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" x:Name="StartPosition" Header="Start" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
+                <TextBox Grid.Column="1" x:Name="EndPosition" Header="Destination" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
+            </Grid>
+
+            <Grid Grid.Row="3" x:Name="ItemAndTaskInputGrid" RowSpacing="8" ColumnSpacing="8">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
@@ -221,7 +231,7 @@
                 </Grid>
             </Grid>
 
-            <Button x:Name="AddTravelListButton" Grid.Row="3" Grid.ColumnSpan="2" Click="AddTravelList" Content="Add travel list" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White"/>
+            <Button x:Name="AddTravelListButton" Grid.Row="4" Grid.ColumnSpan="2" Click="AddTravelList" Content="Add travel list" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White"/>
 
         </Grid>
     </Grid>
