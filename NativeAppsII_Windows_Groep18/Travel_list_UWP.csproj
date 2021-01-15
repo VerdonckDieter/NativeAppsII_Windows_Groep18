@@ -124,6 +124,7 @@
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\DTO\TravelListDTO.cs" />
     <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\Itinerary.cs" />
     <Compile Include="Model\Singleton\ClientSingleton.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\TravelList.cs" />
@@ -133,6 +134,9 @@
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="View\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Itinerary.xaml.cs">
+      <DependentUpon>Itinerary.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -181,6 +185,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="View\Account.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Itinerary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
