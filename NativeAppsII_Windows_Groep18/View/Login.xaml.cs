@@ -32,8 +32,18 @@ namespace NativeAppsII_Windows_Groep18.View
             LoginViewModel = new LoginViewModel();
             LoginMail.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
         }
+        private void LoginEnterKey(object sender, KeyRoutedEventArgs e)
+        {
+            LoginUser();
+        }
 
-        private async void LoginUser(object sender, RoutedEventArgs e)
+
+        private void LoginClick(object sender, RoutedEventArgs e)
+        {
+            LoginUser();
+        }
+
+        private async void LoginUser()
         {
             string mail = LoginMail.Text;
             try
@@ -55,7 +65,6 @@ namespace NativeAppsII_Windows_Groep18.View
                 dialog.CloseButtonText = "Close";
                 dialog.ShowAsync();
             }
-
         }
 
         private void NavigateToRegister(object sender, RoutedEventArgs e)

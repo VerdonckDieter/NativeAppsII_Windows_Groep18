@@ -71,7 +71,7 @@
             <StackPanel Orientation="Vertical" Grid.Row="0" VerticalAlignment="Center" Margin="20">
                 <TextBox x:Name="LoginMail" Grid.Row="0" Header="E-mail" PlaceholderText="Enter your e-mail" Margin="0, 0, 0, 24" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
 
-                <Button x:Name="LoginButton" Grid.Row="1" Click="LoginUser" Content="Login" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White"/>
+                <Button x:Name="LoginButton" Grid.Row="1" Click="LoginClick" KeyDown="LoginEnterKey" Content="Login" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White"/>
             </StackPanel>
 
             <TextBlock Grid.Row="1" x:Name="NavigateButtonText" Text="Don't have an account yet?" VerticalAlignment="Bottom" HorizontalAlignment="Center"  />
