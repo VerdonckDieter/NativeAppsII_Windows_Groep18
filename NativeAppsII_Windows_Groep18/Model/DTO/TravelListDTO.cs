@@ -15,5 +15,6 @@ namespace NativeAppsII_Windows_Groep18.Model.DTO
         public List<Item> Items { get; set; } = new List<Item>();
         public List<Task> Tasks { get; set; } = new List<Task>();
         public List<Category> Categories { get; set; } = new List<Category>();
+        public Itinerary Itinerary { get; set; }
     }
 }

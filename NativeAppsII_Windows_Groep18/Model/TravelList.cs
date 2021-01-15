@@ -52,6 +52,34 @@ namespace NativeAppsII_Windows_Groep18.DataModel
             }
         }
 
+        private Itinerary _itinerary;
+        public Itinerary Itinerary
+        {
+            get
+            {
+                return _itinerary;
+            }
+            set
+            {
+                _itinerary = value;
+                OnPropertyChanged("Itinerary");
+            }
+        }
+
+        private int _progress;
+        public int Progress
+        {
+            get
+            {
+                return _progress;
+            }
+            set
+            {
+                _progress = value;
+                OnPropertyChanged("Progress");
+            }
+        }
+
         public ObservableCollection<Item> Items { get; set; }
         public Dictionary<string, List<Item>> ItemsGrouped { get; set; }
         public ObservableCollection<Task> Tasks { get; set; }
@@ -62,6 +90,12 @@ namespace NativeAppsII_Windows_Groep18.DataModel
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void UpdateProgress()
+        {
+            double count = Items.Count(i => i.Added == true);
+            Progress = (int)(count / (double)Items.Count() * 100);
         }
     }
 }
