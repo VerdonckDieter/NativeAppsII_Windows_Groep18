@@ -116,7 +116,7 @@ namespace Travel_list_API.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2021, 1, 14, 23, 15, 43, 949, DateTimeKind.Local).AddTicks(117),
+                            BirthDate = new DateTime(2021, 1, 15, 21, 10, 21, 86, DateTimeKind.Local).AddTicks(5753),
                             Email = "client@gmail.com",
                             FirstName = "Pog",
                             LastName = "Champ"
@@ -124,7 +124,7 @@ namespace Travel_list_API.Migrations
                         new
                         {
                             Id = 2,
-                            BirthDate = new DateTime(2021, 1, 14, 23, 15, 43, 950, DateTimeKind.Local).AddTicks(7660),
+                            BirthDate = new DateTime(2021, 1, 15, 21, 10, 21, 88, DateTimeKind.Local).AddTicks(3668),
                             Email = "client2@gmail.com",
                             FirstName = "Ayaya",
                             LastName = "Clap"
@@ -234,6 +234,65 @@ namespace Travel_list_API.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Travel_list_API.Models.Itinerary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("EndLatitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("EndLongitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("StartLatitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("StartLongitude")
+                        .HasColumnType("float");
+
+                    b.Property<int>("TravelListId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TravelListId")
+                        .IsUnique();
+
+                    b.ToTable("Itineraries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EndLatitude = 41.385063000000002,
+                            EndLongitude = 2.1734040000000001,
+                            StartLatitude = 51.054340000000003,
+                            StartLongitude = 3.7174239999999998,
+                            TravelListId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EndLatitude = 48.856613000000003,
+                            EndLongitude = 2.3522219999999998,
+                            StartLatitude = 51.054340000000003,
+                            StartLongitude = 3.7174239999999998,
+                            TravelListId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EndLatitude = 52.370215999999999,
+                            EndLongitude = 4.895168,
+                            StartLatitude = 51.054340000000003,
+                            StartLongitude = 3.7174239999999998,
+                            TravelListId = 3
+                        });
+                });
+
             modelBuilder.Entity("Travel_list_API.Models.Task", b =>
                 {
                     b.Property<int>("Id")
@@ -284,41 +343,41 @@ namespace Travel_list_API.Migrations
                         {
                             Id = 1,
                             ClientId = 1,
-                            EndDate = new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(7609),
+                            EndDate = new DateTime(2021, 1, 20, 21, 10, 21, 89, DateTimeKind.Local).AddTicks(3608),
                             Name = "Spanje",
-                            StartDate = new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(7311)
+                            StartDate = new DateTime(2021, 1, 15, 21, 10, 21, 89, DateTimeKind.Local).AddTicks(3277)
                         },
                         new
                         {
                             Id = 2,
                             ClientId = 1,
-                            EndDate = new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8170),
+                            EndDate = new DateTime(2021, 1, 20, 21, 10, 21, 89, DateTimeKind.Local).AddTicks(4174),
                             Name = "Frankrijk",
-                            StartDate = new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8151)
+                            StartDate = new DateTime(2021, 1, 15, 21, 10, 21, 89, DateTimeKind.Local).AddTicks(4153)
                         },
                         new
                         {
                             Id = 3,
                             ClientId = 1,
-                            EndDate = new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8187),
+                            EndDate = new DateTime(2021, 1, 20, 21, 10, 21, 89, DateTimeKind.Local).AddTicks(4191),
                             Name = "Nederland",
-                            StartDate = new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8183)
+                            StartDate = new DateTime(2021, 1, 15, 21, 10, 21, 89, DateTimeKind.Local).AddTicks(4188)
                         },
                         new
                         {
                             Id = 4,
                             ClientId = 2,
-                            EndDate = new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8193),
+                            EndDate = new DateTime(2021, 1, 20, 21, 10, 21, 89, DateTimeKind.Local).AddTicks(4197),
                             Name = "Duitsland",
-                            StartDate = new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8190)
+                            StartDate = new DateTime(2021, 1, 15, 21, 10, 21, 89, DateTimeKind.Local).AddTicks(4195)
                         },
                         new
                         {
                             Id = 5,
                             ClientId = 2,
-                            EndDate = new DateTime(2021, 1, 19, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8199),
+                            EndDate = new DateTime(2021, 1, 20, 21, 10, 21, 89, DateTimeKind.Local).AddTicks(4203),
                             Name = "Noorwegen",
-                            StartDate = new DateTime(2021, 1, 14, 23, 15, 43, 951, DateTimeKind.Local).AddTicks(8197)
+                            StartDate = new DateTime(2021, 1, 15, 21, 10, 21, 89, DateTimeKind.Local).AddTicks(4201)
                         });
                 });
 
@@ -336,6 +395,15 @@ namespace Travel_list_API.Migrations
                     b.HasOne("Travel_list_API.Models.TravelList", null)
                         .WithMany("Items")
                         .HasForeignKey("TravelListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Travel_list_API.Models.Itinerary", b =>
+                {
+                    b.HasOne("Travel_list_API.Models.TravelList", null)
+                        .WithOne("Itinerary")
+                        .HasForeignKey("Travel_list_API.Models.Itinerary", "TravelListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
