@@ -15,7 +15,7 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
     public class TravelListViewModel
     {
         #region Properties
-        public ObservableCollection<TravelList> TravelLists { get; set; } 
+        public ObservableCollection<TravelList> TravelLists { get; set; }
         public ObservableCollection<Category> Categories { get; set; }
         #endregion
 
@@ -39,16 +39,21 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
                 TravelLists.Add(travelList);
             }
             GroupBy();
+            InitializeProgress();
         }
 
-        public async System.Threading.Tasks.Task AddTravelList(String name, DateTime startdate, DateTime enddate, List<Item> items = null, List<Model.Task> tasks = null)
+        public async System.Threading.Tasks.Task AddTravelList(String name, DateTime startdate, DateTime enddate, 
+            double startLatitude, double startLongitude, double endLatitude, double endLongitude, List<Item> items = null, List<Model.Task> tasks = null)
         {
-            var travelList = new TravelListDTO() { 
-                Name = name, 
-                StartDate = startdate, 
-                EndDate = enddate, 
-                Items = items, 
-                Tasks = tasks
+            var itinerary = new Itinerary() { StartLatitude = startLatitude, StartLongitude = startLongitude, EndLatitude = endLatitude, EndLongitude = endLongitude };
+            var travelList = new TravelListDTO()
+            {
+                Name = name,
+                StartDate = startdate,
+                EndDate = enddate,
+                Items = items,
+                Tasks = tasks,
+                Itinerary = itinerary
             };
             var travelListJson = JsonConvert.SerializeObject(travelList);
 
@@ -60,10 +65,10 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
                 TravelLists.Add(JsonConvert.DeserializeObject<TravelList>(res.Content.ToString()));
             }
         }
-        
+
         public void GroupBy()
         {
-            foreach(TravelList t in TravelLists)
+            foreach (TravelList t in TravelLists)
             {
                 t.ItemsGrouped = t.Items.GroupBy(i => i.Category).ToDictionary(i => i.Key, i => i.ToList());
             }
@@ -78,6 +83,14 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
                 new Category() { Name = "Bad" },
                 new Category() { Name = "Kledij" }
             };
+        }
+
+        public void InitializeProgress()
+        {
+            foreach (TravelList t in TravelLists)
+            {
+                t.UpdateProgress();
+            }
         }
         #endregion
     }
