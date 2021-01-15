@@ -28,6 +28,7 @@ namespace NativeAppsII_Windows_Groep18.View
             ("Home", typeof(TravelListOverview)),
             ("Add TravelList", typeof(AddTravelListView)),
             ("Account", typeof(Account)),
+            ("Maps", typeof(Itinerary)),
             ("Logout", typeof(MainPage))
         };
         public Navigation()
@@ -53,6 +54,9 @@ namespace NativeAppsII_Windows_Groep18.View
                     Content.Navigate(_page);
                     break;
                 case "Account":
+                    Content.Navigate(_page);
+                    break;
+                case "Maps":
                     Content.Navigate(_page);
                     break;
                 case "Logout":

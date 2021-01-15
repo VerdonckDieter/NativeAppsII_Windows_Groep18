@@ -58,7 +58,7 @@
                     Icon="Add">
                 </NavigationViewItem>
                 <NavigationViewItem 
-                    Content="Itinerary" 
+                    Content="Maps" 
                     Icon="Map">
                 </NavigationViewItem>
                 <NavigationViewItem
