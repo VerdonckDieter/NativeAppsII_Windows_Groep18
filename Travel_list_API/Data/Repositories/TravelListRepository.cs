@@ -9,12 +9,14 @@ namespace Travel_list_API.Data.Repositories
     {
         private readonly TravelListContext _dbContext;
         private readonly DbSet<TravelList> _travelLists;
+        private readonly DbSet<Item> _items;
         private readonly DbSet<Client> _clients;
         public TravelListRepository(TravelListContext dbContext)
         {
             _dbContext = dbContext;
             _travelLists = dbContext.TravelLists;
             _clients = dbContext.Clients;
+            _items = dbContext.Items;
         }
 
         public void AddTravelList(int clientId, TravelList travelList)
@@ -49,6 +51,10 @@ namespace Travel_list_API.Data.Repositories
         public void UpdateTravelList(TravelList travelList)
         {
             _travelLists.Update(travelList);
+            foreach(var i in travelList.Items)
+            {
+                _items.Update(i);
+            }
         }
 
         public void SaveChanges()

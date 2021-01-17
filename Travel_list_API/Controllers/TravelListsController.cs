@@ -48,13 +48,22 @@ namespace Travel_list_API.Controllers
             return CreatedAtAction(nameof(GetTravelListById), new { clientId, travelListId = travelList.Id }, travelList);
         }
 
-        [HttpPut("{travelListId}")]
-        public IActionResult PutTravelList(int travelListId, TravelList travelList)
+        [HttpPut("{clientId}/travelLists/{travelListId}")]
+        public IActionResult PutTravelList(int clientId, int travelListId, TravelListDTO travelListDTO)
         {
-            if (travelListId != travelList.Id)
+            if (travelListId != travelListDTO.Id)
             {
                 return BadRequest();
             }
+            var travelList = new TravelList()
+            {
+                Id = travelListDTO.Id,
+                ClientId = clientId,
+                Name = travelListDTO.Name,
+                StartDate = travelListDTO.StartDate,
+                EndDate = travelListDTO.EndDate,
+                Items = travelListDTO.Items
+            };
             _travelListRepository.UpdateTravelList(travelList);
             _travelListRepository.SaveChanges();
 
