@@ -7,7 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:NativeAppsII_Windows_Groep18.ViewModel"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
+
+    <Page.Background>
+        <SolidColorBrush Color="WhiteSmoke" />
+    </Page.Background>
 
     <Page.DataContext>
         <vm:AccountViewModel></vm:AccountViewModel>
@@ -141,12 +145,12 @@
         <TextBlock x:Name="AccountTitle" Grid.Row="0" Grid.Column="1" Text="Manage account" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="CornflowerBlue"/>
         <Grid Grid.Row="1" Grid.Column="1" x:Name="GridAccount" Margin="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" x:Name="GridEmail" VerticalAlignment="Center" Margin="2">
                 <Grid.ColumnDefinitions>
@@ -180,7 +184,7 @@
                 <TextBlock x:Name="AccountBirthdateText" Text="Date of birth" VerticalAlignment="Center"/>
                 <DatePicker IsEnabled="False" x:Name="AccountBirthdate" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
             </Grid>
-            <Button IsEnabled="False" Grid.Row="4" x:Name="AccountButton" Click="UpdateUser" Content="Save changes" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White" Margin="2"/>
+            <Button IsEnabled="False" Grid.Row="4" x:Name="AccountButton" Click="UpdateUser" Content="Save changes" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="WhiteSmoke" Margin="2"/>
             <Button Grid.Row="5" x:Name="EditButton" Click="EditAccount" Content="Edit" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="CornflowerBlue" FontWeight="SemiBold" Margin="2">
                 <Button.Background>
                     <SolidColorBrush Opacity="0"/>

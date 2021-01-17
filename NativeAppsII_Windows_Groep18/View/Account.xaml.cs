@@ -1,7 +1,9 @@
-﻿using NativeAppsII_Windows_Groep18.Model.Singleton;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using NativeAppsII_Windows_Groep18.Model.Singleton;
 using NativeAppsII_Windows_Groep18.ViewModel;
 using System;
 using Windows.UI;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
@@ -21,7 +23,7 @@ namespace NativeAppsII_Windows_Groep18.View
         public Account()
         {
             InitializeComponent();
-            InitializeElements();
+            InitializeBindings();
             AccountViewModel = new AccountViewModel();
             AccountEmail.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
             AccountFirstname.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
@@ -47,14 +49,17 @@ namespace NativeAppsII_Windows_Groep18.View
                 try
                 {
                     await AccountViewModel.UpdateUser(id, email, firstname, lastname, birthdate);
+                    ShowToast(email);
                     EditableElements(false);
                 }
                 catch (Exception ex)
                 {
-                    var dialog = new ContentDialog();
-
-                    dialog.CloseButtonText = "Close";
-                    dialog.ShowAsync();
+                    var dialog = new ContentDialog
+                    {
+                        Title = ex.Message,
+                        CloseButtonText = "Close"
+                    };
+                    await dialog.ShowAsync();
                 }
             }
         }
@@ -131,7 +136,7 @@ namespace NativeAppsII_Windows_Groep18.View
             AccountButton.IsEnabled = edit;
         }
 
-        private void InitializeElements()
+        private void InitializeBindings()
         {
             var binding = new Binding { Source = ClientSingleton.Instance.Client.Email, Mode = BindingMode.OneWay };
             AccountEmail.SetBinding(TextBox.TextProperty, binding);
@@ -144,6 +149,16 @@ namespace NativeAppsII_Windows_Groep18.View
 
             binding = new Binding { Source = ClientSingleton.Instance.Client.Birthdate, Mode = BindingMode.OneWay };
             AccountBirthdate.SetBinding(DatePicker.DateProperty, binding);
+        }
+
+        private void ShowToast(string text)
+        {
+            var content = new ToastContentBuilder()
+                .AddText("Account for " + text + " was updated")
+                .SetToastDuration(ToastDuration.Short)
+                .GetToastContent();
+            var notif = new ToastNotification(content.GetXml());
+            ToastNotificationManager.CreateToastNotifier().Show(notif);
         }
     }
 }
