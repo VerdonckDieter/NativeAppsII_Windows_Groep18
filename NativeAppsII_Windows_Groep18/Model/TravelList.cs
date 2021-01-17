@@ -10,6 +10,7 @@ namespace NativeAppsII_Windows_Groep18.DataModel
 {
     public class TravelList : INotifyPropertyChanged
     {
+        public int Id { get; set; }
         private string _name;
         public string Name
         {
@@ -95,7 +96,7 @@ namespace NativeAppsII_Windows_Groep18.DataModel
         public void UpdateProgress()
         {
             double count = Items.Count(i => i.Added == true);
-            Progress = (int)(count / (double)Items.Count() * 100);
+            Progress = (int)(count / Items.Count() * 100);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace NativeAppsII_Windows_Groep18.Model
 {
     public class Itinerary : INotifyPropertyChanged
     {
+        public int Id { get; set; }
         private double _startLatitude;
         public double StartLatitude
         {

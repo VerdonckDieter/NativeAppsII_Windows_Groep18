@@ -10,6 +10,7 @@ namespace NativeAppsII_Windows_Groep18.Model
 {
     public class Task : INotifyPropertyChanged
     {
+        public int Id { get; set; }
         private string _name;
         public string Name
         {
