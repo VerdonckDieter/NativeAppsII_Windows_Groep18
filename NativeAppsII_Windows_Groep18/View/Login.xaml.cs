@@ -1,20 +1,10 @@
 ﻿using NativeAppsII_Windows_Groep18.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -45,26 +35,35 @@ namespace NativeAppsII_Windows_Groep18.View
 
         private async void LoginUser()
         {
-            string mail = LoginMail.Text;
-            try
+            if (String.IsNullOrEmpty(LoginMail.Text))
             {
-                await LoginViewModel.Login(mail);
-                if (LoginViewModel.Succes)
-                {
-                    Frame.Navigate(typeof(Navigation));
-                }
-                else
-                {
-                    LoginError();
-                }
+                LoginError(true);
             }
-            catch (Exception ex)
+            else
             {
-                var dialog = new ContentDialog();
-
-                dialog.CloseButtonText = "Close";
-                dialog.ShowAsync();
-            }
+                string mail = LoginMail.Text;
+                try
+                {
+                    await LoginViewModel.Login(mail);
+                    if (LoginViewModel.Succes)
+                    {
+                        Frame.Navigate(typeof(Navigation));
+                    }
+                    else
+                    {
+                        LoginError(false);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var dialog = new ContentDialog
+                    {
+                        Title = ex.Message,
+                        CloseButtonText = "Close"
+                    };
+                    await dialog.ShowAsync();
+                }
+            }  
         }
 
         private void NavigateToRegister(object sender, RoutedEventArgs e)
@@ -72,11 +71,21 @@ namespace NativeAppsII_Windows_Groep18.View
             Frame.Navigate(typeof(Register));
         }
 
-        private void LoginError()
+        private void LoginError(bool empty)
         {
-            LoginMail.Text = string.Empty;
-            LoginMail.Header = "Could not find user";
-            LoginMail.BorderBrush = new SolidColorBrush(Colors.Red);
+            switch (empty)
+            {
+                case true:
+                    LoginMail.Text = string.Empty;
+                    LoginMail.Header = "Please enter your e-mail";
+                    LoginMail.BorderBrush = new SolidColorBrush(Colors.Red);
+                    break;
+                case false:
+                    LoginMail.Text = string.Empty;
+                    LoginMail.Header = "Could not find user";
+                    LoginMail.BorderBrush = new SolidColorBrush(Colors.Red);
+                    break;
+            }
         }
 
         private void ResetErrors(object sender, TappedRoutedEventArgs e)

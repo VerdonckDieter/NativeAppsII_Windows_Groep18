@@ -6,7 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
+
+    <Page.Background>
+        <SolidColorBrush Color="WhiteSmoke" />
+    </Page.Background>
+    
     <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
@@ -71,7 +76,7 @@
             <StackPanel Orientation="Vertical" Grid.Row="0" VerticalAlignment="Center" Margin="20">
                 <TextBox x:Name="LoginMail" Grid.Row="0" Header="E-mail" PlaceholderText="Enter your e-mail" Margin="0, 0, 0, 24" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
 
-                <Button x:Name="LoginButton" Grid.Row="1" Click="LoginClick" KeyDown="LoginEnterKey" Content="Login" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White"/>
+                <Button x:Name="LoginButton" Grid.Row="1" Click="LoginClick" KeyDown="LoginEnterKey" Content="Login" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="WhiteSmoke"/>
             </StackPanel>
 
             <TextBlock Grid.Row="1" x:Name="NavigateButtonText" Text="Don't have an account yet?" VerticalAlignment="Bottom" HorizontalAlignment="Center"  />
