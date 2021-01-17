@@ -1,20 +1,12 @@
-﻿using NativeAppsII_Windows_Groep18.ViewModel;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using NativeAppsII_Windows_Groep18.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -53,14 +45,17 @@ namespace NativeAppsII_Windows_Groep18.View
                 try
                 {
                     await RegisterViewModel.Register(email, firstname, lastname, birthdate);
+                    ShowToast(email);
                     Frame.Navigate(typeof(Login));
                 }
                 catch (Exception ex)
                 {
-                    var dialog = new ContentDialog();
-
-                    dialog.CloseButtonText = "Close";
-                    dialog.ShowAsync();
+                    var dialog = new ContentDialog
+                    {
+                        Title = ex.Message,
+                        CloseButtonText = "Close"
+                    };
+                    await dialog.ShowAsync();
                 }
             }
         }
@@ -126,6 +121,16 @@ namespace NativeAppsII_Windows_Groep18.View
         private void NavigateToLogin(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Login));
+        }
+
+        private void ShowToast(string text)
+        {
+            var content = new ToastContentBuilder()
+                .AddText("Account for " + text + " was created")
+                .SetToastDuration(ToastDuration.Short)
+                .GetToastContent();
+            var notif = new ToastNotification(content.GetXml());
+            ToastNotificationManager.CreateToastNotifier().Show(notif);
         }
     }
 }

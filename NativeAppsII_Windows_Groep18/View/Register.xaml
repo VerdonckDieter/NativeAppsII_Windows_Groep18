@@ -6,7 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
+
+    <Page.Background>
+        <SolidColorBrush Color="WhiteSmoke" />
+    </Page.Background>
 
     <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <VisualStateManager.VisualStateGroups>
@@ -76,7 +80,7 @@
             <TextBox Grid.Row="1" x:Name="RegisterFirstname" Header="First name" PlaceholderText="Enter your first name" VerticalAlignment="Center" Tapped="ResetErrors"/>
             <TextBox Grid.Row="2" x:Name="RegisterLastname" Header="Last name" PlaceholderText="Enter your last name" VerticalAlignment="Center" Tapped="ResetErrors"/>
             <DatePicker Grid.Row="3" x:Name="RegisterBirthdate" Header="Date of birth" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
-            <Button Grid.Row="4" x:Name="RegisterButton" Click="RegisterUser" Content="Create account" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White" />
+            <Button Grid.Row="4" x:Name="RegisterButton" Click="RegisterUser" Content="Create account" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="WhiteSmoke" />
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
