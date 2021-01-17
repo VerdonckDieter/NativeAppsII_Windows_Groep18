@@ -1,11 +1,12 @@
-﻿using NativeAppsII_Windows_Groep18.Model;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using NativeAppsII_Windows_Groep18.Model;
 using NativeAppsII_Windows_Groep18.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
 using Windows.UI;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
@@ -41,12 +42,13 @@ namespace NativeAppsII_Windows_Groep18.View
             StartDate.MinDate = DateTimeOffset.Now;
             EndDate.MinDate = DateTimeOffset.Now;
             Name.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
-
+            StartPosition.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
+            EndPosition.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
         }
 
         private async void AddTravelList(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(Name.Text) || StartDate.Date == null || EndDate.Date == null)
+            if (String.IsNullOrEmpty(Name.Text) || StartDate.Date == null || EndDate.Date == null || String.IsNullOrEmpty(StartPosition.Text) || String.IsNullOrEmpty(EndPosition.Text))
             {
                 AddTravelListError();
             }
@@ -65,13 +67,16 @@ namespace NativeAppsII_Windows_Groep18.View
                 try
                 {
                     await travelListViewModel.AddTravelList(name, startdate, enddate, startLatitude, startLongitude, endLatitude, endLongitude, items, tasks);
+                    ShowToast(name);
                 }
                 catch (Exception ex)
                 {
-                    var dialog = new ContentDialog();
-
-                    dialog.CloseButtonText = "Close";
-                    dialog.ShowAsync();
+                    var dialog = new ContentDialog
+                    {
+                        Title = ex.Message,
+                        CloseButtonText = "Close"
+                    };
+                    await dialog.ShowAsync();
                 }
             }
         }
@@ -126,6 +131,18 @@ namespace NativeAppsII_Windows_Groep18.View
                 EndDate.Foreground = new SolidColorBrush(Colors.Red);
                 EndDate.BorderBrush = new SolidColorBrush(Colors.Red);
             }
+            if (String.IsNullOrEmpty(StartPosition.Text))
+            {
+                StartPosition.Text = string.Empty;
+                StartPosition.Header = "Start position is required";
+                StartPosition.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            if (String.IsNullOrEmpty(EndPosition.Text))
+            {
+                EndPosition.Text = string.Empty;
+                EndPosition.Header = "Destination is required";
+                EndPosition.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
         }
 
         private void ResetErrors(object sender, TappedRoutedEventArgs e)
@@ -133,8 +150,21 @@ namespace NativeAppsII_Windows_Groep18.View
             switch (sender.GetType().Name)
             {
                 case "TextBox":
-                    Name.Header = "Name";
-                    Name.ClearValue(TextBox.BorderBrushProperty);
+                    if (((TextBox)sender).Name.Equals("Name"))
+                    {
+                        Name.Header = "Name";
+                        Name.ClearValue(TextBox.BorderBrushProperty);
+                    }
+                    else if (((TextBox)sender).Name.Equals("StartPosition"))
+                    {
+                        StartPosition.Header = "Start";
+                        StartPosition.ClearValue(TextBox.BorderBrushProperty);
+                    }
+                    else
+                    {
+                        EndPosition.Header = "Destination";
+                        EndPosition.ClearValue(TextBox.BorderBrushProperty);
+                    }
                     break;
                 case "CalendarDatePicker":
                     if (((CalendarDatePicker)sender).Name.Equals("StartDate"))
@@ -269,6 +299,16 @@ namespace NativeAppsII_Windows_Groep18.View
                 positions.Add(result.Locations[0].Point.Position.Longitude);
             }
             return positions;
+        }
+
+        private void ShowToast(string text)
+        {
+            var content = new ToastContentBuilder()
+                .AddText("Travel list for " + text + " was created")
+                .SetToastDuration(ToastDuration.Short)
+                .GetToastContent();
+            var notif = new ToastNotification(content.GetXml());
+            ToastNotificationManager.CreateToastNotifier().Show(notif);
         }
     }
 }

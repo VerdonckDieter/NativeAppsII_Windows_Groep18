@@ -8,9 +8,12 @@
     xmlns:vm="using:NativeAppsII_Windows_Groep18.ViewModel" 
     xmlns:my="using:NativeAppsII_Windows_Groep18.DataModel"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     x:Name="pageAdd"
     >
+
+    <Page.Background>
+        <SolidColorBrush Color="WhiteSmoke" />
+    </Page.Background>
 
     <Page.DataContext>
         <vm:TravelListViewModel></vm:TravelListViewModel>
@@ -155,8 +158,8 @@
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" x:Name="StartPosition" Header="Start" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
-                <TextBox Grid.Column="1" x:Name="EndPosition" Header="Destination" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
+                <TextBox Grid.Column="0" x:Name="StartPosition" Header="Start" HorizontalAlignment="Stretch" VerticalAlignment="Center" Tapped="ResetErrors"/>
+                <TextBox Grid.Column="1" x:Name="EndPosition" Header="Destination" HorizontalAlignment="Stretch" VerticalAlignment="Center" Tapped="ResetErrors"/>
             </Grid>
 
             <Grid Grid.Row="3" x:Name="ItemAndTaskInputGrid" RowSpacing="8" ColumnSpacing="8">
@@ -231,7 +234,7 @@
                 </Grid>
             </Grid>
 
-            <Button x:Name="AddTravelListButton" Grid.Row="4" Grid.ColumnSpan="2" Click="AddTravelList" Content="Add travel list" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White"/>
+            <Button x:Name="AddTravelListButton" Grid.Row="4" Grid.ColumnSpan="2" Click="AddTravelList" Content="Add travel list" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="WhiteSmoke"/>
 
         </Grid>
     </Grid>
