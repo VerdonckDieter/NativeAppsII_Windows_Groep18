@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using NativeAppsII_Windows_Groep18.DataModel;
+using NativeAppsII_Windows_Groep18.ViewModel;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +13,31 @@ namespace NativeAppsII_Windows_Groep18.View
     /// </summary>
     public sealed partial class TravelListOverview : Page
     {
+        public TravelListViewModel TravelListViewModel;
+
         public TravelListOverview()
         {
             InitializeComponent();
+            TravelListViewModel = new TravelListViewModel();
+        }
+
+        private async void SaveTravelList(object sender, RoutedEventArgs e)
+        {
+            var travelList = (TravelList)MasterDetailTravelListOverview.SelectedItem;
+            try
+            {
+                await TravelListViewModel.UpdateTravelList(travelList);
+                travelList.UpdateProgress();
+            }
+            catch (Exception ex)
+            {
+                var dialog = new ContentDialog
+                {
+                    Title = ex.Message,
+                    CloseButtonText = "Close"
+                };
+                await dialog.ShowAsync();
+            }
         }
     }
 }

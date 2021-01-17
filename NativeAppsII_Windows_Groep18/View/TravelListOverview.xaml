@@ -9,7 +9,11 @@
     xmlns:vm="using:NativeAppsII_Windows_Groep18.ViewModel" 
     xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
+
+    <Page.Background>
+        <SolidColorBrush Color="WhiteSmoke" />
+    </Page.Background>
 
     <Page.DataContext>
         <vm:TravelListViewModel></vm:TravelListViewModel>
@@ -23,14 +27,16 @@
                 Value="Stretch" />
             <Setter Property="VerticalContentAlignment"
                 Value="Stretch" />
+            <Setter Property="Padding" Value="0" />
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid x:Name="GridTravelListOverview">
         <controls:MasterDetailsView BackButtonBehavior="Automatic"
                                     ItemsSource="{Binding TravelLists}"
                                     NoSelectionContent="Select an item to view"
-                                    CompactModeThresholdWidth="720">
+                                    CompactModeThresholdWidth="720"
+                                    x:Name="MasterDetailTravelListOverview">
             <controls:MasterDetailsView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -59,14 +65,14 @@
             </controls:MasterDetailsView.ItemTemplate>
             <controls:MasterDetailsView.DetailsTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Stretch">
+                    <Grid HorizontalAlignment="Stretch" x:Name="GridDetailView">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.05*" />
-                            <ColumnDefinition Width="0.9*" />
-                            <ColumnDefinition Width="0.05*" />
+                            <ColumnDefinition Width="0.02*" />
+                            <ColumnDefinition Width="0.96*" />
+                            <ColumnDefinition Width="0.02*" />
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="1" Margin="24" Orientation="Vertical" HorizontalAlignment="Stretch">
+                        <StackPanel Grid.Column="1" Margin="24" Orientation="Vertical" HorizontalAlignment="Stretch" x:Name="StackPanelDetailView">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                                 <TextBlock x:Name="travelListName" Text="{Binding Name}" 
                                    Style="{ThemeResource TitleTextBlockStyle}" 
@@ -78,27 +84,39 @@
                             <Run Text=" - " />
                             <Run Text="{Binding EndDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:dd/MM/yyyy}'}" />
                                 </TextBlock>
+                                <ProgressBar IsIndeterminate="false" Value="{Binding Progress}" Margin="0,12"/>
                             </StackPanel>
                             <ListView ItemsSource="{Binding ItemsGrouped}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ItemContainerStyle="{StaticResource StretchedListViewItemStyle}">
                                 <ListView.HeaderTemplate>
                                     <DataTemplate>
-                                        <Grid Padding="12" Background="{ThemeResource SystemBaseLowColor}">
+                                        <Grid Padding="12" Background="{ThemeResource SystemListAccentMediumColor}" CornerRadius="5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1*" />
+                                                <RowDefinition Height="1*" />
+                                            </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="0.6*" />
                                                 <ColumnDefinition Width="0.2*" />
                                                 <ColumnDefinition Width="0.2*" />
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="Item" Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="NoWrap" MaxLines="1"/>
-                                            <TextBlock Grid.Column="1" Text="Amount" Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="NoWrap" MaxLines="1" HorizontalAlignment="Center"/>
-                                            <TextBlock Grid.Column="2" Text="Completed" Style="{ThemeResource CaptionTextBlockStyle}" TextWrapping="NoWrap" MaxLines="1" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Items" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Item" Style="{ThemeResource BaseTextBlockStyle}" TextWrapping="NoWrap" MaxLines="1"/>
+                                            <TextBlock Grid.Row="1" Grid.Column="1" Text="Amount" Style="{ThemeResource BaseTextBlockStyle}" TextWrapping="NoWrap" MaxLines="1" HorizontalAlignment="Center"/>
+                                            <TextBlock Grid.Row="1" Grid.Column="2" Text="Completed" Style="{ThemeResource BaseTextBlockStyle}" TextWrapping="NoWrap" MaxLines="1" HorizontalAlignment="Center"/>
                                         </Grid>
                                     </DataTemplate>
                                 </ListView.HeaderTemplate>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
-                                            <TextBlock Text="{Binding Key}" />
-                                            <ListView ItemsSource="{Binding Value}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ItemContainerStyle="{StaticResource StretchedListViewItemStyle}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1.5*" />
+                                                <RowDefinition Height="1*"/>
+                                            </Grid.RowDefinitions>
+                                            <Border Grid.Row="0" Background="{ThemeResource SystemListAccentLowColor}" CornerRadius="5" Margin="0,8" Padding="8">
+                                                <TextBlock Text="{Binding Key}" Style="{ThemeResource TitleTextBlockStyle}"  />
+                                            </Border>
+                                            <ListView Grid.Row="1" ItemsSource="{Binding Value}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ItemContainerStyle="{StaticResource StretchedListViewItemStyle}">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid Padding="6">
@@ -107,9 +125,9 @@
                                                                 <ColumnDefinition Width="0.2*" />
                                                                 <ColumnDefinition Width="0.2*" />
                                                             </Grid.ColumnDefinitions>
-                                                            <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" />
-                                                            <TextBlock Grid.Column="1" Text="{Binding Amount}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                                            <CheckBox Grid.Column="2" IsChecked="{Binding Added}" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="0" />
+                                                            <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}" />
+                                                            <TextBlock Grid.Column="1" Text="{Binding Amount}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}" />
+                                                            <CheckBox Grid.Column="2" IsChecked="{Binding Added, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="0" />
                                                         </Grid>
                                                     </DataTemplate>
                                                 </ListView.ItemTemplate>
@@ -118,6 +136,21 @@
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
+                            <ListView ItemsSource="{Binding Tasks}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ItemContainerStyle="{StaticResource StretchedListViewItemStyle}">
+                                <ListView.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{ThemeResource SystemListAccentMediumColor}" CornerRadius="5" Margin="0,8" Padding="12">
+                                            <TextBlock Text="Tasks" MaxLines="1" TextWrapping="NoWrap" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.HeaderTemplate>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{ThemeResource BodyTextBlockStyle}" Padding="6"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <Button x:Name="SaveButton" Click="SaveTravelList" Content="Save" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="White" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
