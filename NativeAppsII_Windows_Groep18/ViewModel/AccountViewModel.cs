@@ -8,10 +8,6 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
 {
     public class AccountViewModel
     {
-        public AccountViewModel()
-        {
-        }
-
         public async System.Threading.Tasks.Task UpdateUser(int id, string email, string firstname, string lastname, DateTime birthdate)
         {
             HttpClient client = new HttpClient();
