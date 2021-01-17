@@ -9,11 +9,12 @@
     >
     <Page.Background>
         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-            <GradientStop Color="White" Offset="0.0" />
-            <GradientStop Color="#A3E8FE" Offset="0.25" />
-            <GradientStop Color="#86D7F1" Offset="0.75" />
-            <GradientStop Color="#FF86D7F1" Offset="1.0"/>
+            <GradientStop Color="SteelBlue" Offset="0.0" />
+            <GradientStop Color="SkyBlue" Offset="0.25" />
+            <GradientStop Color="LightSkyBlue" Offset="0.75" />
+            <GradientStop Color="WhiteSmoke" Offset="1.0" />
         </LinearGradientBrush>
+
     </Page.Background>
 
     <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -51,8 +52,8 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="MainPageTitle.FontSize" Value="35"></Setter>
-                        <Setter Target="Login.FontSize" Value="25"></Setter>
-                        <Setter Target="Register.FontSize" Value="25"></Setter>
+                        <Setter Target="Login.FontSize" Value="20"></Setter>
+                        <Setter Target="Register.FontSize" Value="20"></Setter>
                         <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".25*"></Setter>
                         <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".5*"></Setter>
                         <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".25*"></Setter>
@@ -70,10 +71,33 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock  Grid.Row="0" x:Name="MainPageTitle" Grid.Column="1" Text="Travel List App" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid Grid.Row="0" Grid.Column="1" Margin="12">
+            <TextBlock x:Name="MainPageTitle" Text="Travel List App" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="WhiteSmoke" FontWeight="Bold"/>
+        </Grid>
+        
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-            <Button  x:Name="Login" Click="LoginUser" Content="Login" HorizontalAlignment="Stretch" CornerRadius="5" Margin="0,0,0,24"/>
-            <Button  x:Name="Register" Click="RegisterUser" Content="Register" HorizontalAlignment="Stretch" CornerRadius="5" />
+            <Button x:Name="Login" Click="LoginUser" HorizontalAlignment="Stretch" CornerRadius="5" Margin="0,0,0,24" HorizontalContentAlignment="Stretch" Background="CornflowerBlue" Foreground="WhiteSmoke">
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <SymbolIcon Grid.Column="0" Symbol="Account" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1" Text="Login" HorizontalAlignment="Center" />
+                </Grid>
+            </Button>
+            <Button  x:Name="Register" Click="RegisterUser" HorizontalAlignment="Stretch" CornerRadius="5" HorizontalContentAlignment="Stretch" Background="CornflowerBlue" Foreground="WhiteSmoke">
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <SymbolIcon Grid.Column="0" Symbol="Contact" HorizontalAlignment="Left" />
+                    <TextBlock Grid.Column="1" Text="Register" HorizontalAlignment="Center"/>
+                </Grid>
+            </Button>
         </StackPanel>
         
     </Grid>
