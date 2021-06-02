@@ -1,0 +1,195 @@
+﻿<Page
+    x:Class="NativeAppsII_Windows_Groep18.View.Account"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NativeAppsII_Windows_Groep18.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:NativeAppsII_Windows_Groep18.ViewModel"
+    mc:Ignorable="d"
+    >
+
+    <Page.Background>
+        <SolidColorBrush Color="WhiteSmoke" />
+    </Page.Background>
+
+    <Page.DataContext>
+        <vm:AccountViewModel></vm:AccountViewModel>
+    </Page.DataContext>
+
+    <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ScreenSizes">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="AccountTitle.FontSize" Value="25"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".05*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".9*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".05*"></Setter>
+
+                        <Setter Target="AccountEmailText.Visibility" Value="Collapsed"></Setter>
+                        <Setter Target="AccountEmail.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountEmail.Header" Value="Email"></Setter>
+                        <Setter Target="AccountEmail.(Grid.ColumnSpan)" Value="2"></Setter>
+
+                        <Setter Target="AccountFirstnameText.Visibility" Value="Collapsed"></Setter>
+                        <Setter Target="AccountFirstname.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountFirstname.Header" Value="First name"></Setter>
+                        <Setter Target="AccountFirstname.(Grid.ColumnSpan)" Value="2"></Setter>
+
+                        <Setter Target="AccountLastnameText.Visibility" Value="Collapsed"></Setter>
+                        <Setter Target="AccountLastname.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountLastname.Header" Value="Last name"></Setter>
+                        <Setter Target="AccountLastname.(Grid.ColumnSpan)" Value="2"></Setter>
+
+                        <Setter Target="AccountBirthdateText.Visibility" Value="Collapsed"></Setter>
+                        <Setter Target="AccountBirthdate.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountBirthdate.Header" Value="Date of birth"></Setter>
+                        <Setter Target="AccountBirthdate.(Grid.ColumnSpan)" Value="2"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="AccountTitle.FontSize" Value="30"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".125*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".75*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".125*"></Setter>
+                        
+                        <Setter Target="GridEmail.ColumnDefinitions[0].Width" Value=".2*"></Setter>
+                        <Setter Target="GridEmail.ColumnDefinitions[1].Width" Value=".8*"></Setter>
+                        <Setter Target="AccountEmailText.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountEmail.(Grid.Column)" Value="1"></Setter>
+                        <Setter Target="AccountEmailText.(Grid.Row)" Value="0"></Setter>
+                        <Setter Target="AccountEmail.(Grid.Row)" Value="0"></Setter>
+
+                        <Setter Target="GridFirstname.ColumnDefinitions[0].Width" Value=".2*"></Setter>
+                        <Setter Target="GridFirstname.ColumnDefinitions[1].Width" Value=".8*"></Setter>
+                        <Setter Target="AccountFirstnameText.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountFirstname.(Grid.Column)" Value="1"></Setter>
+                        <Setter Target="AccountFirstnameText.(Grid.Row)" Value="0"></Setter>
+                        <Setter Target="AccountFirstname.(Grid.Row)" Value="0"></Setter>
+
+                        <Setter Target="GridLastname.ColumnDefinitions[0].Width" Value=".2*"></Setter>
+                        <Setter Target="GridLastname.ColumnDefinitions[1].Width" Value=".8*"></Setter>
+                        <Setter Target="AccountLastnameText.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountLastname.(Grid.Column)" Value="1"></Setter>
+                        <Setter Target="AccountLastnameText.(Grid.Row)" Value="0"></Setter>
+                        <Setter Target="AccountLastname.(Grid.Row)" Value="0"></Setter>
+
+                        <Setter Target="GridBirthdate.ColumnDefinitions[0].Width" Value=".2*"></Setter>
+                        <Setter Target="GridBirthdate.ColumnDefinitions[1].Width" Value=".8*"></Setter>
+                        <Setter Target="AccountBirthdateText.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountBirthdate.(Grid.Column)" Value="1"></Setter>
+                        <Setter Target="AccountBirthdateText.(Grid.Row)" Value="0"></Setter>
+                        <Setter Target="AccountBirthdate.(Grid.Row)" Value="0"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="AccountTitle.FontSize" Value="35"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".25*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".5*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".25*"></Setter>
+                        
+                        <Setter Target="GridEmail.ColumnDefinitions[0].Width" Value=".2*"></Setter>
+                        <Setter Target="GridEmail.ColumnDefinitions[1].Width" Value=".8*"></Setter>
+                        <Setter Target="AccountEmailText.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountEmail.(Grid.Column)" Value="1"></Setter>
+                        <Setter Target="AccountEmailText.(Grid.Row)" Value="0"></Setter>
+                        <Setter Target="AccountEmail.(Grid.Row)" Value="0"></Setter>
+
+                        <Setter Target="GridFirstname.ColumnDefinitions[0].Width" Value=".2*"></Setter>
+                        <Setter Target="GridFirstname.ColumnDefinitions[1].Width" Value=".8*"></Setter>
+                        <Setter Target="AccountFirstnameText.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountFirstname.(Grid.Column)" Value="1"></Setter>
+                        <Setter Target="AccountFirstnameText.(Grid.Row)" Value="0"></Setter>
+                        <Setter Target="AccountFirstname.(Grid.Row)" Value="0"></Setter>
+
+                        <Setter Target="GridLastname.ColumnDefinitions[0].Width" Value=".2*"></Setter>
+                        <Setter Target="GridLastname.ColumnDefinitions[1].Width" Value=".8*"></Setter>
+                        <Setter Target="AccountLastnameText.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountLastname.(Grid.Column)" Value="1"></Setter>
+                        <Setter Target="AccountLastnameText.(Grid.Row)" Value="0"></Setter>
+                        <Setter Target="AccountLastname.(Grid.Row)" Value="0"></Setter>
+
+                        <Setter Target="GridBirthdate.ColumnDefinitions[0].Width" Value=".2*"></Setter>
+                        <Setter Target="GridBirthdate.ColumnDefinitions[1].Width" Value=".8*"></Setter>
+                        <Setter Target="AccountBirthdateText.(Grid.Column)" Value="0"></Setter>
+                        <Setter Target="AccountBirthdate.(Grid.Column)" Value="1"></Setter>
+                        <Setter Target="AccountBirthdateText.(Grid.Row)" Value="0"></Setter>
+                        <Setter Target="AccountBirthdate.(Grid.Row)" Value="0"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="AccountTitle" Grid.Row="0" Grid.Column="1" Text="Manage account" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="CornflowerBlue"/>
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="GridAccount" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" x:Name="GridEmail" VerticalAlignment="Center" Margin="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="AccountEmailText" Text="Email" VerticalAlignment="Center"/>
+                <TextBox IsEnabled="False" x:Name="AccountEmail" Tapped="ResetErrors" />
+            </Grid>
+            <Grid Grid.Row="1" x:Name="GridFirstname" VerticalAlignment="Center" Margin="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="AccountFirstnameText" Text="First name" VerticalAlignment="Center"/>
+                <TextBox IsEnabled="False" x:Name="AccountFirstname" Tapped="ResetErrors" />
+            </Grid>
+            <Grid Grid.Row="2" x:Name="GridLastname" VerticalAlignment="Center" Margin="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="AccountLastnameText" Text="Last name" VerticalAlignment="Center"/>
+                <TextBox IsEnabled="False" x:Name="AccountLastname" Tapped="ResetErrors" />
+            </Grid>
+            <Grid Grid.Row="3" x:Name="GridBirthdate" HorizontalAlignment="Stretch" Margin="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="AccountBirthdateText" Text="Date of birth" VerticalAlignment="Center"/>
+                <DatePicker IsEnabled="False" x:Name="AccountBirthdate" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
+            </Grid>
+            <Button IsEnabled="False" Grid.Row="4" x:Name="AccountButton" Click="UpdateUser" Content="Save changes" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="WhiteSmoke" Margin="2"/>
+            <Button Grid.Row="5" x:Name="EditButton" Click="EditAccount" Content="Edit" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="CornflowerBlue" FontWeight="SemiBold" Margin="2">
+                <Button.Background>
+                    <SolidColorBrush Opacity="0"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+    </Grid>
+</Page>

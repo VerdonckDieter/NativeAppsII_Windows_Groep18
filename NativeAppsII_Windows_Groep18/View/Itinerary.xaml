@@ -1,0 +1,109 @@
+﻿<Page
+    x:Class="NativeAppsII_Windows_Groep18.View.Itinerary"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NativeAppsII_Windows_Groep18.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps" 
+    xmlns:converters="using:NativeAppsII_Windows_Groep18.Converters" 
+    xmlns:vm="using:NativeAppsII_Windows_Groep18.ViewModel"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:TravelListViewModel></vm:TravelListViewModel>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+
+        <Style x:Key="FlyoutStyle" TargetType="FlyoutPresenter">
+            <Setter Property="Padding" Value="0" />
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="ItineraryGrid">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ScreenSizes">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ChooseRouteButton.(Grid.Row)" Value="1" />
+                        <Setter Target="ChooseRouteButton.(Grid.Column)" Value="0" />
+                        <Setter Target="ChooseRouteButton.(VerticalAlignment)" Value="Bottom" />
+                        <Setter Target="ChooseRouteButtonFlyout.(Placement)" Value="TopEdgeAlignedLeft" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ChooseRouteButton.(Grid.Row)" Value="1" />
+                        <Setter Target="ChooseRouteButton.(Grid.Column)" Value="0" />
+                        <Setter Target="ChooseRouteButton.(VerticalAlignment)" Value="Bottom" />
+                        <Setter Target="ChooseRouteButtonFlyout.(Placement)" Value="TopEdgeAlignedLeft" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ChooseRouteButton.(Grid.Row)" Value="0" />
+                        <Setter Target="ChooseRouteButton.(Grid.Column)" Value="0" />
+                        <Setter Target="ChooseRouteButton.(VerticalAlignment)" Value="Top" />
+                        <Setter Target="ChooseRouteButtonFlyout.(Placement)" Value="BottomEdgeAlignedLeft" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <maps:MapControl Grid.ColumnSpan="2" Grid.RowSpan="2"
+            x:Name="TravelMap"
+            ZoomInteractionMode="GestureAndControl"
+            TiltInteractionMode="GestureAndControl"
+            MapServiceToken="kiMTfBjS18oItbEwSQsi~V30ULXHdubcpoIgp7E9GjA~AhlM7Rp6OqMz_O06wAnydivBQG4XpUEUJKwS9nPg-y5tajWHqTi5VJ9fnOUiUQTD"
+            />
+        <Button x:Name="ChooseRouteButton" Content="Choose route" HorizontalAlignment="Left" Margin="24" CornerRadius="5" Background="CornflowerBlue" Foreground="White">
+            <Button.Flyout>
+                <Flyout x:Name="ChooseRouteButtonFlyout" FlyoutPresenterStyle="{StaticResource FlyoutStyle}">
+                    <Grid Background="White" Height="150" Width="400">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" x:Name="ItineraryComboBoxTitle" Text="Show route for:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <ComboBox Grid.Row="1" x:Name="ItineraryComboBox" PlaceholderText="Pick a travel list" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding TravelLists}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock MaxLines="1">
+                            <Run Text="{Binding Name}" />
+                            <Run Text=" " />
+                            <Run Text="{Binding StartDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:dd/MM/yyyy}'}" />
+                            <Run Text=" - " />
+                            <Run Text="{Binding EndDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:dd/MM/yyyy}'}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Grid.Row="2" x:Name="ItineraryButtonShow" Content="Show" Click="Click_ShowRoute" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="5" Background="CornflowerBlue" Foreground="WhiteSmoke"/>
+                    </Grid>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+    </Grid>
+</Page>
