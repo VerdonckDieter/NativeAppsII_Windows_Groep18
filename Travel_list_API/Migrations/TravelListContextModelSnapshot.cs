@@ -8,7 +8,7 @@ using Travel_list_API.Data;
 
 namespace Travel_list_API.Migrations
 {
-    [DbContext(typeof(TravelListContext))]
+    [DbContext(typeof(Context))]
     partial class TravelListContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
