@@ -25,7 +25,7 @@ namespace NativeAppsII_Windows_Groep18.View
         public Navigation()
         {
             InitializeComponent();
-            InitializeElements();
+            //InitializeElements();
             var page = _pages.FirstOrDefault(p => p.Tag.Equals("Home"));
             Type _page = page.Page;
             Content.Navigate(_page);
@@ -58,10 +58,10 @@ namespace NativeAppsII_Windows_Groep18.View
             }
         }
 
-        private void InitializeElements()
-        {
-            var binding = new Binding { Source = ClientSingleton.Instance.Client.Email, Mode = BindingMode.OneWay };
-            ClientEmail.SetBinding(NavigationViewItem.ContentProperty, binding);
-        }
+        //private void InitializeElements()
+        //{
+        //    var binding = new Binding { Source = ClientSingleton.Instance.Client.Email, Mode = BindingMode.OneWay };
+        //    ClientEmail.SetBinding(NavigationViewItem.ContentProperty, binding);
+        //}
     }
 }

@@ -31,7 +31,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid x:Name="GridTravelListOverview">
+    <!--<Grid x:Name="GridTravelListOverview">
         <controls:MasterDetailsView BackButtonBehavior="Automatic"
                                     ItemsSource="{Binding TravelLists}"
                                     NoSelectionContent="Select an item to view"
@@ -191,5 +191,5 @@
                 </CommandBar>
             </controls:MasterDetailsView.DetailsCommandBar>
         </controls:MasterDetailsView>
-    </Grid>
+    </Grid>-->
 </Page>

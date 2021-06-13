@@ -17,7 +17,7 @@
         <vm:AccountViewModel></vm:AccountViewModel>
     </Page.DataContext>
 
-    <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <!--<Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
                 <VisualState x:Name="Phone">
@@ -191,5 +191,5 @@
                 </Button.Background>
             </Button>
         </Grid>
-    </Grid>
+    </Grid>-->
 </Page>

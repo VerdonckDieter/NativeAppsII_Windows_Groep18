@@ -69,10 +69,10 @@
                     Content="Account"
                     Icon="Account">
                 </NavigationViewItem>
-                <NavigationViewItem 
+                <!--<NavigationViewItem 
                     x:Name="ClientEmail"
                     Icon="Contact">
-                </NavigationViewItem>
+                </NavigationViewItem>-->
                 <NavigationViewItem 
                     x:Name="Logout"
                     Content="Logout" 

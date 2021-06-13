@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:vm="using:NativeAppsII_Windows_Groep18.ViewModel" 
-    xmlns:my="using:NativeAppsII_Windows_Groep18.DataModel"
+    xmlns:my="using:NativeAppsII_Windows_Groep18.Model"
     mc:Ignorable="d"
     x:Name="pageAdd"
     >
@@ -36,7 +36,7 @@
             <Setter Property="MinWidth" Value="0" />
         </Style>
     </Page.Resources>
-    <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <!--<Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
                 <VisualState x:Name="Phone">
@@ -237,5 +237,5 @@
             <Button x:Name="AddTravelListButton" Grid.Row="4" Grid.ColumnSpan="2" Click="AddTravelList" Content="Add travel list" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="WhiteSmoke"/>
 
         </Grid>
-    </Grid>
+    </Grid>-->
 </Page>
