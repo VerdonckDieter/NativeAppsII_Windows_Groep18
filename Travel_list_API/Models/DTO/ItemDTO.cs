@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Travel_list_API.Models.DTO
+﻿namespace Travel_list_API.Models.DTO
 {
     /// <summary>
     /// Represents an item DTO.
@@ -29,10 +24,5 @@ namespace Travel_list_API.Models.DTO
         /// Gets or sets a value indicating wether the item DTO is added.
         /// </summary>
         public bool Added { get; set; }
-
-        /// <summary>
-        /// Gets or sets the item DTO's category.
-        /// </summary>
-        public Category Category { get; set; }
     }
 }

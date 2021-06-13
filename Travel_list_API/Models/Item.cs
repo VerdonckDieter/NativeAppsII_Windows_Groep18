@@ -32,19 +32,6 @@
         /// Creates a new item.
         /// </summary>
         public Item() { }
-
-        /// <summary>
-        /// Creates a new item.
-        /// </summary>
-        /// <param name="name">The item's name</param>
-        /// <param name="amount">The item's amount</param>
-        /// <param name="added">Wether the item is added</param>
-        public Item(string name, int amount, bool added)
-        {
-            Name = name;
-            Amount = amount;
-            Added = added;
-        } 
         #endregion
     }
 }
