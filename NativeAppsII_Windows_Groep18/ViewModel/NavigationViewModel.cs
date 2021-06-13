@@ -5,7 +5,7 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
 {
     public class NavigationViewModel
     {
-        public Client Client { get; set; }
+        public User Client { get; set; }
         public NavigationViewModel()
         {
             Client = ClientSingleton.Instance.Client;
