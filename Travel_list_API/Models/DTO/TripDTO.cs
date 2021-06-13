@@ -31,11 +31,6 @@ namespace Travel_list_API.Models.DTO
         public DateTime EndDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the trip DTO's items.
-        /// </summary>
-        public List<Item> Items { get; set; } = new List<Item>();
-
-        /// <summary>
         /// Gets or sets the trip DTO's chores.
         /// </summary>
         public List<Chore> Chores { get; set; } = new List<Chore>();
