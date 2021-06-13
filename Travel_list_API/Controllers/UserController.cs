@@ -115,6 +115,16 @@ namespace Travel_list_API.Controllers
         }
 
         /// <summary>
+        /// Check if an email is available.
+        /// </summary>
+        [AllowAnonymous]
+        [HttpGet("checkusername")]
+        public async Task<ActionResult<bool>> CheckAvailableUserName(string email)
+        {
+            return Ok(await _userManager.FindByNameAsync(email) == null);
+        }
+
+        /// <summary>
         /// Creates a JWT token based on the provided IdentityUser and append claim information.
         /// </summary>
         private async Task<string> GetToken(IdentityUser user)
