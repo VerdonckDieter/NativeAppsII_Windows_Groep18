@@ -37,21 +37,6 @@
         /// Creates a new itinerary.
         /// </summary>
         public Itinerary() { }
-
-        /// <summary>
-        /// Creates a new itinerary.
-        /// </summary>
-        /// <param name="startLatitude">The itinerary's start latitude</param>
-        /// <param name="startLongitude">The itinerary's start longitude</param>
-        /// <param name="endLatitude">The itinerary's end latitude</param>
-        /// <param name="endLongitude">The itinerary's end longitude</param>
-        public Itinerary(double startLatitude, double startLongitude, double endLatitude, double endLongitude)
-        {
-            StartLatitude = startLatitude;
-            StartLongitude = startLongitude;
-            EndLatitude = endLatitude;
-            EndLongitude = endLongitude;
-        } 
         #endregion
     }
 }

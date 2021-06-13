@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Travel_list_API.Models
 {
@@ -30,11 +29,6 @@ namespace Travel_list_API.Models
         public string LastName { get; set; }
 
         /// <summary>
-        /// Gets or sets the user's birth date.
-        /// </summary>
-        public DateTime BirthDate { get; set; }
-
-        /// <summary>
         /// Gets or sets the user's trips.
         /// </summary>
         public List<Trip> Trips { get; set; } 
@@ -47,19 +41,6 @@ namespace Travel_list_API.Models
         public User()
         {
             Trips = new List<Trip>();
-        }
-
-        /// <summary>
-        /// Creates a new user.
-        /// </summary>
-        /// <param name="email">The user's email</param>
-        /// <param name="firstname">The user's first name</param>
-        /// <param name="lastname">The user's last name</param>
-        public User(string email, string firstname, string lastname)
-        {
-            Email = email;
-            FirstName = firstname;
-            LastName = lastname;
         }
         #endregion
 

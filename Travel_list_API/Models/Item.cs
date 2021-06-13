@@ -25,11 +25,6 @@
         /// Gets or sets a value indicating wether the item is added.
         /// </summary>
         public bool Added { get; set; }
-
-        /// <summary>
-        /// Gets or sets the item's category.
-        /// </summary>
-        public Category Category { get; set; } 
         #endregion
 
         #region Constructors

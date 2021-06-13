@@ -27,17 +27,6 @@
         /// Creates a new chore.
         /// </summary>
         public Chore() { }
-
-        /// <summary>
-        /// Creates a new chore.
-        /// </summary>
-        /// <param name="name">The chore's name</param>
-        /// <param name="completed">Wether the chore is completed</param>
-        public Chore(string name, bool completed)
-        {
-            Name = name;
-            Completed = completed;
-        } 
         #endregion
     }
 }
