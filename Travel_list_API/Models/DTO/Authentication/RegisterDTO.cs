@@ -32,11 +32,5 @@ namespace Travel_list_API.Models.DTO.Authentication
         /// </summary>
         [Required]
         public string LastName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the user's birth date.
-        /// </summary>
-        [Required]
-        public DateTime BirthDate { get; set; }
     }
 }
