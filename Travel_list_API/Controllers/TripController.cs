@@ -18,9 +18,15 @@ namespace Travel_list_API.Controllers
     [Authorize(Policy = "User")]
     public class TripController : ControllerBase
     {
+        #region Fields
         private readonly ITripRepository _tripRepository;
-        public TripController(ITripRepository tripRepository) => _tripRepository = tripRepository;
+        #endregion
 
+        #region Constructors
+        public TripController(ITripRepository tripRepository) => _tripRepository = tripRepository;
+        #endregion
+
+        #region Methods
         /// <summary>
         /// Gets all trips of the logged in user.
         /// </summary>
@@ -79,6 +85,7 @@ namespace Travel_list_API.Controllers
         public async Task<ActionResult> DeleteTrip(int tripId)
         {
             return Ok(await _tripRepository.DeleteTripAsync(User.Identity.Name, tripId));
-        }
+        } 
+        #endregion
     }
 }

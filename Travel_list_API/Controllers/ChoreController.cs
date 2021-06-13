@@ -16,10 +16,16 @@ namespace Travel_list_API.Controllers
     [Authorize(Policy = "User")]
     public class ChoreController : ControllerBase
     {
+        #region Fields
         private readonly IChoreRepository _choreRepository;
+        #endregion
 
+
+        #region Constructors
         public ChoreController(IChoreRepository choreRepository) => _choreRepository = choreRepository;
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Creates a new chore or updates an existing one.
         /// </summary>
@@ -42,6 +48,7 @@ namespace Travel_list_API.Controllers
         public async Task<ActionResult> DeleteChore(int tripId, int choreId)
         {
             return Ok(await _choreRepository.DeleteChoreAsync(tripId, choreId));
-        }
+        } 
+        #endregion
     }
 }

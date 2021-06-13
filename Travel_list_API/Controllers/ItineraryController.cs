@@ -18,10 +18,15 @@ namespace Travel_list_API.Controllers
     [Authorize(Policy = "User")]
     public class ItineraryController : ControllerBase
     {
+        #region Fields
         private readonly IItineraryRepository _itineraryRepository;
+        #endregion
 
+        #region Constructors
         public ItineraryController(IItineraryRepository itineraryRepository) => _itineraryRepository = itineraryRepository;
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Gets all itineraries of a specific trip.
         /// </summary>
@@ -78,6 +83,7 @@ namespace Travel_list_API.Controllers
         public async Task<ActionResult> DeleteItinerary(int tripId, int itineraryId)
         {
             return Ok(await _itineraryRepository.DeleteItineraryAsync(tripId, itineraryId));
-        }
+        } 
+        #endregion
     }
 }

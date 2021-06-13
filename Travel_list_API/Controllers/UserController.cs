@@ -24,11 +24,14 @@ namespace Travel_list_API.Controllers
     [ApiConventionType(typeof(DefaultApiConventions))]
     public class UserController : ControllerBase
     {
+        #region Fields
         private readonly IUserRepository _userRepository;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IConfiguration _config;
+        #endregion
 
+        #region Constructors
         public UserController(IUserRepository clientRepository, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IConfiguration config)
         {
             _userRepository = clientRepository;
@@ -36,7 +39,9 @@ namespace Travel_list_API.Controllers
             _userManager = userManager;
             _config = config;
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Gets all users.
         /// </summary>
@@ -76,7 +81,7 @@ namespace Travel_list_API.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult> Register([FromBody]RegisterDTO model)
+        public async Task<ActionResult> Register([FromBody] RegisterDTO model)
         {
             var identityUser = new IdentityUser { UserName = model.Email, Email = model.Email };
             var user = new User()
@@ -101,7 +106,7 @@ namespace Travel_list_API.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login([FromBody]LoginDTO model)
+        public async Task<ActionResult<string>> Login([FromBody] LoginDTO model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user != null && (await _signInManager.CheckPasswordSignInAsync(user, model.Password, false)).Succeeded)
@@ -128,6 +133,7 @@ namespace Travel_list_API.Controllers
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }
+        } 
+        #endregion
     }
 }

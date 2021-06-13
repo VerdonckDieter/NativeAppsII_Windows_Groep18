@@ -16,10 +16,15 @@ namespace Travel_list_API.Controllers
     [Authorize(Policy = "User")]
     public class CategoryController : ControllerBase
     {
+        #region Fields
         private readonly ICategoryRepository _categoryRepository;
+        #endregion
 
+        #region Constructors
         public CategoryController(ICategoryRepository categoryRepository) => _categoryRepository = categoryRepository;
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Creates a new category or updates an existing one.
         /// </summary>
@@ -42,6 +47,7 @@ namespace Travel_list_API.Controllers
         public async Task<ActionResult> DeleteCategory(int tripId, int categoryId)
         {
             return Ok(await _categoryRepository.DeleteCategoryAsync(tripId, categoryId));
-        }
+        } 
+        #endregion
     }
 }
