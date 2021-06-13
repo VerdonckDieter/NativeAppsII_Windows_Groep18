@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Travel_list_API.Models
 {
@@ -32,6 +29,18 @@ namespace Travel_list_API.Models
         /// Creates a new category.
         /// </summary>
         public Category() => Items = new List<Item>();
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Adds a new item to the category.
+        /// </summary>
+        public void AddItem(Item item) => Items.Add(item);
+
+        /// <summary>
+        /// Removes an item from the category.
+        /// </summary>
+        public void RemoveItem(Item item) => Items.Remove(item); 
         #endregion
     }
 }
