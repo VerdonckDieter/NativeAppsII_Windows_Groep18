@@ -26,10 +26,5 @@ namespace Travel_list_API.Models.DTO
         /// Gets or sets the user DTO's last name.
         /// </summary>
         public string LastName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the user DTO's birth date.
-        /// </summary>
-        public DateTime BirthDate { get; set; }
     }
 }
