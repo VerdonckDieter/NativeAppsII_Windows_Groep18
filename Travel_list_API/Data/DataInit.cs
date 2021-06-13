@@ -42,6 +42,9 @@ namespace Travel_list_API.Data
                 trip.Chores.Add(chore);
                 trip.Itineraries.Add(itinerary);
 
+                var item = new Item { Name = "Knife", Amount = 2, Added = false };
+                category.AddItem(item);
+
                 user = new User { Email = "client2@gmail.com", FirstName = "Dylan", LastName = "D" };
                 await _db.Users.AddAsync(user);
 
@@ -56,6 +59,9 @@ namespace Travel_list_API.Data
                 trip.Chores.Add(chore);
                 trip.Itineraries.Add(itinerary);
 
+                item = new Item { Name = "Football", Amount = 1, Added = true };
+                category.AddItem(item);
+
                 user = new User { Email = "client3@gmail.com", FirstName = "Thibault", LastName = "D" };
                 await _db.Users.AddAsync(user);
 
@@ -69,6 +75,9 @@ namespace Travel_list_API.Data
                 trip.Categories.Add(category);
                 trip.Chores.Add(chore);
                 trip.Itineraries.Add(itinerary);
+
+                item = new Item { Name = "Phone", Amount = 3, Added = false };
+                category.AddItem(item);
 
                 await _db.SaveChangesAsync();
 
