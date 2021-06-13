@@ -9,7 +9,7 @@ using Travel_list_API.Data;
 
 namespace Travel_list_API.Migrations
 {
-    [DbContext(typeof(TravelListContext))]
+    [DbContext(typeof(Context))]
     [Migration("20210115201021_Initial")]
     partial class Initial
     {

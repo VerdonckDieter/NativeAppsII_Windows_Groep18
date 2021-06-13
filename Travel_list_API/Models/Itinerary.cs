@@ -1,30 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Travel_list_API.Models
+﻿namespace Travel_list_API.Models
 {
+    /// <summary>
+    /// Represents an itinerary.
+    /// </summary>
     public class Itinerary
     {
+        #region Properties
+        /// <summary>
+        /// Gets or sets the itinerary's id.
+        /// </summary>
         public int Id { get; set; }
-        public int TravelListId { get; set; }
-        public double StartLatitude { get;  set;  }
+
+        /// <summary>
+        /// Gets or sets the itinerary's start latitude.
+        /// </summary>
+        public double StartLatitude { get; set; }
+
+        /// <summary>
+        /// Gets or sets the itinerary's start longitude.
+        /// </summary>
         public double StartLongitude { get; set; }
+
+        /// <summary>
+        /// Gets or sets the itinerary's end latitude.
+        /// </summary>
         public double EndLatitude { get; set; }
-        public double EndLongitude { get; set; }
 
-        public Itinerary()
-        {
+        /// <summary>
+        /// Gets or sets the itinerary's end longitude.
+        /// </summary>
+        public double EndLongitude { get; set; } 
+        #endregion
 
-        }
-
-        public Itinerary(double startLatitude, double startLongitude, double endLatitude, double endLongitude)
-        {
-            StartLatitude = startLatitude;
-            StartLongitude = startLongitude;
-            EndLatitude = endLatitude;
-            EndLongitude = endLongitude;
-        }
+        #region Constructors
+        /// <summary>
+        /// Creates a new itinerary.
+        /// </summary>
+        public Itinerary() { }
+        #endregion
     }
 }
