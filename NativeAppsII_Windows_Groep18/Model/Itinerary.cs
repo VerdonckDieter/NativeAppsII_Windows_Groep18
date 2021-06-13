@@ -1,80 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NativeAppsII_Windows_Groep18.Model
+﻿namespace NativeAppsII_Windows_Groep18.Model
 {
-    public class Itinerary : INotifyPropertyChanged
+    /// <summary>
+    /// Represents an itinerary.
+    /// </summary>
+    public class Itinerary
     {
+        #region Properties
+        /// <summary>
+        /// Gets or sets the itinerary's id.
+        /// </summary>
         public int Id { get; set; }
-        private double _startLatitude;
-        public double StartLatitude
-        {
-            get
-            {
-                return _startLatitude;
-            }
-            set
-            {
-                _startLatitude = value;
-                OnPropertyChanged("StartLatitude");
-            }
-        }
 
-        private double _startLongitude;
-        public double StartLongitude
-        {
-            get
-            {
-                return _startLongitude;
-            }
-            set
-            {
-                _startLongitude = value;
-                OnPropertyChanged("StartLongitude");
-            }
-        }
+        /// <summary>
+        /// Gets or sets the itinerary's start latitude.
+        /// </summary>
+        public double StartLatitude { get; set; }
 
-        private double _endLatitude;
-        public double EndLatitude
-        {
-            get
-            {
-                return _endLatitude;
-            }
-            set
-            {
-                _endLatitude = value;
-                OnPropertyChanged("EndLatitude");
-            }
-        }
+        /// <summary>
+        /// Gets or sets the itinerary's start longitude.
+        /// </summary>
+        public double StartLongitude { get; set; }
 
-        private double _endLongitude;
-        public double EndLongitude
-        {
-            get
-            {
-                return _endLongitude;
-            }
-            set
-            {
-                _endLongitude = value;
-                OnPropertyChanged("EndLongitude");
-            }
-        }
+        /// <summary>
+        /// Gets or sets the itinerary's end latitude.
+        /// </summary>
+        public double EndLatitude { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Gets or sets the itinerary's end longitude.
+        /// </summary>
+        public double EndLongitude { get; set; }
+        #endregion
 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            if (PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        #region Constructors
+        /// <summary>
+        /// Creates a new itinerary.
+        /// </summary>
+        public Itinerary() { }
+        #endregion
     }
 }
