@@ -21,49 +21,28 @@ namespace NativeAppsII_Windows_Groep18.View
             InitializeComponent();
             LoginViewModel = new LoginViewModel();
             LoginMail.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
-        }
-        private void LoginEnterKey(object sender, KeyRoutedEventArgs e)
-        {
-            LoginUser();
+            LoginPassword.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
         }
 
-
-        private void LoginClick(object sender, RoutedEventArgs e)
+        private async void LoginUser(object sender, RoutedEventArgs e)
         {
-            LoginUser();
-        }
-
-        private async void LoginUser()
-        {
-            if (String.IsNullOrEmpty(LoginMail.Text))
+            string email = LoginMail.Text;
+            string password = LoginPassword.Password;
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                LoginError(true);
+                LoginError("empty");
             }
             else
             {
-                string mail = LoginMail.Text;
-                try
+                if (await LoginViewModel.Login(email, password))
                 {
-                    await LoginViewModel.Login(mail);
-                    if (LoginViewModel.Succes)
-                    {
-                        Frame.Navigate(typeof(Navigation));
-                    }
-                    else
-                    {
-                        LoginError(false);
-                    }
+                    Frame.Navigate(typeof(Navigation));
                 }
-                catch (Exception ex)
+                else
                 {
-                    var dialog = new ContentDialog
-                    {
-                        Title = ex.Message,
-                        CloseButtonText = "Close"
-                    };
-                    await dialog.ShowAsync();
+                    LoginError("notfound");
                 }
-            }  
+            }
         }
 
         private void NavigateToRegister(object sender, RoutedEventArgs e)
@@ -71,19 +50,27 @@ namespace NativeAppsII_Windows_Groep18.View
             Frame.Navigate(typeof(Register));
         }
 
-        private void LoginError(bool empty)
+        private void LoginError(string type)
         {
-            switch (empty)
+            switch (type.ToLower())
             {
-                case true:
+                case "empty":
                     LoginMail.Text = string.Empty;
                     LoginMail.Header = "Please enter your e-mail";
                     LoginMail.BorderBrush = new SolidColorBrush(Colors.Red);
+                    LoginPassword.Password = string.Empty;
+                    LoginPassword.Header = "Please enter your password";
+                    LoginPassword.BorderBrush = new SolidColorBrush(Colors.Red);
                     break;
-                case false:
+                case "notfound":
                     LoginMail.Text = string.Empty;
                     LoginMail.Header = "Could not find user";
                     LoginMail.BorderBrush = new SolidColorBrush(Colors.Red);
+                    LoginPassword.Password = string.Empty;
+                    LoginPassword.Header = "Could not find user";
+                    LoginPassword.BorderBrush = new SolidColorBrush(Colors.Red);
+                    break;
+                default:
                     break;
             }
         }
@@ -91,7 +78,10 @@ namespace NativeAppsII_Windows_Groep18.View
         private void ResetErrors(object sender, TappedRoutedEventArgs e)
         {
             LoginMail.Header = "E-mail";
-            LoginMail.ClearValue(TextBox.BorderBrushProperty);
+            LoginMail.ClearValue(BorderBrushProperty);
+
+            LoginPassword.Header = "Password";
+            LoginPassword.ClearValue(BorderBrushProperty);
         }
     }
 }
