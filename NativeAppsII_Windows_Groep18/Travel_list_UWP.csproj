@@ -121,13 +121,13 @@
     </Compile>
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Model\Category.cs" />
-    <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\Chore.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Model\DTO\TravelListDTO.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Itinerary.cs" />
-    <Compile Include="Model\Singleton\ClientSingleton.cs" />
-    <Compile Include="Model\Task.cs" />
-    <Compile Include="Model\TravelList.cs" />
+    <Compile Include="Model\Trip.cs" />
+    <Compile Include="Services\Globals.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
@@ -145,7 +145,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\Commands\AddTravelListCommand.cs" />
     <Compile Include="ViewModel\TravelListViewModel.cs" />
     <Compile Include="View\AddTravelListView.xaml.cs">
       <DependentUpon>AddTravelListView.xaml</DependentUpon>
@@ -177,7 +176,6 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="Services\.gitignore" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
