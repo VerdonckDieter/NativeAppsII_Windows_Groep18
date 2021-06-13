@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Travel_list_API.Data.Repositories.IRepositories;
 using Travel_list_API.Models;
 using Travel_list_API.Models.DTO;
 using Travel_list_API.Models.DTO.Authentication;
+using Travel_list_API.Models.IRepositories;
 
 namespace Travel_list_API.Controllers
 {
@@ -21,6 +21,7 @@ namespace Travel_list_API.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -39,7 +40,7 @@ namespace Travel_list_API.Controllers
         /// <summary>
         /// Gets all users.
         /// </summary>
-        [HttpGet]
+        [HttpGet("GetUsers")]
         //[Authorize(Policy = "Admin")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsersAsync()
         {
@@ -56,12 +57,13 @@ namespace Travel_list_API.Controllers
         /// <summary>
         /// Gets the current logged in user.
         /// </summary>
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserDTO>> GetUserAsync(int id)
+        [HttpGet("GetUser")]
+        [Authorize(Policy = "User")]
+        public async Task<ActionResult<UserDTO>> GetUserAsync()
         {
             try
             {
-                return Ok(await _userRepository.GetUserAsync(User.Identity.Name, id));
+                return Ok(await _userRepository.GetUserAsync(User.Identity.Name));
             }
             catch (Exception)
             {
@@ -72,6 +74,7 @@ namespace Travel_list_API.Controllers
         /// <summary>
         /// Registers a new user.
         /// </summary>
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody]RegisterDTO model)
         {
@@ -80,8 +83,7 @@ namespace Travel_list_API.Controllers
             {
                 Email = model.Email,
                 FirstName = model.FirstName,
-                LastName = model.LastName,
-                BirthDate = model.BirthDate
+                LastName = model.LastName
             };
             var result = await _userManager.CreateAsync(identityUser, model.Password);
             if (result.Succeeded)
@@ -99,7 +101,7 @@ namespace Travel_list_API.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login([FromBody] LoginDTO model)
+        public async Task<ActionResult<string>> Login([FromBody]LoginDTO model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user != null && (await _signInManager.CheckPasswordSignInAsync(user, model.Password, false)).Succeeded)
