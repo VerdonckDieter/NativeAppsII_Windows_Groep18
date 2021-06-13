@@ -13,8 +13,6 @@ using System.Security.Claims;
 using System.Text;
 using Travel_list_API.Data;
 using Travel_list_API.Data.Repositories;
-using Travel_list_API.Data.Repositories.IRepositories;
-using Travel_list_API.Models;
 using Travel_list_API.Models.IRepositories;
 
 namespace Travel_list_API
@@ -36,6 +34,9 @@ namespace Travel_list_API
 
             services.AddScoped<DataInit>();
             services.AddScoped<ITripRepository, TripRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IChoreRepository, ChoreRepository>();
+            services.AddScoped<IItineraryRepository, ItineraryRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
