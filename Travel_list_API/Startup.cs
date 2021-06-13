@@ -36,6 +36,7 @@ namespace Travel_list_API
             services.AddScoped<ITripRepository, TripRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IChoreRepository, ChoreRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IItineraryRepository, ItineraryRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
