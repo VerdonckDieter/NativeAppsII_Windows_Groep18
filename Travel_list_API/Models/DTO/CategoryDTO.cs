@@ -1,4 +1,6 @@
-﻿namespace Travel_list_API.Models.DTO
+﻿using System.Collections.Generic;
+
+namespace Travel_list_API.Models.DTO
 {
     /// <summary>
     /// Represents a category DTO.
@@ -14,5 +16,10 @@
         /// Gets or sets the category DTO's name.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category DTO's items.
+        /// </summary>
+        public List<Item> Items { get; set; }
     }
 }
