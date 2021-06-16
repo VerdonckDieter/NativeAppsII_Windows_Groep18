@@ -1,5 +1,4 @@
-﻿using NativeAppsII_Windows_Groep18.Model.Singleton;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;

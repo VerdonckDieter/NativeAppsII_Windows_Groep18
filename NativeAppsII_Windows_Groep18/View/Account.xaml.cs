@@ -1,5 +1,4 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
-using NativeAppsII_Windows_Groep18.Model.Singleton;
 using NativeAppsII_Windows_Groep18.ViewModel;
 using System;
 using Windows.UI;

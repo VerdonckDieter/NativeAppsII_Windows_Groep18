@@ -1,5 +1,4 @@
 ﻿using NativeAppsII_Windows_Groep18.Model;
-using NativeAppsII_Windows_Groep18.Model.Singleton;
 using Newtonsoft.Json;
 using System;
 using Windows.Web.Http;
