@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NativeAppsII_Windows_Groep18.Services;
+using NativeAppsII_Windows_Groep18.Services.Instances;
+using NativeAppsII_Windows_Groep18.Services.IServices;
+using NativeAppsII_Windows_Groep18.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,8 +33,35 @@ namespace NativeAppsII_Windows_Groep18
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            Services = ConfigureServices();
+            InitializeComponent();
+            Suspending += OnSuspending;
+        }
+
+        /// <summary>
+        /// Gets the current <see cref="App"/> instance in use
+        /// </summary>
+        public static new App Current => (App)Application.Current;
+
+        /// <summary>
+        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+        /// </summary>
+        public IServiceProvider Services { get; }
+
+        /// <summary>
+        /// Configures the services for the application.
+        /// </summary>
+        private static IServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
+
+            services.AddTransient<LoginViewModel>();
+            services.AddTransient<RegisterViewModel>();
+            services.AddTransient<AccountViewModel>();
+
+            services.AddScoped<IUserService, UserService>();
+            
+            return services.BuildServiceProvider();
         }
 
         /// <summary>
