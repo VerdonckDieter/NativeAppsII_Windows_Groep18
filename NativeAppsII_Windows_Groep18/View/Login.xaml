@@ -74,14 +74,15 @@
                 <RowDefinition Height="50*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" Grid.Row="0" VerticalAlignment="Center" Margin="20">
-                <TextBox x:Name="LoginMail" Grid.Row="0" Header="E-mail" PlaceholderText="Enter your e-mail" Margin="0, 0, 0, 24" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
+                <TextBox x:Uid="LoginMail" x:Name="LoginMail" Margin="0, 0, 0, 24" HorizontalAlignment="Stretch" Tapped="ResetErrors"/>
+                <PasswordBox x:Uid="LoginPassword" x:Name="LoginPassword" Margin="0, 0, 0, 24" HorizontalAlignment="Stretch" Tapped="ResetErrors" />
 
-                <Button x:Name="LoginButton" Grid.Row="1" Click="LoginClick" KeyDown="LoginEnterKey" Content="Login" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="WhiteSmoke"/>
+                <Button x:Uid="LoginButton" x:Name="LoginButton" Click="LoginUser" HorizontalAlignment="Stretch" CornerRadius="5" Background="CornflowerBlue" Foreground="WhiteSmoke"/>
             </StackPanel>
 
-            <TextBlock Grid.Row="1" x:Name="NavigateButtonText" Text="Don't have an account yet?" VerticalAlignment="Bottom" HorizontalAlignment="Center"  />
+            <TextBlock Grid.Row="1" x:Uid="LoginNavigateButtonText" x:Name="NavigateButtonText" VerticalAlignment="Bottom" HorizontalAlignment="Center"  />
 
-            <Button Grid.Row="2" x:Name="NavigateButton" Click="NavigateToRegister" Content="Register" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="CornflowerBlue" FontWeight="SemiBold">
+            <Button Grid.Row="2" x:Uid="LoginNavigateButton" x:Name="NavigateButton" Click="NavigateToRegister" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="CornflowerBlue" FontWeight="SemiBold">
                 <Button.Background>
                     <SolidColorBrush Opacity="0"/>
                 </Button.Background>

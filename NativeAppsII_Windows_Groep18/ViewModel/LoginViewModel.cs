@@ -1,42 +1,37 @@
 ﻿using System;
-using System.Net.Http;
-using NativeAppsII_Windows_Groep18.Model;
 using Newtonsoft.Json;
-using NativeAppsII_Windows_Groep18.Model.Singleton;
+using System.Threading.Tasks;
+using NativeAppsII_Windows_Groep18.Services;
+using Windows.Web.Http;
+using Windows.Storage.Streams;
 
 namespace NativeAppsII_Windows_Groep18.ViewModel
 {
     public class LoginViewModel
     {
-        public Client Client { get; set; }
-        private readonly ClientSingleton clientSingleton = ClientSingleton.Instance;
-        public bool Succes;
-        public async System.Threading.Tasks.Task Login(string email)
+        public async Task<bool> Login(string email, string password)
         {
             HttpClient client = new HttpClient();
+            var success = false;
             try
             {
-                var json = await client.GetStringAsync(new Uri("http://localhost:5000/api/client/" + email));
-                if (!string.IsNullOrEmpty(json))
+                var json = JsonConvert.SerializeObject(new
                 {
-                    var loggedInClient = JsonConvert.DeserializeObject<Client>(json);
-                    Client = loggedInClient;
-                    clientSingleton.Client = Client;
-                    Succes = true;
-                }
-                else
+                    email,
+                    password
+                });
+                var result = await client.PostAsync(new Uri($"{Globals.BASE_URL}/User/Login"),
+                    new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
+                if (result.IsSuccessStatusCode)
                 {
-                    Succes = false;
+                    Globals.LoggedInUser = result.Content.ToString();
+                    return success = true;
                 }
-
-            }
-            catch (HttpRequestException)
-            {
-                throw new Exception("Connection failed");
+                return success;
             }
             catch (Exception)
             {
-                throw;
+                return success;
             }
         }
     }

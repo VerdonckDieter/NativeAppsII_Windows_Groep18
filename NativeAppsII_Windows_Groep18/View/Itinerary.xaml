@@ -23,7 +23,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid x:Name="ItineraryGrid">
+    <!--<Grid x:Name="ItineraryGrid">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
                 <VisualState x:Name="Phone">
@@ -105,5 +105,5 @@
                 </Flyout>
             </Button.Flyout>
         </Button>
-    </Grid>
+    </Grid>-->
 </Page>

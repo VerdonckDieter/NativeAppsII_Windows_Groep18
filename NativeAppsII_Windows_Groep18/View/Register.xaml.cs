@@ -29,24 +29,33 @@ namespace NativeAppsII_Windows_Groep18.View
 
         private async void RegisterUser(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(RegisterEmail.Text) ||
-                String.IsNullOrEmpty(RegisterFirstname.Text) ||
-                String.IsNullOrEmpty(RegisterLastname.Text) ||
-                RegisterBirthdate.SelectedDate == null)
+            if (string.IsNullOrEmpty(RegisterEmail.Text) ||
+                string.IsNullOrEmpty(RegisterPassword.Text) ||
+                string.IsNullOrEmpty(RegisterFirstname.Text) ||
+                string.IsNullOrEmpty(RegisterLastname.Text))
             {
                 AddRegisterError();
             }
             else
             {
                 string email = RegisterEmail.Text;
+                string password = RegisterPassword.Text;
                 string firstname = RegisterFirstname.Text;
                 string lastname = RegisterLastname.Text;
-                DateTime birthdate = RegisterBirthdate.Date.DateTime;
                 try
                 {
-                    await RegisterViewModel.Register(email, firstname, lastname, birthdate);
-                    ShowToast(email);
-                    Frame.Navigate(typeof(Login));
+                    if(!await RegisterViewModel.CheckAvailableUsername(email))
+                    {
+                        RegisterEmail.Text = string.Empty;
+                        RegisterEmail.Header = "E-mail is already in use";
+                        RegisterEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+                        return;
+                    }
+                    if (await RegisterViewModel.Register(email, password, firstname, lastname))
+                    {
+                        ShowToast(email);
+                        Frame.Navigate(typeof(Login));
+                    } 
                 }
                 catch (Exception ex)
                 {
@@ -62,30 +71,29 @@ namespace NativeAppsII_Windows_Groep18.View
 
         private void AddRegisterError()
         {
-            if (String.IsNullOrEmpty(RegisterEmail.Text))
+            if (string.IsNullOrEmpty(RegisterEmail.Text))
             {
                 RegisterEmail.Text = string.Empty;
                 RegisterEmail.Header = "E-mail is required";
                 RegisterEmail.BorderBrush = new SolidColorBrush(Colors.Red);
             }
-            if (String.IsNullOrEmpty(RegisterFirstname.Text))
+            if (string.IsNullOrEmpty(RegisterPassword.Text))
+            {
+                RegisterPassword.Text = string.Empty;
+                RegisterPassword.Header = "Password is required";
+                RegisterPassword.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            if (string.IsNullOrEmpty(RegisterFirstname.Text))
             {
                 RegisterFirstname.Text = string.Empty;
                 RegisterFirstname.Header = "First name is required";
                 RegisterFirstname.BorderBrush = new SolidColorBrush(Colors.Red);
             }
-            if (String.IsNullOrEmpty(RegisterLastname.Text))
+            if (string.IsNullOrEmpty(RegisterLastname.Text))
             {
                 RegisterLastname.Text = string.Empty;
                 RegisterLastname.Header = "Last name is required";
                 RegisterLastname.BorderBrush = new SolidColorBrush(Colors.Red);
-            }
-            if (RegisterBirthdate.SelectedDate == null)
-            {
-                RegisterBirthdate.SelectedDate = null;
-                RegisterBirthdate.Header = "Birth date is required";
-                RegisterBirthdate.Foreground = new SolidColorBrush(Colors.Red);
-                RegisterBirthdate.BorderBrush = new SolidColorBrush(Colors.Red);
             }
         }
 
@@ -97,23 +105,23 @@ namespace NativeAppsII_Windows_Groep18.View
                     if (((TextBox)sender).Name.Equals("RegisterEmail"))
                     {
                         RegisterEmail.Header = "E-mail";
-                        RegisterEmail.ClearValue(TextBox.BorderBrushProperty);
+                        RegisterEmail.ClearValue(BorderBrushProperty);
+                    }
+                    else if (((TextBox)sender).Name.Equals("RegisterPassword"))
+                    {
+                        RegisterPassword.Header = "Password";
+                        RegisterPassword.ClearValue(BorderBrushProperty);
                     }
                     else if (((TextBox)sender).Name.Equals("RegisterFirstname"))
                     {
                         RegisterFirstname.Header = "First name";
-                        RegisterFirstname.ClearValue(TextBox.BorderBrushProperty);
+                        RegisterFirstname.ClearValue(BorderBrushProperty);
                     }
                     else
                     {
                         RegisterLastname.Header = "Last name";
-                        RegisterLastname.ClearValue(TextBox.BorderBrushProperty);
+                        RegisterLastname.ClearValue(BorderBrushProperty);
                     }
-                    break;
-                case "DatePicker":
-                    RegisterBirthdate.Header = "Birth date";
-                    RegisterBirthdate.ClearValue(DatePicker.ForegroundProperty);
-                    RegisterBirthdate.ClearValue(DatePicker.BorderBrushProperty);
                     break;
             }
         }

@@ -1,5 +1,4 @@
-﻿using NativeAppsII_Windows_Groep18.DataModel;
-using NativeAppsII_Windows_Groep18.ViewModel;
+﻿using NativeAppsII_Windows_Groep18.ViewModel;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -21,23 +20,23 @@ namespace NativeAppsII_Windows_Groep18.View
             TravelListViewModel = new TravelListViewModel();
         }
 
-        private async void SaveTravelList(object sender, RoutedEventArgs e)
-        {
-            var travelList = (TravelList)MasterDetailTravelListOverview.SelectedItem;
-            try
-            {
-                await TravelListViewModel.UpdateTravelList(travelList);
-                travelList.UpdateProgress();
-            }
-            catch (Exception ex)
-            {
-                var dialog = new ContentDialog
-                {
-                    Title = ex.Message,
-                    CloseButtonText = "Close"
-                };
-                await dialog.ShowAsync();
-            }
-        }
+        //private async void SaveTravelList(object sender, RoutedEventArgs e)
+        //{
+        //    var travelList = (TravelList)MasterDetailTravelListOverview.SelectedItem;
+        //    try
+        //    {
+        //        await TravelListViewModel.UpdateTravelList(travelList);
+        //        travelList.UpdateProgress();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var dialog = new ContentDialog
+        //        {
+        //            Title = ex.Message,
+        //            CloseButtonText = "Close"
+        //        };
+        //        await dialog.ShowAsync();
+        //    }
+        //}
     }
 }

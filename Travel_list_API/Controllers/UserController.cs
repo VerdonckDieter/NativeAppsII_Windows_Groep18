@@ -80,7 +80,7 @@ namespace Travel_list_API.Controllers
         /// Registers a new user.
         /// </summary>
         [AllowAnonymous]
-        [HttpPost("register")]
+        [HttpPost("[action]")]
         public async Task<ActionResult> Register([FromBody] RegisterDTO model)
         {
             var identityUser = new IdentityUser { UserName = model.Email, Email = model.Email };
@@ -105,7 +105,7 @@ namespace Travel_list_API.Controllers
         /// Logs in a user.
         /// </summary>
         [AllowAnonymous]
-        [HttpPost("login")]
+        [HttpPost("[action]")]
         public async Task<ActionResult<string>> Login([FromBody] LoginDTO model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -118,7 +118,7 @@ namespace Travel_list_API.Controllers
         /// Check if an email is available.
         /// </summary>
         [AllowAnonymous]
-        [HttpGet("checkusername")]
+        [HttpGet("{email}")]
         public async Task<ActionResult<bool>> CheckAvailableUserName(string email)
         {
             return Ok(await _userManager.FindByNameAsync(email) == null);
@@ -130,7 +130,7 @@ namespace Travel_list_API.Controllers
         private async Task<string> GetToken(IdentityUser user)
         {
             var claims = new List<Claim> { new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName) };
-            claims.AddRange((await _userManager.GetClaimsAsync(user)));
+            claims.AddRange(await _userManager.GetClaimsAsync(user));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
 

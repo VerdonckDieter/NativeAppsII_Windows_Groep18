@@ -1,36 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.ObjectModel;
 
 namespace NativeAppsII_Windows_Groep18.Model
 {
-    public class Category : INotifyPropertyChanged
+    /// <summary>
+    /// Represents a category.
+    /// </summary>
+    public class Category
     {
+        #region Properties
+        /// <summary>
+        /// Gets or sets the category's id.
+        /// </summary>
         public int Id { get; set; }
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-                OnPropertyChanged("Name");
-            }
-        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Gets or sets the category's name.
+        /// </summary>
+        public string Name { get; set; }
 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            if (PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        /// <summary>
+        /// Gets or sets the category's items.
+        /// </summary>
+        public ObservableCollection<Item> Items { get; set; }
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Creates a new category.
+        /// </summary>
+        public Category() => Items = new ObservableCollection<Item>();
+        #endregion
     }
 }

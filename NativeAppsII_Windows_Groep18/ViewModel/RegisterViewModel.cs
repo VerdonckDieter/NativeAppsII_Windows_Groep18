@@ -1,28 +1,53 @@
-﻿using NativeAppsII_Windows_Groep18.Model;
+﻿using NativeAppsII_Windows_Groep18.Services;
 using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 using Windows.Web.Http;
+using Windows.Storage.Streams;
 
 namespace NativeAppsII_Windows_Groep18.ViewModel
 {
     public class RegisterViewModel
     {
-        public async System.Threading.Tasks.Task Register(string email, string firstname, string lastname, DateTime birthdate)
+        public async Task<bool> Register(string email, string password, string firstname, string lastname)
         {
-            var registerClient = new Client() { Email = email, Firstname = firstname, Lastname = lastname, Birthdate = birthdate };
-            var registerClientJson = JsonConvert.SerializeObject(registerClient);
             HttpClient client = new HttpClient();
+            var success = false;
             try
             {
-                var res = await client.PostAsync(new Uri("http://localhost:5000/api/client/"), new HttpStringContent(registerClientJson, Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json"));
-            }
-            catch (System.Net.Http.HttpRequestException)
-            {
-                throw new Exception("Connection failed");
+                var json = JsonConvert.SerializeObject(new
+                {
+                    email,
+                    password,
+                    firstname,
+                    lastname
+                });
+                var result = await client.PostAsync(new Uri($"{Globals.BASE_URL}/User/Register"),
+                    new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
+                return success = result.IsSuccessStatusCode;
             }
             catch (Exception)
             {
-                throw;
+                return success;
+            }
+        }
+
+        public async Task<bool> CheckAvailableUsername(string email)
+        {
+            HttpClient client = new HttpClient();
+            var success = false;
+            try
+            {
+                var result = await client.GetAsync(new Uri($"{Globals.BASE_URL}/User/" + email));
+                if (result.IsSuccessStatusCode)
+                {
+                    return success = JsonConvert.DeserializeObject<bool>(await result.Content.ReadAsStringAsync());
+                }
+                return success;
+            }
+            catch (Exception)
+            {
+                return success;
             }
         }
     }

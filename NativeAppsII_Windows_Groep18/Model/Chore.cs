@@ -1,37 +1,32 @@
 ﻿namespace NativeAppsII_Windows_Groep18.Model
 {
     /// <summary>
-    /// Represents an item.
+    /// Represents a chore.
     /// </summary>
-    public class Item
+    public class Chore
     {
         #region Properties
         /// <summary>
-        /// Gets or sets the item's id.
+        /// Gets or sets the chore's id.
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the item's name.
+        /// Gets or sets the chore's name.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the item's amount.
+        /// Gets or sets a value indicating wether the chore is completed.
         /// </summary>
-        public int Amount { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating wether the item is added.
-        /// </summary>
-        public bool Added { get; set; }
+        public bool Completed { get; set; }
         #endregion
 
         #region Constructors
         /// <summary>
-        /// Creates a new item.
+        /// Creates a new chore.
         /// </summary>
-        public Item() { }
+        public Chore() { }
         #endregion
     }
 }
