@@ -1,54 +1,24 @@
-﻿using NativeAppsII_Windows_Groep18.Services;
-using Newtonsoft.Json;
-using System;
-using System.Threading.Tasks;
-using Windows.Web.Http;
-using Windows.Storage.Streams;
+﻿using System.Threading.Tasks;
+using NativeAppsII_Windows_Groep18.Services.IServices;
 
 namespace NativeAppsII_Windows_Groep18.ViewModel
 {
     public class RegisterViewModel
     {
-        public async Task<bool> Register(string email, string password, string firstname, string lastname)
+        private IUserService _userService;
+
+        public RegisterViewModel(IUserService userService)
         {
-            HttpClient client = new HttpClient();
-            var success = false;
-            try
-            {
-                var json = JsonConvert.SerializeObject(new
-                {
-                    email,
-                    password,
-                    firstname,
-                    lastname
-                });
-                var result = await client.PostAsync(new Uri($"{Globals.BASE_URL}/User/Register"),
-                    new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
-                return success = result.IsSuccessStatusCode;
-            }
-            catch (Exception)
-            {
-                return success;
-            }
+            _userService = userService;
+        }
+        public async Task<string> Register(string email, string password, string firstname, string lastname)
+        {
+            return await _userService.Register(email, password, firstname, lastname);
         }
 
-        public async Task<bool> CheckAvailableUsername(string email)
+        public async Task<string> CheckAvailableUsername(string email)
         {
-            HttpClient client = new HttpClient();
-            var success = false;
-            try
-            {
-                var result = await client.GetAsync(new Uri($"{Globals.BASE_URL}/User/" + email));
-                if (result.IsSuccessStatusCode)
-                {
-                    return success = JsonConvert.DeserializeObject<bool>(await result.Content.ReadAsStringAsync());
-                }
-                return success;
-            }
-            catch (Exception)
-            {
-                return success;
-            }
+            return await _userService.CheckAvailableUsername(email);
         }
     }
 }
