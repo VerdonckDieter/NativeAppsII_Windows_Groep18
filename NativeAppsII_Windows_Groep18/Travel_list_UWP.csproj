@@ -127,6 +127,7 @@
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Itinerary.cs" />
     <Compile Include="Model\Trip.cs" />
+    <Compile Include="Services\Instances\ToastService.cs" />
     <Compile Include="Services\Instances\UserService.cs" />
     <Compile Include="Services\IServices\IUserService.cs" />
     <Compile Include="Utility\Globals.cs" />
@@ -222,6 +223,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Divider">
+      <Version>5.0.0.2012</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection">
       <Version>5.0.1</Version>
     </PackageReference>
