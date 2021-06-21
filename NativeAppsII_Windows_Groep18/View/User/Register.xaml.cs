@@ -1,13 +1,16 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
-using NativeAppsII_Windows_Groep18.ViewModel;
+﻿using NativeAppsII_Windows_Groep18.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Windows.UI;
-using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.ApplicationModel.Resources;
+using System.Threading.Tasks;
+using NativeAppsII_Windows_Groep18.Services.Instances;
+using Windows.UI.Xaml.Navigation;
+using System.Numerics;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -18,102 +21,94 @@ namespace NativeAppsII_Windows_Groep18.View
     /// </summary>
     public sealed partial class Register : Page
     {
-        public RegisterViewModel RegisterViewModel;
+        #region Properties
+        public RegisterViewModel RegisterViewModel { get; set; }
+        private ResourceLoader ResourceLoader { get; set; }
+        #endregion
+
+        #region Constructors
         public Register()
         {
             InitializeComponent();
             RegisterViewModel = App.Current.Services.GetService<RegisterViewModel>();
             DataContext = RegisterViewModel;
+            ResourceLoader = ResourceLoader.GetForCurrentView();
             RegisterEmail.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
+            RegisterPassword.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
             RegisterFirstname.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
             RegisterLastname.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
         }
+        #endregion
 
+        #region Methods
         private async void RegisterUser(object sender, RoutedEventArgs e)
         {
-            string email = RegisterEmail.Text;
-            string password = RegisterPassword.Text;
-            string firstname = RegisterFirstname.Text;
-            string lastname = RegisterLastname.Text;
-            if (string.IsNullOrEmpty(email) ||
-                string.IsNullOrEmpty(password) ||
-                string.IsNullOrEmpty(firstname) ||
-                string.IsNullOrEmpty(lastname))
+            if (Validate())
             {
-                AddRegisterError();
-            }
-            else
-            {
-                if (await RegisterViewModel.CheckAvailableUsername(email) == "NOTAVAILABLE")
+                if (await ValidateEmail())
                 {
-                    RegisterEmail.Text = string.Empty;
-                    RegisterEmail.Header = "E-mail is already in use";
-                    RegisterEmail.BorderBrush = new SolidColorBrush(Colors.Red);
-                    return;
-                }
-                if (await RegisterViewModel.Register(email, password, firstname, lastname) == "SUCCESS")
-                {
-                    ShowToast(email);
-                    Frame.Navigate(typeof(Login));
+                    switch (await RegisterViewModel.Register(RegisterEmail.Text, RegisterPassword.Password,
+                        RegisterFirstname.Text, RegisterLastname.Text))
+                    {
+                        case "SUCCESS":
+                            Frame.Navigate(typeof(Login));
+                            ToastService.MakeToast(string.Format(ResourceLoader.GetString("RegisterAccountCreated"), RegisterEmail.Text));
+                            break;
+                        case "FAIL":
+                            RegisterError("fail");
+                            break;
+                        case "ERROR":
+                            RegisterError("error");
+                            break;
+                    }
                 }
             }
         }
 
-        private void AddRegisterError()
+        private bool Validate()
         {
-            if (string.IsNullOrEmpty(RegisterEmail.Text))
+            var success = true;
+            if (string.IsNullOrWhiteSpace(RegisterEmail.Text))
             {
                 RegisterEmail.Text = string.Empty;
-                RegisterEmail.Header = "E-mail is required";
+                RegisterEmail.Header = ResourceLoader.GetString("RegisterEmailHeaderEmpty");
                 RegisterEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+                success = false;
             }
-            if (string.IsNullOrEmpty(RegisterPassword.Text))
+            if (string.IsNullOrWhiteSpace(RegisterPassword.Password))
             {
-                RegisterPassword.Text = string.Empty;
-                RegisterPassword.Header = "Password is required";
+                RegisterPassword.Password = string.Empty;
+                RegisterPassword.Header = ResourceLoader.GetString("RegisterPasswordHeaderEmpty");
                 RegisterPassword.BorderBrush = new SolidColorBrush(Colors.Red);
+                success = false;
             }
-            if (string.IsNullOrEmpty(RegisterFirstname.Text))
+            if (string.IsNullOrWhiteSpace(RegisterFirstname.Text))
             {
                 RegisterFirstname.Text = string.Empty;
-                RegisterFirstname.Header = "First name is required";
+                RegisterFirstname.Header = ResourceLoader.GetString("RegisterFirstnameHeaderEmpty");
                 RegisterFirstname.BorderBrush = new SolidColorBrush(Colors.Red);
+                success = false;
             }
-            if (string.IsNullOrEmpty(RegisterLastname.Text))
+            if (string.IsNullOrWhiteSpace(RegisterLastname.Text))
             {
                 RegisterLastname.Text = string.Empty;
-                RegisterLastname.Header = "Last name is required";
+                RegisterLastname.Header = ResourceLoader.GetString("RegisterLastnameHeaderEmpty");
                 RegisterLastname.BorderBrush = new SolidColorBrush(Colors.Red);
+                success = false;
             }
+            return success;
         }
 
-        private void ResetErrors(object sender, TappedRoutedEventArgs e)
+        private async Task<bool> ValidateEmail()
         {
-            switch (sender.GetType().Name)
+            if (await RegisterViewModel.CheckAvailableUsername(RegisterEmail.Text) == "NOTAVAILABLE")
             {
-                case "TextBox":
-                    if (((TextBox)sender).Name.Equals("RegisterEmail"))
-                    {
-                        RegisterEmail.Header = "E-mail";
-                        RegisterEmail.ClearValue(BorderBrushProperty);
-                    }
-                    else if (((TextBox)sender).Name.Equals("RegisterPassword"))
-                    {
-                        RegisterPassword.Header = "Password";
-                        RegisterPassword.ClearValue(BorderBrushProperty);
-                    }
-                    else if (((TextBox)sender).Name.Equals("RegisterFirstname"))
-                    {
-                        RegisterFirstname.Header = "First name";
-                        RegisterFirstname.ClearValue(BorderBrushProperty);
-                    }
-                    else
-                    {
-                        RegisterLastname.Header = "Last name";
-                        RegisterLastname.ClearValue(BorderBrushProperty);
-                    }
-                    break;
+                RegisterEmail.Text = string.Empty;
+                RegisterEmail.Header = ResourceLoader.GetString("RegisterEmailHeaderEmailInUse");
+                RegisterEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+                return false;
             }
+            return true;
         }
 
         private void NavigateToLogin(object sender, RoutedEventArgs e)
@@ -121,14 +116,63 @@ namespace NativeAppsII_Windows_Groep18.View
             Frame.Navigate(typeof(Login));
         }
 
-        private void ShowToast(string text)
+        private void RegisterError(string type)
         {
-            var content = new ToastContentBuilder()
-                .AddText("Account for " + text + " was created")
-                .SetToastDuration(ToastDuration.Short)
-                .GetToastContent();
-            var notif = new ToastNotification(content.GetXml());
-            ToastNotificationManager.CreateToastNotifier().Show(notif);
+            switch (type.ToLower())
+            {
+                case "fail":
+                    RegisterEmail.Text = string.Empty;
+                    RegisterEmail.Header = ResourceLoader.GetString("RegisterFail");
+                    RegisterEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+                    RegisterPassword.Password = string.Empty;
+                    RegisterPassword.Header = ResourceLoader.GetString("RegisterFail");
+                    RegisterPassword.BorderBrush = new SolidColorBrush(Colors.Red);
+                    RegisterFirstname.Text = string.Empty;
+                    RegisterFirstname.Header = ResourceLoader.GetString("RegisterFail");
+                    RegisterFirstname.BorderBrush = new SolidColorBrush(Colors.Red);
+                    RegisterLastname.Text = string.Empty;
+                    RegisterLastname.Header = ResourceLoader.GetString("RegisterFail");
+                    RegisterLastname.BorderBrush = new SolidColorBrush(Colors.Red);
+                    break;
+                case "error":
+                    RegisterEmail.Text = string.Empty;
+                    RegisterEmail.Header = ResourceLoader.GetString("ErrorText");
+                    RegisterEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+                    RegisterPassword.Password = string.Empty;
+                    RegisterPassword.Header = ResourceLoader.GetString("ErrorText");
+                    RegisterPassword.BorderBrush = new SolidColorBrush(Colors.Red);
+                    RegisterFirstname.Text = string.Empty;
+                    RegisterFirstname.Header = ResourceLoader.GetString("ErrorText");
+                    RegisterFirstname.BorderBrush = new SolidColorBrush(Colors.Red);
+                    RegisterLastname.Text = string.Empty;
+                    RegisterLastname.Header = ResourceLoader.GetString("ErrorText");
+                    RegisterLastname.BorderBrush = new SolidColorBrush(Colors.Red);
+                    break;
+            }
         }
+
+        private void ResetErrors(object sender, TappedRoutedEventArgs e)
+        {
+            RegisterEmail.Header = ResourceLoader.GetString("RegisterEmail/Header");
+            RegisterEmail.ClearValue(BorderBrushProperty);
+
+            RegisterPassword.Header = ResourceLoader.GetString("RegisterPassword/Header");
+            RegisterPassword.ClearValue(BorderBrushProperty);
+
+            RegisterFirstname.Header = ResourceLoader.GetString("RegisterFirstname/Header");
+            RegisterFirstname.ClearValue(BorderBrushProperty);
+
+            RegisterLastname.Header = ResourceLoader.GetString("RegisterLastname/Header");
+            RegisterLastname.ClearValue(BorderBrushProperty);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            SharedShadow.Receivers.Add(BackgroundGrid);
+            RegisterStackPanel.Translation += new Vector3(0, 0, 10);
+        }
+        #endregion
     }
 }
