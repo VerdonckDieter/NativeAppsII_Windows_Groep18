@@ -1,8 +1,8 @@
-﻿using System;
+﻿using NativeAppsII_Windows_Groep18.View.Trip;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -15,7 +15,7 @@ namespace NativeAppsII_Windows_Groep18.View
     {
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
-            ("Home", typeof(TravelListOverview)),
+            ("Home", typeof(TripOverview)),
             ("Add TravelList", typeof(AddTravelListView)),
             ("Account", typeof(Account)),
             ("Maps", typeof(Itinerary)),
