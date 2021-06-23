@@ -58,8 +58,10 @@ namespace NativeAppsII_Windows_Groep18
             services.AddTransient<LoginViewModel>();
             services.AddTransient<RegisterViewModel>();
             services.AddTransient<AccountViewModel>();
+            services.AddTransient<TripViewModel>();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITripService, TripService>();
             
             return services.BuildServiceProvider();
         }
