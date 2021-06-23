@@ -30,7 +30,7 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
                     new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
                 if (result.IsSuccessStatusCode)
                 {
-                    Globals.LoggedInUser = await result.Content.ReadAsStringAsync();
+                    StorageService.StoreToken(await result.Content.ReadAsStringAsync());
                     return "SUCCESS";
                 }
                 return "FAIL";
