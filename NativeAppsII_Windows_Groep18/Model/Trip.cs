@@ -43,6 +43,11 @@ namespace NativeAppsII_Windows_Groep18.Model
         /// Gets or sets the trip's itineraries.
         /// </summary>
         public ObservableCollection<Itinerary> Itineraries { get; set; }
+
+        /// <summary>
+        /// Gets the trip's time period.
+        /// </summary>
+        public string Period => StartDate.ToShortDateString() + " - " + EndDate.ToShortDateString();
         #endregion
 
         #region Constructors
