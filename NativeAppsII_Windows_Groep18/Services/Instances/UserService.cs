@@ -19,68 +19,47 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
 
         public async Task<string> Login(string email, string password)
         {
-            try
+            var json = JsonConvert.SerializeObject(new
             {
-                var json = JsonConvert.SerializeObject(new
-                {
-                    email,
-                    password
-                });
-                var result = await _httpClient.PostAsync(new Uri($"{Globals.BASE_URL}/User/Login"),
-                    new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
-                if (result.IsSuccessStatusCode)
-                {
-                    StorageService.StoreToken(await result.Content.ReadAsStringAsync());
-                    return "SUCCESS";
-                }
-                return "FAIL";
-            }
-            catch (Exception)
+                email,
+                password
+            });
+            var result = await _httpClient.PostAsync(new Uri($"{Globals.BASE_URL}/User/Login"),
+                new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
+            if (result.IsSuccessStatusCode)
             {
-                return "ERROR";
+                StorageService.StoreToken(await result.Content.ReadAsStringAsync());
+                return "SUCCESS";
             }
+            return "FAIL";
         }
 
         public async Task<string> Register(string email, string password, string firstname, string lastname)
         {
-            try
+            var json = JsonConvert.SerializeObject(new
             {
-                var json = JsonConvert.SerializeObject(new
-                {
-                    email,
-                    password,
-                    firstname,
-                    lastname
-                });
-                var result = await _httpClient.PostAsync(new Uri($"{Globals.BASE_URL}/User/Register"),
-                    new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
-                if (result.IsSuccessStatusCode)
-                {
-                    return "SUCCESS";
-                }
-                return "FAIL";
-            }
-            catch (Exception)
+                email,
+                password,
+                firstname,
+                lastname
+            });
+            var result = await _httpClient.PostAsync(new Uri($"{Globals.BASE_URL}/User/Register"),
+                new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
+            if (result.IsSuccessStatusCode)
             {
-                return "ERROR";
+                return "SUCCESS";
             }
+            return "FAIL";
         }
 
         public async Task<string> CheckAvailableUsername(string email)
         {
-            try
+            var result = await _httpClient.GetAsync(new Uri($"{Globals.BASE_URL}/User/" + email));
+            if (result.IsSuccessStatusCode)
             {
-                var result = await _httpClient.GetAsync(new Uri($"{Globals.BASE_URL}/User/" + email));
-                if (result.IsSuccessStatusCode)
-                {
-                    return await result.Content.ReadAsStringAsync() == "true" ? "AVAILABLE" : "NOTAVAILABLE";
-                }
-                return "FAIL";
+                return await result.Content.ReadAsStringAsync() == "true" ? "AVAILABLE" : "NOTAVAILABLE";
             }
-            catch (Exception)
-            {
-                return "ERROR";
-            }
+            return "FAIL";
         }
     }
 }
