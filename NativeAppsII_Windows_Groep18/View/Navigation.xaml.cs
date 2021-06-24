@@ -16,7 +16,7 @@ namespace NativeAppsII_Windows_Groep18.View
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
             ("Home", typeof(TripOverview)),
-            ("Add TravelList", typeof(AddTravelListView)),
+            ("Add Trip", typeof(AddTripView)),
             ("Account", typeof(Account)),
             ("Maps", typeof(Itinerary)),
             ("Logout", typeof(MainPage))
@@ -40,7 +40,7 @@ namespace NativeAppsII_Windows_Groep18.View
                 case "Home":
                     Content.Navigate(_page);
                     break;
-                case "Add TravelList":
+                case "Add Trip":
                     Content.Navigate(_page);
                     break;
                 case "Account":

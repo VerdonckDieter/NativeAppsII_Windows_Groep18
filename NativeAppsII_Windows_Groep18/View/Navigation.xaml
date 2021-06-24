@@ -58,7 +58,7 @@
                     Icon="Home">
                 </NavigationViewItem>
                 <NavigationViewItem 
-                    Content="Add TravelList" 
+                    Content="Add Trip" 
                     Icon="Add">
                 </NavigationViewItem>
                 <NavigationViewItem 
@@ -69,10 +69,6 @@
                     Content="Account"
                     Icon="Account">
                 </NavigationViewItem>
-                <!--<NavigationViewItem 
-                    x:Name="ClientEmail"
-                    Icon="Contact">
-                </NavigationViewItem>-->
                 <NavigationViewItem 
                     x:Name="Logout"
                     Content="Logout" 
