@@ -15,9 +15,14 @@ namespace Travel_list_API.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the trip's
+        /// Gets or sets the trip's name.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the trips's location.
+        /// </summary>
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets the trip's start date.

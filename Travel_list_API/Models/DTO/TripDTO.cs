@@ -21,6 +21,11 @@ namespace Travel_list_API.Models.DTO
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the trip DTO's location.
+        /// </summary>
+        public string Location { get; set; }
+
+        /// <summary>
         /// Gets or sets the trip DTO's start date.
         /// </summary>
         public DateTime StartDate { get; set; }

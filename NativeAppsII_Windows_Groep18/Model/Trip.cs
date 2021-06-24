@@ -15,9 +15,14 @@ namespace NativeAppsII_Windows_Groep18.Model
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the trip's
+        /// Gets or sets the trip's name.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the trip's location.
+        /// </summary>
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets the trip's start date.
@@ -61,11 +66,5 @@ namespace NativeAppsII_Windows_Groep18.Model
             Itineraries = new ObservableCollection<Itinerary>();
         }
         #endregion
-
-        //public void UpdateProgress()
-        //{
-        //    double count = Items.Count(i => i.Added == true);
-        //    Progress = (int)(count / Items.Count() * 100);
-        //}
     }
 }
