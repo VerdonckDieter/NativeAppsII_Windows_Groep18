@@ -11,5 +11,7 @@ namespace NativeAppsII_Windows_Groep18.Services.IServices
         Task<Trip> GetTrip(int id);
 
         Task<bool> DeleteTrip(int id);
+
+        Task<Trip> UpsertTrip(Trip trip);
     }
 }
