@@ -47,19 +47,11 @@ namespace NativeAppsII_Windows_Groep18.View
             {
                 if (await ValidateEmail())
                 {
-                    switch (await RegisterViewModel.Register(RegisterEmail.Text, RegisterPassword.Password,
-                        RegisterFirstname.Text, RegisterLastname.Text))
+                    if (await RegisterViewModel.Register(RegisterEmail.Text, RegisterPassword.Password,
+                        RegisterFirstname.Text, RegisterLastname.Text) == "SUCCESS")
                     {
-                        case "SUCCESS":
-                            Frame.Navigate(typeof(Login));
-                            ToastService.MakeToast(string.Format(ResourceLoader.GetString("RegisterAccountCreated"), RegisterEmail.Text));
-                            break;
-                        case "FAIL":
-                            RegisterError("fail");
-                            break;
-                        case "ERROR":
-                            RegisterError("error");
-                            break;
+                        Frame.Navigate(typeof(Login));
+                        ToastService.MakeToast(string.Format(ResourceLoader.GetString("RegisterAccountCreated"), RegisterEmail.Text));
                     }
                 }
             }
