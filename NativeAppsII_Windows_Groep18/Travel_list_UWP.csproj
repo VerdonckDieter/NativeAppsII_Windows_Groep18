@@ -135,6 +135,7 @@
     <Compile Include="Services\IServices\IUserService.cs" />
     <Compile Include="Utility\Globals.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\AddTripViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
@@ -152,8 +153,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\TripViewModel.cs" />
-    <Compile Include="View\AddTravelListView.xaml.cs">
-      <DependentUpon>AddTravelListView.xaml</DependentUpon>
+    <Compile Include="View\Trip\AddTripView.xaml.cs">
+      <DependentUpon>AddTripView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Trip\TripOverview.xaml.cs">
       <DependentUpon>TripOverview.xaml</DependentUpon>
@@ -204,7 +205,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\AddTravelListView.xaml">
+    <Page Include="View\Trip\AddTripView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
