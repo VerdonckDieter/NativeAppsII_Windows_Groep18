@@ -117,6 +117,45 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddTripButton.Content" xml:space="preserve">
+    <value>Add trip</value>
+  </data>
+  <data name="AddTripCreated" xml:space="preserve">
+    <value>Trip {0} was created</value>
+  </data>
+  <data name="AddTripEndDate.Header" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="AddTripEndDateEmpty" xml:space="preserve">
+    <value>The end date field cannot be empty</value>
+  </data>
+  <data name="AddTripLocation.Header" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="AddTripLocation.PlaceholderText" xml:space="preserve">
+    <value>Where are you going?</value>
+  </data>
+  <data name="AddTripLocationEmpty" xml:space="preserve">
+    <value>The location field cannot be empty</value>
+  </data>
+  <data name="AddTripName.Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AddtripName.PlaceholderText" xml:space="preserve">
+    <value>Name of the trip</value>
+  </data>
+  <data name="AddTripNameEmpty" xml:space="preserve">
+    <value>The name field cannot be empty</value>
+  </data>
+  <data name="AddTripStartDate.Header" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="AddTripStartDateEmpty" xml:space="preserve">
+    <value>The start date field cannot be empty</value>
+  </data>
+  <data name="AddTripTitle.Text" xml:space="preserve">
+    <value>Create your trip</value>
+  </data>
   <data name="ErrorText" xml:space="preserve">
     <value>An error has occurred</value>
   </data>
