@@ -1,4 +1,4 @@
-﻿using NativeAppsII_Windows_Groep18.View.Trip;
+﻿using NativeAppsII_Windows_Groep18.View.TripView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
