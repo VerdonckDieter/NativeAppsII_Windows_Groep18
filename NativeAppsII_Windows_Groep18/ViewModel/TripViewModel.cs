@@ -56,8 +56,6 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
                 IsLoading = false;
             });
         }
-
-        public async void DeleteTrip(int id) => await _tripService.DeleteTrip(id);
         #endregion
     }
 }
