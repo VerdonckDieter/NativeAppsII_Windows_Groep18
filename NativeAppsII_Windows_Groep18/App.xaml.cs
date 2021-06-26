@@ -60,9 +60,11 @@ namespace NativeAppsII_Windows_Groep18
             services.AddTransient<AccountViewModel>();
             services.AddTransient<TripViewModel>();
             services.AddTransient<AddTripViewModel>();
+            services.AddTransient<TripDetailViewModel>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITripService, TripService>();
+            services.AddScoped<IWeatherService, WeatherService>();
             
             return services.BuildServiceProvider();
         }
