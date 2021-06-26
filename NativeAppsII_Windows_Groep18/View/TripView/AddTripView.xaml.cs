@@ -10,7 +10,7 @@ using NativeAppsII_Windows_Groep18.Services.Instances;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace NativeAppsII_Windows_Groep18.View.Trip
+namespace NativeAppsII_Windows_Groep18.View.TripView
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
