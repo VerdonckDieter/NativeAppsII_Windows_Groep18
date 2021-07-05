@@ -19,55 +19,46 @@
     </Page.Background>
 
     <ScrollViewer>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" MaxHeight=".33"/>
-                <RowDefinition Height="Auto" MaxHeight=".33"/>
-                <RowDefinition Height="Auto" MaxHeight=".33"/>
-            </Grid.RowDefinitions>
+        <Grid Padding="12">
             <GridView x:Name="TripGridView"
-                  ItemsSource="{x:Bind TripViewModel.Trips}"
-                  HorizontalAlignment="Left"
-                  Margin="0,20,0,0"                  
-                  IsItemClickEnabled="True">
-                
-                <GridView.Background>
-                    <SolidColorBrush Color="LightGray" />
-                </GridView.Background>
+                      ItemsSource="{x:Bind TripViewModel.Trips}"
+                      HorizontalAlignment="Left"
+                      Margin="0,20,0,0"                
+                      IsItemClickEnabled="True">
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="FrameworkElement">
+                        <Setter Property="Margin" Value="12" />
+                    </Style>
+                </GridView.ItemContainerStyle>
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="model:Trip">
-                            <Grid>
-                                <StackPanel x:Name="TripGridViewItem"
-                                            Margin="24"
-                                            Tapped="NavigateToDetail">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                     </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0"
-                                                   Text="{x:Bind Name}"
-                                                   TextWrapping="NoWrap"
-                                                   TextAlignment="Center"
-                                                    Foreground="DarkGreen"
-                                                   Style="{ThemeResource TitleTextBlockStyle}"/>
-                                        <TextBlock Grid.Row="1"
-                                                   Margin="0,10,0,0"
-                                                   Text="{x:Bind Period}"
-                                                   TextWrapping="NoWrap"
-                                                   TextAlignment="Center"
-                                                   Foreground="DarkGreen"
-                                                   Style="{ThemeResource SubtitleTextBlockStyle}"/>
-                                    </Grid>
-                                    <Rectangle x:Name="BorderBottom"
-                                               Grid.Row="2"
-                                               Height="1"
-                                               HorizontalAlignment="Stretch"
-                                               VerticalAlignment="Bottom"
-                                               Fill="Black"/>
-                                </StackPanel>
+                        <StackPanel x:Name="TripGridViewItem"
+                                    Tapped="NavigateToDetail">
+                            <Grid Background="LightGray"
+                                  BorderBrush="DarkGreen"
+                                  BorderThickness="2"
+                                  CornerRadius="2"
+                                  Padding="12,24">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Text="{x:Bind Name}"
+                                           TextWrapping="NoWrap"
+                                           TextAlignment="Center"
+                                           Foreground="DarkGreen"
+                                           Style="{ThemeResource TitleTextBlockStyle}"/>
+                                <TextBlock Grid.Row="1"
+                                           Margin="0,10,0,0"
+                                           Text="{x:Bind Period}"
+                                           TextWrapping="NoWrap"
+                                           TextAlignment="Center"
+                                           Foreground="DarkGreen"
+                                           Style="{ThemeResource SubtitleTextBlockStyle}"/>
                             </Grid>
+                        </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
