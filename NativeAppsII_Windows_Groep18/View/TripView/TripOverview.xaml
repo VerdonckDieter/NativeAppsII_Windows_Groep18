@@ -14,38 +14,50 @@
     >
 
     <Page.Background>
-        <SolidColorBrush Color="WhiteSmoke" />
+        <!--<SolidColorBrush Color="WhiteSmoke" />-->
+        <ImageBrush Stretch="None" ImageSource="/Assets/forest.png"/>
     </Page.Background>
 
     <ScrollViewer>
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MaxHeight=".33"/>
+                <RowDefinition Height="Auto" MaxHeight=".33"/>
+                <RowDefinition Height="Auto" MaxHeight=".33"/>
+            </Grid.RowDefinitions>
             <GridView x:Name="TripGridView"
                   ItemsSource="{x:Bind TripViewModel.Trips}"
                   HorizontalAlignment="Left"
-                  Margin="0,20,0,0"
+                  Margin="0,20,0,0"                  
                   IsItemClickEnabled="True">
+                
+                <GridView.Background>
+                    <SolidColorBrush Color="LightGray" />
+                </GridView.Background>
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="model:Trip">
                             <Grid>
                                 <StackPanel x:Name="TripGridViewItem"
                                             Margin="24"
                                             Tapped="NavigateToDetail">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
+                                     </Grid.RowDefinitions>
                                         <TextBlock Grid.Row="0"
                                                    Text="{x:Bind Name}"
                                                    TextWrapping="NoWrap"
                                                    TextAlignment="Center"
+                                                    Foreground="DarkGreen"
                                                    Style="{ThemeResource TitleTextBlockStyle}"/>
                                         <TextBlock Grid.Row="1"
                                                    Margin="0,10,0,0"
                                                    Text="{x:Bind Period}"
                                                    TextWrapping="NoWrap"
                                                    TextAlignment="Center"
+                                                   Foreground="DarkGreen"
                                                    Style="{ThemeResource SubtitleTextBlockStyle}"/>
                                     </Grid>
                                     <Rectangle x:Name="BorderBottom"
