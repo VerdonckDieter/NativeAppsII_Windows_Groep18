@@ -9,10 +9,11 @@
     >
 
     <Page.Background>
-        <SolidColorBrush Color="WhiteSmoke" />
+        <!--<SolidColorBrush Color="Azure" />-->
+        <ImageBrush Stretch="Fill" ImageSource="/Assets/forest.png"/>
     </Page.Background>
 
-    <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">        
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
                 <VisualState x:Name="Phone">
