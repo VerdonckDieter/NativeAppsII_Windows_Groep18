@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NativeAppsII_Windows_Groep18.Model.Weather
 {
-    public class WeatherForecast
+    public class LocalWeather
     {
         [JsonProperty("coord")]
         public Coord Coord { get; set; }
@@ -114,5 +114,97 @@ namespace NativeAppsII_Windows_Groep18.Model.Weather
         public int Sunrise { get; set; }
         [JsonProperty("sunset")]
         public int Sunset { get; set; }
+    }
+
+    public class WeatherForecast
+    {
+        [JsonProperty("city")]
+        public City City { get; set; }
+        [JsonProperty("cod")]
+        public string Cod { get; set; }
+        [JsonProperty("message")]
+        public double Message { get; set; }
+        [JsonProperty("cnt")]
+        public int Count { get; set; }
+        [JsonProperty("list")]
+        public List<WeatherForecastList> WeatherForecastList { get; set; }
+    }
+
+    public class WeatherForecastList
+    {
+        [JsonProperty("dt")]
+        public int Dt { get; set; }
+        [JsonProperty("sunrise")]
+        public int Sunrise { get; set; }
+        [JsonProperty("sunset")]
+        public int Sunset { get; set; }
+        [JsonProperty("temp")]
+        public Temperature Temperature { get; set; }
+        [JsonProperty("feels_like")]
+        public TemperatureFeeling TemperatureFeeling { get; set; }
+        [JsonProperty("pressure")]
+        public double Pressure { get; set; }
+        [JsonProperty("humidity")]
+        public int Humidity { get; set; }
+        [JsonProperty("weather")]
+        public List<Weather> Weather { get; set; }
+        [JsonProperty("speed")]
+        public double Speed { get; set; }
+        [JsonProperty("deg")]
+        public int Degree { get; set; }
+        [JsonProperty("gust")]
+        public double Gust { get; set; }
+        [JsonProperty("clouds")]
+        public int Clouds { get; set; }
+        [JsonProperty("rain")]
+        public int Rain { get; set; }
+        [JsonProperty("snow")]
+        public int Snow { get; set; }
+        [JsonProperty("pop")]
+        public double Probability { get; set; }
+    }
+
+    public class City
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("coord")]
+        public Coord Coord { get; set; }
+        [JsonProperty("country")]
+        public string Country { get; set; }
+        [JsonProperty("population")]
+        public int Population { get; set; }
+        [JsonProperty("timezone")]
+        public int Timezone { get; set; }
+    }
+
+    public class Temperature
+    {
+        [JsonProperty("day")]
+        public double Day { get; set; }
+        [JsonProperty("min")]
+        public double Min { get; set; }
+        [JsonProperty("max")]
+        public double Max { get; set; }
+        [JsonProperty("night")]
+        public double Night { get; set; }
+        [JsonProperty("eve")]
+        public double Evening { get; set; }
+        [JsonProperty("morn")]
+        public double Morning { get; set; }
+    }
+
+    public class TemperatureFeeling
+    {
+        [JsonProperty("day")]
+        public double Day { get; set; }
+        [JsonProperty("night")]
+        public double Night { get; set; }
+        [JsonProperty("eve")]
+        public double Evening { get; set; }
+        [JsonProperty("morn")]
+        public double Morning { get; set; }
     }
 }
