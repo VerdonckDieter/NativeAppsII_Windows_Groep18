@@ -27,7 +27,7 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
         #region Methods
         public async void DeleteTrip(int id) => await _tripService.DeleteTrip(id);
 
-        public async void GetWeatherForecast() => await _weatherService.GetWeatherForecast(Trip.Location);
+        public async void GetWeatherForecast(int days) => await _weatherService.GetWeatherForecast(Trip.Location, days);
         #endregion
     }
 }
