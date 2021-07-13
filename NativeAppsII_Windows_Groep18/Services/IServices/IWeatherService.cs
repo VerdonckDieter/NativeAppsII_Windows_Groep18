@@ -5,6 +5,8 @@ namespace NativeAppsII_Windows_Groep18.Services.IServices
 {
     public interface IWeatherService
     {
-        Task<WeatherForecast> GetWeatherForecast(string location);
+        Task<LocalWeather> GetLocalWeather(string location);
+
+        Task<WeatherForecast> GetWeatherForecast(string location, int days);
     }
 }
