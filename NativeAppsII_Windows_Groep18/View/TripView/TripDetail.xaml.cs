@@ -3,6 +3,7 @@ using NativeAppsII_Windows_Groep18.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Input;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -17,6 +18,7 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
         public TripDetailViewModel TripDetailViewModel { get; set; }
 
         #endregion
+
         #region Constructors
         public TripDetail()
         {
@@ -30,13 +32,12 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
             TripDetailViewModel.Trip = (Trip)e.Parameter;
+        }
 
-            if(TripDetailViewModel.WeatherForecast == null)
-            {
-                TripDetailViewModel.GetWeatherForecast();
-            }
+        private void ItemChecked(object sender, TappedRoutedEventArgs e)
+        {
+            Item selectedItem = (Item)((CheckBox)sender).DataContext;
         }
         #endregion
     }

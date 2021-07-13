@@ -4,11 +4,246 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NativeAppsII_Windows_Groep18.View.TripView"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:model="using:NativeAppsII_Windows_Groep18.Model" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.Resources>
 
-    </Grid>
+        <Style TargetType="CheckBox">
+            <Setter Property="FlowDirection" Value="RightToLeft"/>
+            <!--<Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <ContentControl FlowDirection="LeftToRight" Content="{Binding}"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>-->
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="MinWidth" Value="0"/>
+        </Style>
+        <Style TargetType="Path">
+            <Setter Property="FlowDirection" Value="LeftToRight"/>
+        </Style>
+    </Page.Resources>
+    
+    <ScrollViewer>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ScreenSizes">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".05*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".9*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".05*"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".125*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".75*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".125*"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".125*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".75*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".125*"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
+        <Grid x:Name="LayoutGrid" 
+              HorizontalAlignment="Stretch" 
+              VerticalAlignment="Stretch">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="1"
+                        HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <TextBlock Margin="24"
+                           TextWrapping="Wrap"
+                           Text="{x:Bind TripDetailViewModel.Trip.Name}"
+                           Style="{ThemeResource HeaderTextBlockStyle}"/>
+                </StackPanel>
+
+
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock x:Uid="TravelListTitle"
+                               x:Name="TravelListTitle"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               Margin="12"
+                               Style="{ThemeResource TitleTextBlockStyle}"/>
+                    <TextBlock x:Uid="ChoresTitle"
+                               x:Name="ChoresTitle"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               Margin="12"
+                               Style="{ThemeResource TitleTextBlockStyle}"/>
+
+                    <ListView x:Name="ListViewCategories"
+                              Grid.Row="1"
+                              Grid.Column="0"
+                              HorizontalAlignment="Stretch"
+                              Margin="12"
+                              Padding="12"
+                              BorderBrush="Black"
+                              BorderThickness="1"
+                              CornerRadius="2"
+                              ItemsSource="{x:Bind TripDetailViewModel.Trip.Categories}">
+                        
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Stretch"/>
+                                <Setter Property="Padding"
+                                        Value="0"/>
+                                <Setter Property="Margin"
+                                        Value="0"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Category">
+                                <Grid>
+
+                                    <controls:Expander IsExpanded="True"
+                                                       HorizontalContentAlignment="Stretch">
+                                        <controls:Expander.Header>
+                                            <Grid HorizontalAlignment="Stretch">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{x:Bind Name}"
+                                                       HorizontalAlignment="Left"
+                                                       VerticalAlignment="Center"
+                                                       Grid.Column="0"/>
+                                                <TextBlock HorizontalAlignment="Right"
+                                                       VerticalAlignment="Center"
+                                                       Grid.Column="1">
+                                                <Run Text="{x:Bind ItemsAdded}"/>
+                                                <Run Text="/" />
+                                                <Run Text="{x:Bind Items.Count}"/>
+                                                </TextBlock>
+                                            </Grid>
+                                        </controls:Expander.Header>
+
+                                        <controls:Expander.Content>
+                                            <ListView x:Name="ListViewItems"
+                                              ItemsSource="{x:Bind Items}"
+                                              HorizontalAlignment="Stretch">
+
+                                                <ListView.ItemContainerStyle>
+                                                    <Style TargetType="ListViewItem">
+                                                        <Setter Property="HorizontalContentAlignment"
+                                                                Value="Stretch"/>
+                                                        <Setter Property="Padding"
+                                                                Value="24,6"/>
+                                                    </Style>
+                                                </ListView.ItemContainerStyle>
+
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate x:DataType="model:Item">
+                                                        <Grid HorizontalAlignment="Stretch">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Text="{x:Bind Name}"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center"
+                                                               Grid.Column="0"/>
+                                                            <CheckBox IsChecked="{x:Bind Added}"
+                                                              HorizontalAlignment="Right"
+                                                              VerticalAlignment="Center"
+                                                              Grid.Column="1"
+                                                              Tapped="ItemChecked"
+                                                              MinWidth="0"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                        </controls:Expander.Content>
+                                        
+                                    </controls:Expander>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <ListView x:Name="ListViewChores"
+                              Grid.Row="1"
+                              Grid.Column="1"
+                              HorizontalAlignment="Stretch"
+                              Margin="12"
+                              Padding="12"
+                              BorderBrush="Black"
+                              BorderThickness="1"
+                              CornerRadius="2"
+                              ItemsSource="{x:Bind TripDetailViewModel.Trip.Chores}">
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Chore">
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{x:Bind Name}"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Grid.Column="0"/>
+                                    <CheckBox IsChecked="{x:Bind Completed}"
+                                              HorizontalAlignment="Right"
+                                              VerticalAlignment="Center"
+                                              Grid.Column="1"
+                                              MinWidth="0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>
