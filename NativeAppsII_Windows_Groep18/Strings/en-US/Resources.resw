@@ -156,6 +156,9 @@
   <data name="AddTripTitle.Text" xml:space="preserve">
     <value>Create your trip</value>
   </data>
+  <data name="ChoresTitle.Text" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
   <data name="ErrorText" xml:space="preserve">
     <value>An error has occurred</value>
   </data>
@@ -245,5 +248,8 @@
   </data>
   <data name="RegisterTitle.Text" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="TravelListTitle.Text" xml:space="preserve">
+    <value>Travel List</value>
   </data>
 </root>
