@@ -39,7 +39,9 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
         private void NavigateToDetail(object sender, TappedRoutedEventArgs e)
         {
             if (TripGridView.SelectedItem is Trip clickedItem)
+            {
                 Frame.Navigate(typeof(TripDetail), clickedItem);
+            }
         }
         #endregion
     }
