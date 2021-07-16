@@ -65,6 +65,8 @@ namespace NativeAppsII_Windows_Groep18
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITripService, TripService>();
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IChoreService, ChoreService>();
             services.AddScoped<IWeatherService, WeatherService>();
             
             return services.BuildServiceProvider();

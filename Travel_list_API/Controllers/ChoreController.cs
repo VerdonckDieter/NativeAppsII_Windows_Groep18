@@ -30,7 +30,7 @@ namespace Travel_list_API.Controllers
         /// Creates a new chore or updates an existing one.
         /// </summary>
         [HttpPost("{tripId}")]
-        public async Task<ActionResult> PostChore(int tripId, ChoreDTO choreDTO)
+        public async Task<ActionResult> PostChore(ChoreDTO choreDTO, int tripId = 0)
         {
             var chore = new Chore()
             {
