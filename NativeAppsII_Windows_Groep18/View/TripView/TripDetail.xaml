@@ -185,7 +185,7 @@
                                                                HorizontalAlignment="Left"
                                                                VerticalAlignment="Center"
                                                                Grid.Column="0"/>
-                                                            <CheckBox IsChecked="{x:Bind Added}"
+                                                            <CheckBox IsChecked="{x:Bind Added, Mode=TwoWay}"
                                                               HorizontalAlignment="Right"
                                                               VerticalAlignment="Center"
                                                               Grid.Column="1"
@@ -232,10 +232,11 @@
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
                                                Grid.Column="0"/>
-                                    <CheckBox IsChecked="{x:Bind Completed}"
+                                    <CheckBox IsChecked="{x:Bind Completed, Mode=TwoWay}"
                                               HorizontalAlignment="Right"
                                               VerticalAlignment="Center"
                                               Grid.Column="1"
+                                              Tapped="ChoreChecked"
                                               MinWidth="0"/>
                                 </Grid>
                             </DataTemplate>
