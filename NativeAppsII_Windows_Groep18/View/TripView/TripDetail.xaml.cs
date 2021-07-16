@@ -38,6 +38,13 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
         private void ItemChecked(object sender, TappedRoutedEventArgs e)
         {
             Item selectedItem = (Item)((CheckBox)sender).DataContext;
+            TripDetailViewModel.UpdateItemAsync(selectedItem);
+        }
+
+        private void ChoreChecked(object sender, TappedRoutedEventArgs e)
+        {
+            Chore selectedItem = (Chore)((CheckBox)sender).DataContext;
+            TripDetailViewModel.UpdateChoreAsync(selectedItem);
         }
         #endregion
     }
