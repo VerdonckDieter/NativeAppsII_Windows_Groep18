@@ -12,6 +12,11 @@
         public int Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the item's category id.
+        /// </summary>
+        public int CategoryId { get; set; }
+
+        /// <summary>
         /// Gets or sets the item's name.
         /// </summary>
         public string Name { get; set; }
