@@ -33,7 +33,7 @@ namespace Travel_list_API.Controllers
         {
             var category = new Category()
             {
-                Id = categoryDTO.Id,
+                CategoryId = categoryDTO.Id,
                 Name = categoryDTO.Name,
                 Items = categoryDTO.Items
             };

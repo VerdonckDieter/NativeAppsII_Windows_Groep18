@@ -27,7 +27,7 @@ namespace Travel_list_API.Data.Repositories
         /// </summary>
         public async Task<Category> UpsertCategoryAsync(int tripId, Category category)
         {
-            var current = await _db.Categories.SingleOrDefaultAsync(c => c.Id == category.Id);
+            var current = await _db.Categories.SingleOrDefaultAsync(c => c.CategoryId == category.CategoryId);
             if (current == null)
             {
                 var trip = await GetTrip(tripId);
@@ -48,7 +48,7 @@ namespace Travel_list_API.Data.Repositories
         public async Task<bool> DeleteCategoryAsync(int tripId, int categoryId)
         {
             var trip = await GetTrip(tripId);
-            trip.RemoveCategory(trip.Categories.Single(c => c.Id == categoryId));
+            trip.RemoveCategory(trip.Categories.Single(c => c.CategoryId == categoryId));
             _db.Trips.Update(trip);
             return await _db.SaveChangesAsync() > 0;
         }
