@@ -26,7 +26,7 @@
             <Setter Property="FlowDirection" Value="LeftToRight"/>
         </Style>
     </Page.Resources>
-    
+
     <ScrollViewer>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
@@ -67,7 +67,7 @@
         <Grid x:Name="LayoutGrid" 
               HorizontalAlignment="Stretch" 
               VerticalAlignment="Stretch">
-            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -112,137 +112,239 @@
                                Margin="12"
                                Style="{ThemeResource TitleTextBlockStyle}"/>
 
-                    <ListView x:Name="ListViewCategories"
-                              Grid.Row="1"
-                              Grid.Column="0"
-                              HorizontalAlignment="Stretch"
-                              Margin="12"
-                              Padding="12"
-                              BorderBrush="Black"
-                              BorderThickness="1"
-                              CornerRadius="2"
-                              ItemsSource="{x:Bind TripDetailViewModel.Trip.Categories}">
-                        
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Stretch"/>
-                                <Setter Property="Padding"
-                                        Value="0"/>
-                                <Setter Property="Margin"
-                                        Value="0"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="model:Category">
-                                <Grid>
+                    <StackPanel Orientation="Vertical"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Margin="12"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                                CornerRadius="2">
 
-                                    <controls:Expander IsExpanded="True"
+                        <ListView x:Name="ListViewCategories"
+                              HorizontalAlignment="Stretch"
+                              Padding="12"
+                              ItemsSource="{x:Bind TripDetailViewModel.Trip.Categories}">
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment"
+                                        Value="Stretch"/>
+                                    <Setter Property="Padding"
+                                        Value="0"/>
+                                    <Setter Property="Margin"
+                                        Value="0"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="model:Category">
+                                    <Grid>
+
+                                        <controls:Expander IsExpanded="True"
                                                        HorizontalContentAlignment="Stretch">
-                                        <controls:Expander.Header>
-                                            <Grid HorizontalAlignment="Stretch">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock Text="{x:Bind Name}"
+
+                                            <controls:Expander.Header>
+                                                <Grid HorizontalAlignment="Stretch"
+                                                  RightTapped="ShowMenu">
+                                                    <FlyoutBase.AttachedFlyout>
+                                                        <MenuFlyout Placement="Bottom">
+                                                            <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemModify"
+                                                                        x:Name="MenuModifyCategory"
+                                                                        Click="MenuFlyoutItemTapped"/>
+                                                            <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemDelete"
+                                                                        x:Name="MenuDeleteCategory"
+                                                                        Click="MenuFlyoutItemTapped"/>
+                                                        </MenuFlyout>
+                                                    </FlyoutBase.AttachedFlyout>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="{x:Bind Name}"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Center"
                                                        Grid.Column="0"/>
-                                                <TextBlock HorizontalAlignment="Right"
+                                                    <TextBlock HorizontalAlignment="Right"
                                                        VerticalAlignment="Center"
                                                        Grid.Column="1">
                                                 <Run Text="{x:Bind ItemsAdded}"/>
                                                 <Run Text="/" />
                                                 <Run Text="{x:Bind Items.Count}"/>
-                                                </TextBlock>
-                                            </Grid>
-                                        </controls:Expander.Header>
+                                                    </TextBlock>
+                                                </Grid>
+                                            </controls:Expander.Header>
 
-                                        <controls:Expander.Content>
-                                            <ListView x:Name="ListViewItems"
-                                              ItemsSource="{x:Bind Items}"
-                                              HorizontalAlignment="Stretch">
+                                            <controls:Expander.Content>
 
-                                                <ListView.ItemContainerStyle>
-                                                    <Style TargetType="ListViewItem">
-                                                        <Setter Property="HorizontalContentAlignment"
+                                                <StackPanel Orientation="Vertical">
+                                                    
+                                                    <ListView x:Name="ListViewItems"
+                                                          ItemsSource="{x:Bind Items}"
+                                                          HorizontalAlignment="Stretch">
+
+                                                        <ListView.ItemContainerStyle>
+                                                            <Style TargetType="ListViewItem">
+                                                                <Setter Property="HorizontalContentAlignment"
                                                                 Value="Stretch"/>
-                                                        <Setter Property="Padding"
+                                                                <Setter Property="Padding"
                                                                 Value="24,6"/>
-                                                    </Style>
-                                                </ListView.ItemContainerStyle>
+                                                            </Style>
+                                                        </ListView.ItemContainerStyle>
 
-                                                <ListView.ItemTemplate>
-                                                    <DataTemplate x:DataType="model:Item">
-                                                        <Grid HorizontalAlignment="Stretch">
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="*"/>
-                                                                <ColumnDefinition Width="*"/>
-                                                            </Grid.ColumnDefinitions>
-                                                            <TextBlock Text="{x:Bind Name}"
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate x:DataType="model:Item">
+                                                                <Grid HorizontalAlignment="Stretch"
+                                                              RightTapped="ShowMenu">
+                                                                    <FlyoutBase.AttachedFlyout>
+                                                                        <MenuFlyout Placement="Bottom">
+                                                                            <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemModify"
+                                                                                    x:Name="MenuModifyItem"
+                                                                                    Click="MenuFlyoutItemTapped"/>
+                                                                            <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemDelete"
+                                                                                    x:Name="MenuDeleteItem"
+                                                                                    Click="MenuFlyoutItemTapped"/>
+                                                                        </MenuFlyout>
+                                                                    </FlyoutBase.AttachedFlyout>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <TextBlock Text="{x:Bind Name}"
                                                                HorizontalAlignment="Left"
                                                                VerticalAlignment="Center"
                                                                Grid.Column="0"/>
-                                                            <CheckBox IsChecked="{x:Bind Added, Mode=TwoWay}"
+                                                                    <CheckBox IsChecked="{x:Bind Added, Mode=TwoWay}"
                                                               HorizontalAlignment="Right"
                                                               VerticalAlignment="Center"
                                                               Grid.Column="1"
                                                               Tapped="ItemChecked"
                                                               MinWidth="0"/>
-                                                        </Grid>
-                                                    </DataTemplate>
-                                                </ListView.ItemTemplate>
-                                            </ListView>
-                                        </controls:Expander.Content>
-                                        
-                                    </controls:Expander>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+                                                    </ListView>
 
-                    <ListView x:Name="ListViewChores"
-                              Grid.Row="1"
-                              Grid.Column="1"
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="8*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBox x:Uid="AddName"
+                                                                 Grid.Column="0"
+                                                                 VerticalAlignment="Center"/>
+                                                        <TextBox x:Uid="AddAmount"
+                                                                 Grid.Column="1"
+                                                                 VerticalAlignment="Center"/>
+                                                        <Button Grid.Column="2"
+                                                                VerticalAlignment="Center">
+                                                            <FontIcon FontFamily="Segoe MDL2 Assets" 
+                                                                      Glyph="&#xE710;"/>
+                                                        </Button>
+                                                    </Grid>
+
+                                                </StackPanel>
+                                            </controls:Expander.Content>
+
+                                        </controls:Expander>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                        <Grid Padding="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Uid="AddName"
+                                     x:Name="AddCategoryName"
+                                     Grid.Column="0"
+                                     VerticalAlignment="Center"/>
+                            <Button Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Tapped="AddCategory">
+                                <FontIcon FontFamily="Segoe MDL2 Assets" 
+                                          Glyph="&#xE710;"/>
+                            </Button>
+                        </Grid>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="12"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                                CornerRadius="2">
+
+                        <ListView x:Name="ListViewChores"
                               HorizontalAlignment="Stretch"
-                              Margin="12"
                               Padding="12"
-                              BorderBrush="Black"
-                              BorderThickness="1"
-                              CornerRadius="2"
                               ItemsSource="{x:Bind TripDetailViewModel.Trip.Chores}">
 
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment"
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment"
                                         Value="Stretch"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="model:Chore">
-                                <Grid HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{x:Bind Name}"
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="model:Chore">
+                                    <Grid HorizontalAlignment="Stretch"
+                                      RightTapped="ShowMenu">
+                                        <FlyoutBase.AttachedFlyout>
+                                            <MenuFlyout Placement="Bottom">
+                                                <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemModify"
+                                                            x:Name="MenuModifyChore"
+                                                            Click="MenuFlyoutItemTapped"/>
+                                                <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemDelete"
+                                                            x:Name="MenuDeleteChore"
+                                                            Click="MenuFlyoutItemTapped"/>
+                                            </MenuFlyout>
+                                        </FlyoutBase.AttachedFlyout>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{x:Bind Name}"
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
                                                Grid.Column="0"/>
-                                    <CheckBox IsChecked="{x:Bind Completed, Mode=TwoWay}"
+                                        <CheckBox IsChecked="{x:Bind Completed, Mode=TwoWay}"
                                               HorizontalAlignment="Right"
                                               VerticalAlignment="Center"
                                               Grid.Column="1"
                                               Tapped="ChoreChecked"
                                               MinWidth="0"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
 
-                    </ListView>
+                        </ListView>
+                        
+                        <Grid Padding="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Uid="AddName"
+                                     x:Name="AddChoreName"
+                                     Grid.Column="0"
+                                     VerticalAlignment="Center"/>
+                            <Button Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Tapped="AddChore">
+                                <FontIcon FontFamily="Segoe MDL2 Assets" 
+                                          Glyph="&#xE710;"/>
+                            </Button>
+                        </Grid>
+
+                    </StackPanel>
                 </Grid>
             </StackPanel>
         </Grid>
