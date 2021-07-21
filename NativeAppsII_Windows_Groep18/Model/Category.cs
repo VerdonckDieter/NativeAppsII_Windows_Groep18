@@ -12,7 +12,7 @@ namespace NativeAppsII_Windows_Groep18.Model
         /// <summary>
         /// Gets or sets the category's id.
         /// </summary>
-        public int Id { get; set; }
+        public int CategoryId { get; set; }
 
         /// <summary>
         /// Gets or sets the category's name.
