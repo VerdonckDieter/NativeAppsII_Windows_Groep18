@@ -26,7 +26,7 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
             return JsonConvert.DeserializeObject<bool>(await json.Content.ReadAsStringAsync());
         }
 
-        public async Task<Chore> UpsertChore(Chore chore, int tripId = 0)
+        public async Task<Chore> UpsertChore(Chore chore, int tripId)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("Bearer", StorageService.RetrieveToken());
             var json = JsonConvert.SerializeObject(chore);
