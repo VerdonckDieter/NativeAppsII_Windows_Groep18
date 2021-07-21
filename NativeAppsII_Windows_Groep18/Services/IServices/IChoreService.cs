@@ -7,6 +7,6 @@ namespace NativeAppsII_Windows_Groep18.Services.IServices
     {
         Task<bool> DeleteChore(int tripId, int choreId);
 
-        Task<Chore> UpsertChore(Chore chore, int tripId = 0);
+        Task<Chore> UpsertChore(Chore chore, int tripId = -1);
     }
 }

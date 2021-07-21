@@ -7,6 +7,6 @@ namespace NativeAppsII_Windows_Groep18.Services.IServices
     {
         Task<bool> DeleteItem(int categoryId, int itemId);
 
-        Task<Item> UpsertItem(Item item, int categoryId = 0);
+        Task<Item> UpsertItem(Item item, int categoryId = -1);
     }
 }
