@@ -29,7 +29,7 @@ namespace Travel_list_API.Controllers
         /// Creates a new item or updates an existing one.
         /// </summary>
         [HttpPost("{categoryId}")]
-        public async Task<ActionResult> PostItem(ItemDTO itemDTO, int categoryId = -1)
+        public async Task<ActionResult> PostItem(ItemDTO itemDTO, int categoryId)
         {
             var item = new Item()
             {
