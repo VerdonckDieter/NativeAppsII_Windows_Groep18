@@ -165,6 +165,18 @@
   <data name="ChoresTitle.Text" xml:space="preserve">
     <value>Tasks</value>
   </data>
+  <data name="DeleteContentDialogCloseButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DeleteContentDialogContent" xml:space="preserve">
+    <value>Do you wish to delete {0}?</value>
+  </data>
+  <data name="DeleteContentDialogPrimaryButton" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteContentDialogTitle" xml:space="preserve">
+    <value>Delete permanently?</value>
+  </data>
   <data name="ErrorText" xml:space="preserve">
     <value>An error has occurred</value>
   </data>
