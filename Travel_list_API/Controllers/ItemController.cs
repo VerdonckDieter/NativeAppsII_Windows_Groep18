@@ -34,6 +34,7 @@ namespace Travel_list_API.Controllers
             var item = new Item()
             {
                 Id = itemDTO.Id,
+                CategoryId = itemDTO.CategoryId,
                 Name = itemDTO.Name,
                 Amount = itemDTO.Amount,
                 Added = itemDTO.Added
