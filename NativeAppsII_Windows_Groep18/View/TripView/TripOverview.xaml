@@ -14,7 +14,6 @@
     >
 
     <Page.Background>
-        <!--<SolidColorBrush Color="WhiteSmoke" />-->
         <ImageBrush Stretch="None" ImageSource="/Assets/forest.png"/>
     </Page.Background>
 
@@ -40,32 +39,47 @@
                                   CornerRadius="2"
                                   Padding="12,24">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0"
+                                           Margin="0,0,0,6"
                                            Text="{x:Bind Name}"
                                            TextWrapping="NoWrap"
                                            TextAlignment="Center"
                                            Foreground="DarkGreen"
                                            Style="{ThemeResource TitleTextBlockStyle}"/>
                                 <TextBlock Grid.Row="1"
-                                           Margin="0,10,0,0"
+                                           Margin="0,6"
                                            Text="{x:Bind Period}"
                                            TextWrapping="NoWrap"
                                            TextAlignment="Center"
                                            Foreground="DarkGreen"
                                            Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                                <MUXC:ProgressBar Grid.Row="2"
+                                                  Margin="0,6"
+                                                  Value="{x:Bind ItemProgress}"
+                                                  Maximum="100"
+                                                  IsIndeterminate="False"
+                                                  Foreground="CornflowerBlue"/>
+                                <MUXC:ProgressBar Grid.Row="3"
+                                                  Margin="0,6"
+                                                  Value="{x:Bind ChoreProgress}"
+                                                  Maximum="100"
+                                                  IsIndeterminate="False"
+                                                  Foreground="ForestGreen"/>
                             </Grid>
                         </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
-            <MUXC:ProgressBar
-                            HorizontalAlignment="Stretch"
+            <MUXC:ProgressRing
+                            HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Margin="50,0"
+                            Height="100"
+                            Width="100"
                             IsIndeterminate="True"
                             Visibility="{x:Bind TripViewModel.IsLoading, Mode=OneWay}" />
         </Grid>
