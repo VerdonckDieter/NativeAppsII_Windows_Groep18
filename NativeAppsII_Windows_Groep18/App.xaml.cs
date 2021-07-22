@@ -69,6 +69,7 @@ namespace NativeAppsII_Windows_Groep18
             services.AddScoped<IChoreService, ChoreService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IWeatherService, WeatherService>();
+            services.AddScoped<IContentDialogService, ContentDialogService>();
             
             return services.BuildServiceProvider();
         }
