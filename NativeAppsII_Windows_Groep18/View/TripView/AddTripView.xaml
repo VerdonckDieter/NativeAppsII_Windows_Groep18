@@ -11,7 +11,7 @@
     >
 
     <Page.Background>
-        <SolidColorBrush Color="WhiteSmoke" />
+        <ImageBrush Stretch="None" ImageSource="/Assets/forest.png"/>
     </Page.Background>
 
     <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
