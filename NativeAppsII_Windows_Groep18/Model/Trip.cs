@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace NativeAppsII_Windows_Groep18.Model
 {
@@ -53,6 +54,16 @@ namespace NativeAppsII_Windows_Groep18.Model
         /// Gets the trip's time period.
         /// </summary>
         public string Period => StartDate.ToShortDateString() + " - " + EndDate.ToShortDateString();
+
+        /// <summary>
+        /// Gets the trip's item progress.
+        /// </summary>
+        public double ItemProgress => Convert.ToDouble(Categories.Sum(c => c.ItemsAdded)) / Categories.Sum(c => c.Items.Count) * 100;
+
+        /// <summary>
+        /// Gets the trip's chore progress.
+        /// </summary>
+        public double ChoreProgress => Convert.ToDouble(Chores.Count(c => c.Completed)) / Chores.Count * 100;
         #endregion
 
         #region Constructors
