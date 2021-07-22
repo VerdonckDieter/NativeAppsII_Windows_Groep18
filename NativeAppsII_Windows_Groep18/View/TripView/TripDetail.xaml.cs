@@ -6,6 +6,10 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml;
+using Windows.ApplicationModel.Resources;
+using System.Threading.Tasks;
+using System.Linq;
+using System;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -18,7 +22,7 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
     {
         #region Properties
         public TripDetailViewModel TripDetailViewModel { get; set; }
-
+        private ResourceLoader ResourceLoader { get; set; }
         #endregion
 
         #region Constructors
@@ -27,6 +31,7 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             InitializeComponent();
             TripDetailViewModel = App.Current.Services.GetService<TripDetailViewModel>();
             DataContext = TripDetailViewModel;
+            ResourceLoader = ResourceLoader.GetForCurrentView();
         }
         #endregion
 
@@ -59,7 +64,11 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
         {
             if (!string.IsNullOrWhiteSpace(AddCategoryName.Text))
             {
-                await TripDetailViewModel.AddCategory(new Category { Name = AddCategoryName.Text });
+                var category = new Category { Name = AddCategoryName.Text };
+                if (await TripDetailViewModel.AddCategory(category) != null)
+                {
+                    TripDetailViewModel.Trip.Categories.Add(category);
+                }
             }
             AddCategoryName.Text = string.Empty;
         }
@@ -68,9 +77,34 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
         {
             if (!string.IsNullOrWhiteSpace(AddChoreName.Text))
             {
-                await TripDetailViewModel.AddChore(new Chore { Name = AddChoreName.Text });
+                var chore = new Chore { Name = AddChoreName.Text };
+                if (await TripDetailViewModel.AddChore(chore) != null)
+                {
+                    TripDetailViewModel.Trip.Chores.Add(chore);
+                }
             }
             AddChoreName.Text = string.Empty;
+        }
+
+        private async void AddItem(object sender, TappedRoutedEventArgs e)
+        {
+            int categoryId = ((Category)((Button)sender).DataContext).CategoryId;
+            var name = (TextBox)((Grid)((Button)sender).Parent).Children[0];
+            var amount = (TextBox)((Grid)((Button)sender).Parent).Children[1];
+            if (!string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(amount.Text))
+            {
+                int itemAmount;
+                if (int.TryParse(amount.Text, out itemAmount))
+                {
+                    var item = new Item { CategoryId = categoryId, Name = name.Text, Amount = itemAmount, Added = false };
+                    if (await TripDetailViewModel.AddItem(item, categoryId) != null)
+                    {
+                        TripDetailViewModel.Trip.Categories.SingleOrDefault(c => c.CategoryId == categoryId).Items.Add(item);
+                    }
+                }
+            }
+            name.Text = string.Empty;
+            amount.Text = string.Empty;
         }
 
         private void ShowMenu(object sender, RightTappedRoutedEventArgs e)
@@ -142,25 +176,57 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
                     var deleteCategory = (Category)sender.DataContext;
                     if (deleteCategory != null)
                     {
-                        await TripDetailViewModel.DeleteCategory(deleteCategory.CategoryId);
+                        if (await ShowDeleteContentDialog(deleteCategory.Name) == ContentDialogResult.Primary)
+                        {
+                            if (await TripDetailViewModel.DeleteCategory(deleteCategory.CategoryId))
+                            {
+                                TripDetailViewModel.Trip.Categories.Remove(deleteCategory);
+                            }
+                        }
                     }
                     break;
                 case "Item":
                     var deleteItem = (Item)sender.DataContext;
                     if (deleteItem != null)
                     {
-                        await TripDetailViewModel.DeleteItem(deleteItem.CategoryId, deleteItem.Id);
+                        if (await ShowDeleteContentDialog(deleteItem.Name) == ContentDialogResult.Primary)
+                        {
+                            if (await TripDetailViewModel.DeleteItem(deleteItem.CategoryId, deleteItem.Id))
+                            {
+                                TripDetailViewModel.Trip.Categories.SingleOrDefault(c => c.CategoryId == deleteItem.CategoryId).Items.Remove(deleteItem);
+                            }
+                        }
                     }
                     break;
                 case "Chore":
                     var deleteChore = (Chore)sender.DataContext;
                     if (deleteChore != null)
                     {
-                        await TripDetailViewModel.DeleteChore(deleteChore.Id);
+                        if (await ShowDeleteContentDialog(deleteChore.Name) == ContentDialogResult.Primary)
+                        {
+                            if (await TripDetailViewModel.DeleteChore(deleteChore.Id))
+                            {
+                                TripDetailViewModel.Trip.Chores.Remove(deleteChore);
+                            }
+                        }
                     }
                     break;
                 default: break;
             }
+        }
+
+        private async Task<ContentDialogResult> ShowDeleteContentDialog(string name)
+        {
+            return await TripDetailViewModel.ShowContentDialog(
+                            ResourceLoader.GetString("DeleteContentDialogTitle"),
+                            string.Format(ResourceLoader.GetString("DeleteContentDialogContent"), name),
+                            ResourceLoader.GetString("DeleteContentDialogPrimaryButton"),
+                            ResourceLoader.GetString("DeleteContentDialogCloseButton"));
+        }
+
+        private void AmountBeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
         }
         #endregion
     }
