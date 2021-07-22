@@ -235,9 +235,12 @@
                                                                  VerticalAlignment="Center"/>
                                                         <TextBox x:Uid="AddAmount"
                                                                  Grid.Column="1"
-                                                                 VerticalAlignment="Center"/>
+                                                                 VerticalAlignment="Center"
+                                                                 InputScope="Number"
+                                                                 BeforeTextChanging="AmountBeforeTextChanging"/>
                                                         <Button Grid.Column="2"
-                                                                VerticalAlignment="Center">
+                                                                VerticalAlignment="Center"
+                                                                Tapped="AddItem">
                                                             <FontIcon FontFamily="Segoe MDL2 Assets" 
                                                                       Glyph="&#xE710;"/>
                                                         </Button>
