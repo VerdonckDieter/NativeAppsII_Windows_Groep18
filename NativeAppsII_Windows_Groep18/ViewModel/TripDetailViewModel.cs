@@ -2,6 +2,7 @@
 using NativeAppsII_Windows_Groep18.Model.Weather;
 using NativeAppsII_Windows_Groep18.Services.IServices;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
@@ -39,11 +40,32 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
         #region Methods
         public async Task GetWeatherForecast(int days) => await _weatherService.GetWeatherForecast(Trip.Location, days);
 
-        public async Task<Category> AddCategory(Category category) => await _categoryService.UpsertCategory(category, Trip.Id);
+        public async void AddCategory(Category category)
+        {
+            var categoryAdded = await _categoryService.UpsertCategory(category, Trip.Id);
+            if (categoryAdded != null)
+            {
+                Trip.Categories.Add(categoryAdded);
+            }
+        }
 
-        public async Task<Item> AddItem(Item item, int categoryId) => await _itemService.UpsertItem(item, categoryId);
+        public async void AddItem(Item item, int categoryId)
+        {
+            var itemAdded = await _itemService.UpsertItem(item, categoryId);
+            if (itemAdded != null)
+            {
+                Trip.Categories.SingleOrDefault(c => c.CategoryId == categoryId).Items.Add(itemAdded);
+            }
+        }
 
-        public async Task<Chore> AddChore(Chore chore) => await _choreService.UpsertChore(chore, Trip.Id);
+        public async void AddChore(Chore chore)
+        {
+            var choreAdded = await _choreService.UpsertChore(chore, Trip.Id);
+            if (choreAdded != null)
+            {
+                Trip.Chores.Add(choreAdded);
+            }
+        }
 
         public async Task UpdateCategory(Category category) => await _categoryService.UpsertCategory(category);
 

@@ -60,33 +60,25 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             }
         }
 
-        private async void AddCategory(object sender, TappedRoutedEventArgs e)
+        private void AddCategory(object sender, TappedRoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(AddCategoryName.Text))
             {
-                var category = new Category { Name = AddCategoryName.Text };
-                if (await TripDetailViewModel.AddCategory(category) != null)
-                {
-                    TripDetailViewModel.Trip.Categories.Add(category);
-                }
+                TripDetailViewModel.AddCategory(new Category { Name = AddCategoryName.Text });
             }
             AddCategoryName.Text = string.Empty;
         }
 
-        private async void AddChore(object sender, TappedRoutedEventArgs e)
+        private void AddChore(object sender, TappedRoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(AddChoreName.Text))
             {
-                var chore = new Chore { Name = AddChoreName.Text };
-                if (await TripDetailViewModel.AddChore(chore) != null)
-                {
-                    TripDetailViewModel.Trip.Chores.Add(chore);
-                }
+                TripDetailViewModel.AddChore(new Chore { Name = AddChoreName.Text });
             }
             AddChoreName.Text = string.Empty;
         }
 
-        private async void AddItem(object sender, TappedRoutedEventArgs e)
+        private void AddItem(object sender, TappedRoutedEventArgs e)
         {
             int categoryId = ((Category)((Button)sender).DataContext).CategoryId;
             var name = (TextBox)((Grid)((Button)sender).Parent).Children[0];
@@ -96,11 +88,7 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
                 int itemAmount;
                 if (int.TryParse(amount.Text, out itemAmount))
                 {
-                    var item = new Item { CategoryId = categoryId, Name = name.Text, Amount = itemAmount, Added = false };
-                    if (await TripDetailViewModel.AddItem(item, categoryId) != null)
-                    {
-                        TripDetailViewModel.Trip.Categories.SingleOrDefault(c => c.CategoryId == categoryId).Items.Add(item);
-                    }
+                    TripDetailViewModel.AddItem(new Item { CategoryId = categoryId, Name = name.Text, Amount = itemAmount, Added = false }, categoryId);
                 }
             }
             name.Text = string.Empty;
