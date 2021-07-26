@@ -29,7 +29,7 @@ namespace Travel_list_API.Controllers
         /// Creates a new category or updates an existing one.
         /// </summary>
         [HttpPost("{tripId}")]
-        public async Task<ActionResult> PostCategory(int tripId, CategoryDTO categoryDTO)
+        public async Task<ActionResult<Category>> PostCategory(int tripId, CategoryDTO categoryDTO)
         {
             var category = new Category()
             {
