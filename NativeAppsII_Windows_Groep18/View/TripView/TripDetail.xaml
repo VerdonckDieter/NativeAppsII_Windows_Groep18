@@ -99,6 +99,7 @@
 
                     <TextBlock x:Uid="TravelListTitle"
                                x:Name="TravelListTitle"
+                               Foreground="CornflowerBlue"
                                Grid.Row="0"
                                Grid.Column="0"
                                HorizontalAlignment="Center"
@@ -109,6 +110,7 @@
                                Grid.Row="0"
                                Grid.Column="1"
                                HorizontalAlignment="Center"
+                               Foreground="ForestGreen"
                                Margin="12"
                                Style="{ThemeResource TitleTextBlockStyle}"/>
 
@@ -116,14 +118,15 @@
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Margin="12"
-                                BorderBrush="Black"
+                                BorderBrush="CornflowerBlue"
                                 BorderThickness="1"
                                 CornerRadius="2">
 
                         <ListView x:Name="ListViewCategories"
                               HorizontalAlignment="Stretch"
                               Padding="12"
-                              ItemsSource="{x:Bind TripDetailViewModel.Trip.Categories}">
+                              ItemsSource="{x:Bind TripDetailViewModel.Trip.Categories}"
+                                  Foreground="CornflowerBlue">
 
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
@@ -132,17 +135,14 @@
                                     <Setter Property="Padding"
                                         Value="0"/>
                                     <Setter Property="Margin"
-                                        Value="0"/>
+                                        Value="0"/>                                  
                                 </Style>
                             </ListView.ItemContainerStyle>
-
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="model:Category">
                                     <Grid>
-
                                         <controls:Expander IsExpanded="True"
-                                                       HorizontalContentAlignment="Stretch">
-
+                                                       HorizontalContentAlignment="Stretch" Background="SkyBlue">
                                             <controls:Expander.Header>
                                                 <Grid HorizontalAlignment="Stretch"
                                                   RightTapped="ShowMenu">
@@ -161,15 +161,16 @@
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <TextBlock Text="{x:Bind Name}"
+                                                       Foreground="FloralWhite"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Center"
                                                        Grid.Column="0"/>
                                                     <TextBlock HorizontalAlignment="Right"
                                                        VerticalAlignment="Center"
                                                        Grid.Column="1">
-                                                <Run Text="{x:Bind ItemsAdded}"/>
-                                                <Run Text="/" />
-                                                <Run Text="{x:Bind Items.Count}"/>
+                                                <Run Text="{x:Bind ItemsAdded}" Foreground="FloralWhite"/>
+                                                <Run Text="/" Foreground="FloralWhite" />
+                                                <Run Text="{x:Bind Items.Count}" Foreground="FloralWhite"/>
                                                     </TextBlock>
                                                 </Grid>
                                             </controls:Expander.Header>
@@ -209,11 +210,19 @@
                                                                         <ColumnDefinition Width="*"/>
                                                                         <ColumnDefinition Width="*"/>
                                                                     </Grid.ColumnDefinitions>
-                                                                    <TextBlock Text="{x:Bind Name}"
+                                                                    <TextBlock Text="{x:Bind Amount}"
                                                                HorizontalAlignment="Left"
                                                                VerticalAlignment="Center"
+                                                                               Foreground="FloralWhite"
+                                                               Grid.Column="0"/>
+                                                                    <TextBlock Text="{x:Bind Name}"
+                                                                               Margin="30, 25, 30, 25"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center"
+                                                                               Foreground="FloralWhite"
                                                                Grid.Column="0"/>
                                                                     <CheckBox IsChecked="{x:Bind Added, Mode=TwoWay}"
+                                                                              Foreground="FloralWhite"
                                                               HorizontalAlignment="Right"
                                                               VerticalAlignment="Center"
                                                               Grid.Column="1"
@@ -224,7 +233,7 @@
                                                         </ListView.ItemTemplate>
                                                     </ListView>
 
-                                                    <Grid>
+                                                    <Grid Background="White">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="8*"/>
                                                             <ColumnDefinition Width="*"/>
@@ -232,7 +241,8 @@
                                                         </Grid.ColumnDefinitions>
                                                         <TextBox x:Uid="AddName"
                                                                  Grid.Column="0"
-                                                                 VerticalAlignment="Center"/>
+                                                                 VerticalAlignment="Center"
+                                                                 Background="White"/>
                                                         <TextBox x:Uid="AddAmount"
                                                                  Grid.Column="1"
                                                                  VerticalAlignment="Center"
@@ -272,19 +282,17 @@
                                           Glyph="&#xE710;"/>
                             </Button>
                         </Grid>
-
                     </StackPanel>
-
                     <StackPanel Orientation="Vertical"
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 Margin="12"
-                                BorderBrush="Black"
+                                BorderBrush="ForestGreen"
                                 BorderThickness="1"
                                 CornerRadius="2">
 
                         <ListView x:Name="ListViewChores"
-                              HorizontalAlignment="Stretch"
+                              HorizontalAlignment="Stretch"           
                               Padding="12"
                               ItemsSource="{x:Bind TripDetailViewModel.Trip.Chores}">
 
@@ -297,7 +305,7 @@
 
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="model:Chore">
-                                    <Grid HorizontalAlignment="Stretch"
+                                    <Grid HorizontalAlignment="Stretch"                              
                                       RightTapped="ShowMenu">
                                         <FlyoutBase.AttachedFlyout>
                                             <MenuFlyout Placement="Bottom">
