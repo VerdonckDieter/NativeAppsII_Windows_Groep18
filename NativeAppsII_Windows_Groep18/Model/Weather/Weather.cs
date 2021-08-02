@@ -1,8 +1,69 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace NativeAppsII_Windows_Groep18.Model.Weather
 {
+    public class DailyForecast
+    {
+        [JsonProperty("lat")]
+        public double Latitude { get; set; }
+        [JsonProperty("lon")]
+        public double Longitude { get; set; }
+        [JsonProperty("timezone")]
+        public string Timezone { get; set; }
+        [JsonProperty("timezone_offset")]
+        public int TimezoneOffset { get; set; }
+        [JsonProperty("daily")]
+        public List<Daily> Daily { get; set; }
+    }
+
+    public class Daily
+    {
+        [JsonProperty("dt")]
+        public int Dt { get; set; }
+        [JsonProperty("sunrise")]
+        public int Sunrise { get; set; }
+        [JsonProperty("sunset")]
+        public int Sunset { get; set; }
+        [JsonProperty("moonrise")]
+        public int Moonrise { get; set; }
+        [JsonProperty("moonset")]
+        public int Moonset { get; set; }
+        [JsonProperty("moon_phase")]
+        public double MoonPhase { get; set; }
+        [JsonProperty("temp")]
+        public Temperature Temperature { get; set; }
+        [JsonProperty("feels_like")]
+        public TemperatureFeeling TemperatureFeeling { get; set; }
+        [JsonProperty("pressure")]
+        public double Pressure { get; set; }
+        [JsonProperty("humidity")]
+        public int Humidity { get; set; }
+        [JsonProperty("dew_point")]
+        public double DewPoint { get; set; }
+        [JsonProperty("wind_speed")]
+        public double WindSpeed { get; set; }
+        [JsonProperty("wind_deg")]
+        public double WindDegree { get; set; }
+        [JsonProperty("wind_gust")]
+        public double WindGust { get; set; }
+        [JsonProperty("weather")]
+        public List<Weather> Weather { get; set; }
+        [JsonProperty("clouds")]
+        public int Clouds { get; set; }
+        [JsonProperty("pop")]
+        public double Probability { get; set; }
+        [JsonProperty("uvi")]
+        public double UVIndex { get; set; }
+        [JsonProperty("rain")]
+        public double Rain { get; set; }
+        [JsonProperty("snow")]
+        public int Snow { get; set; }
+        public string ImageUrl => "http://openweathermap.org/img/wn/" + Weather[0].Icon + "@2x.png";
+    }
+
     public class LocalWeather
     {
         [JsonProperty("coord")]
@@ -194,6 +255,8 @@ namespace NativeAppsII_Windows_Groep18.Model.Weather
         public double Evening { get; set; }
         [JsonProperty("morn")]
         public double Morning { get; set; }
+        public string DayRounded => ((int)Math.Round(Day)).ToString() + "°";
+        public string NightRounded => ((int)Math.Round(Night)).ToString() + "°";
     }
 
     public class TemperatureFeeling
