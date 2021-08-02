@@ -38,8 +38,6 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
         #endregion
 
         #region Methods
-        public async Task GetWeatherForecast(int days) => await _weatherService.GetWeatherForecast(Trip.Location, days);
-
         public async void AddCategory(Category category)
         {
             var categoryAdded = await _categoryService.UpsertCategory(category, Trip.Id);
