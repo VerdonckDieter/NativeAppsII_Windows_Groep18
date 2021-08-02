@@ -7,6 +7,6 @@ namespace NativeAppsII_Windows_Groep18.Services.IServices
     {
         Task<LocalWeather> GetLocalWeather(string location);
 
-        Task<WeatherForecast> GetWeatherForecast(string location, int days);
+        Task<DailyForecast> GetWeatherForecast(double latitude, double longitude);
     }
 }

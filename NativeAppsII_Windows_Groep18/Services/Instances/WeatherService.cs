@@ -23,10 +23,11 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
             return JsonConvert.DeserializeObject<LocalWeather>(json);
         }
 
-        public async Task<WeatherForecast> GetWeatherForecast(string location, int days)
+        public async Task<DailyForecast> GetWeatherForecast(double latitude, double longitude)
         {
-            var json = await _httpClient.GetStringAsync(new Uri($"http://api.openweathermap.org/data/2.5/forecast/daily?q={location}&cnt={days}&appid={Globals.API_KEY}"));
-            return JsonConvert.DeserializeObject<WeatherForecast>(json);
+            var json = await _httpClient.GetStringAsync(new Uri($"https://api.openweathermap.org/data/2.5/onecall?" +
+                $"lat={latitude}&lon={longitude}&exclude=current,minutely,hourly,alerts&appid={Globals.API_KEY}&units=metric"));
+            return JsonConvert.DeserializeObject<DailyForecast>(json);
         }
     }
 }
