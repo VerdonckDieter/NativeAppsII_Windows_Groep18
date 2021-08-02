@@ -31,7 +31,7 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             InitializeComponent();
             TripDetailViewModel = App.Current.Services.GetService<TripDetailViewModel>();
             DataContext = TripDetailViewModel;
-            ResourceLoader = ResourceLoader.GetForCurrentView();            
+            ResourceLoader = ResourceLoader.GetForCurrentView();
         }
         #endregion
 
@@ -217,10 +217,9 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
         }
 
-        private async void NavigateToWeather(object sender, RoutedEventArgs e)
+        private void NavigateToWeather(object sender, RoutedEventArgs e)
         {
-            await TripDetailViewModel.GetWeatherForecast(14);
-            Frame.Navigate(typeof(TripWeather), TripDetailViewModel);
+            Frame.Navigate(typeof(TripWeather), TripDetailViewModel.Trip.Location);
         }
         #endregion
     }
