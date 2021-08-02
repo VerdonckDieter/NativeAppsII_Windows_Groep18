@@ -358,6 +358,7 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
+            <Button Content="Weather Forecast" Click="NavigateToWeather"></Button>
         </Grid>
     </ScrollViewer>
 </Page>
