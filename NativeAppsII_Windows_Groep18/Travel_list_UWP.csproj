@@ -154,6 +154,9 @@
     <Compile Include="View\TripView\TripDetail.xaml.cs">
       <DependentUpon>TripDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TripView\TripWeather.xaml.cs">
+      <DependentUpon>TripWeather.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\User\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="View\TripView\TripDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TripView\TripWeather.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
