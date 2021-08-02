@@ -1,19 +1,7 @@
 ﻿using NativeAppsII_Windows_Groep18.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Extensions.DependencyInjection;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,20 +12,29 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
     /// </summary>
     public sealed partial class TripWeather : Page
     {
+        #region Properties
+        public WeatherViewModel WeatherViewModel { get; set; }
+        #endregion
 
-        public TripDetailViewModel TripDetailViewModel { get; set; }
-
+        #region Constructors
         public TripWeather()
         {
-            this.InitializeComponent();
-            DataContext = TripDetailViewModel;            
+            InitializeComponent();
+            WeatherViewModel = App.Current.Services.GetService<WeatherViewModel>();
+            DataContext = WeatherViewModel;
         }
+        #endregion
 
+        #region Methods
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            TripDetailViewModel = (TripDetailViewModel)e.Parameter;
+            WeatherViewModel.TripLocation = (string)e.Parameter;
+            if (WeatherViewModel.DailyForecast.Count < 1)
+            {
+                WeatherViewModel.GetWeatherForecast();
+            }
         }
-
+        #endregion
     }
 }

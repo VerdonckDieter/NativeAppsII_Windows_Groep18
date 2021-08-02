@@ -4,64 +4,78 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NativeAppsII_Windows_Groep18.View.TripView"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:model="using:NativeAppsII_Windows_Groep18.Model.Weather"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:model="using:NativeAppsII_Windows_Groep18.Model.Weather"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
+
+    <Page.Background>
+        <ImageBrush Stretch="None" ImageSource="/Assets/clouds.png"/>
+    </Page.Background>
 
     <ScrollViewer>
-        <Grid x:Name="WeatherGrid" 
-              HorizontalAlignment="Stretch" 
-              VerticalAlignment="Stretch">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <ListView x:Name="WeatherListViewr"
-                              HorizontalAlignment="Stretch"           
-                              Padding="12"
-                              ItemsSource="{x:Bind TripDetailViewModel.WeatherForecast.WeatherForecastList}">
-
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment"
-                                        Value="Stretch"/>
+        <Grid Padding="12">
+            <GridView x:Name="WeatherGridView"
+                      ItemsSource="{x:Bind WeatherViewModel.DailyForecast}"
+                      HorizontalAlignment="Center">
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="FrameworkElement">
+                        <Setter Property="Margin" Value="12" />
                     </Style>
-                </ListView.ItemContainerStyle>
-
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:WeatherForecastList">
-                        <Grid HorizontalAlignment="Stretch">                           
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>                                
-                            </Grid.ColumnDefinitions>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Text="{x:Bind Temperature}"
+                </GridView.ItemContainerStyle>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Daily">
+                        <StackPanel x:Name="WeatherGridViewItem">
+                            <Grid Background="LightGray"
+                                  BorderBrush="DarkGreen"
+                                  BorderThickness="2"
+                                  CornerRadius="2"
+                                  Padding="12,24"
+                                  Width="200">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Image Source="{x:Bind ImageUrl}"
+                                       Grid.Row="0"
+                                       Margin="0,0,0,6"
+                                       Width="188"
+                                       />
+                                <Grid Grid.Row="1"
+                                      Margin="0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{x:Bind Temperature.DayRounded}"
+                                               TextWrapping="Wrap"
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
-                                               Grid.Column="0"/>
-                            <TextBlock Text="{x:Bind Weather}"
+                                               Grid.Column="0"
+                                               Margin="0,6"
+                                               Style="{ThemeResource TitleTextBlockStyle}"/>
+                                    <TextBlock Text="{x:Bind Temperature.NightRounded}"
+                                               TextWrapping="Wrap"
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
-                                               Grid.Column="0"/>
-                        </Grid>
+                                               Grid.Column="1"
+                                               Margin="0,6"
+                                               Style="{ThemeResource TitleTextBlockStyle}"/>
+                                </Grid>
+
+                                <TextBlock Text="{x:Bind Weather[0].Description}"
+                                           TextWrapping="Wrap"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Grid.Row="2"
+                                           Margin="0,6"
+                                           Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                            </Grid>
+                        </StackPanel>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-
-            </ListView>
-
+                </GridView.ItemTemplate>
+            </GridView>
         </Grid>
     </ScrollViewer>
 </Page>
