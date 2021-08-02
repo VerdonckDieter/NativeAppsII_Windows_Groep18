@@ -151,6 +151,7 @@
     <Compile Include="ViewModel\NavigationViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\TripDetailViewModel.cs" />
+    <Compile Include="ViewModel\WeatherViewModel.cs" />
     <Compile Include="View\TripView\TripDetail.xaml.cs">
       <DependentUpon>TripDetail.xaml</DependentUpon>
     </Compile>
