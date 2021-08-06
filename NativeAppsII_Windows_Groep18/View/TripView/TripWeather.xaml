@@ -10,11 +10,11 @@
     >
 
     <Page.Background>
-        <ImageBrush Stretch="None" ImageSource="/Assets/clouds.png"/>
+        <ImageBrush Stretch="None" ImageSource="/Assets/shine.jpg"/>
     </Page.Background>
 
     <ScrollViewer>
-        <Grid Padding="12">
+        <Grid Padding="12" VerticalAlignment="Center">
             <GridView x:Name="WeatherGridView"
                       ItemsSource="{x:Bind WeatherViewModel.DailyForecast}"
                       HorizontalAlignment="Center">
@@ -27,7 +27,7 @@
                     <DataTemplate x:DataType="model:Daily">
                         <StackPanel x:Name="WeatherGridViewItem">
                             <Grid Background="LightGray"
-                                  BorderBrush="DarkGreen"
+                                  BorderBrush="DimGray"
                                   BorderThickness="2"
                                   CornerRadius="2"
                                   Padding="12,24"
