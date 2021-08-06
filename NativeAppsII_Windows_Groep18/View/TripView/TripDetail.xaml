@@ -5,9 +5,7 @@
     xmlns:local="using:NativeAppsII_Windows_Groep18.View.TripView"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:model="using:NativeAppsII_Windows_Groep18.Model" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    mc:Ignorable="d">
     <Page.Resources>
 
         <Style TargetType="CheckBox">
@@ -26,6 +24,9 @@
             <Setter Property="FlowDirection" Value="LeftToRight"/>
         </Style>
     </Page.Resources>
+    <Page.Background>
+        <ImageBrush Stretch="None" ImageSource="/Assets/skyline4.png"/>
+    </Page.Background>
 
     <ScrollViewer>
         <VisualStateManager.VisualStateGroups>
@@ -83,7 +84,14 @@
                            TextWrapping="Wrap"
                            Text="{x:Bind TripDetailViewModel.Trip.Name}"
                            Style="{ThemeResource HeaderTextBlockStyle}"/>
+                    <Button Click="NavigateToWeather" Background="SkyBlue" >
+                        <StackPanel>
+                            <Image Source="/Assets/sun.png"/>
+                            <TextBlock Text="Weather" Foreground="White" HorizontalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
+
 
 
                 <Grid HorizontalAlignment="Stretch">
@@ -135,7 +143,7 @@
                                     <Setter Property="Padding"
                                         Value="0"/>
                                     <Setter Property="Margin"
-                                        Value="0"/>                                  
+                                        Value="0"/>
                                 </Style>
                             </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate>
@@ -178,7 +186,7 @@
                                             <controls:Expander.Content>
 
                                                 <StackPanel Orientation="Vertical">
-                                                    
+
                                                     <ListView x:Name="ListViewItems"
                                                           ItemsSource="{x:Bind Items}"
                                                           HorizontalAlignment="Stretch">
@@ -336,7 +344,7 @@
                             </ListView.ItemTemplate>
 
                         </ListView>
-                        
+
                         <Grid Padding="12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -358,7 +366,6 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <Button Content="Weather Forecast" Click="NavigateToWeather"></Button>
         </Grid>
     </ScrollViewer>
 </Page>
