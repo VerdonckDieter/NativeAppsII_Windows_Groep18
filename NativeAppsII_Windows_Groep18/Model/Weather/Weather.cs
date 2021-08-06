@@ -61,7 +61,7 @@ namespace NativeAppsII_Windows_Groep18.Model.Weather
         public double Rain { get; set; }
         [JsonProperty("snow")]
         public int Snow { get; set; }
-        public string ImageUrl => "http://openweathermap.org/img/wn/" + Weather[0].Icon + "@2x.png";
+        public string ImageUrl => "http://openweathermap.org/img/wn/" + Weather[0].Icon + "@4x.png";
     }
 
     public class LocalWeather
