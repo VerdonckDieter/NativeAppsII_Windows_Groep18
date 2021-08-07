@@ -10,11 +10,13 @@
     >
 
     <Page.Background>
-        <ImageBrush Stretch="None" ImageSource="/Assets/shine.jpg"/>
+        <ImageBrush Stretch="None" 
+                    ImageSource="/Assets/shine.jpg"/>
     </Page.Background>
 
     <ScrollViewer>
-        <Grid Padding="12" VerticalAlignment="Center">
+        <Grid Padding="12" 
+              VerticalAlignment="Center">
             <GridView x:Name="WeatherGridView"
                       ItemsSource="{x:Bind WeatherViewModel.DailyForecast}"
                       HorizontalAlignment="Center">
