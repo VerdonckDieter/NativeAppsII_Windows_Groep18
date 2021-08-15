@@ -47,5 +47,6 @@
     <Capability Name="internetClient" />
     <uap:Capability Name="sharedUserCertificates"/>
     <Capability Name="privateNetworkClientServer"/>
+    <DeviceCapability Name="location"/>
   </Capabilities>
 </Package>
