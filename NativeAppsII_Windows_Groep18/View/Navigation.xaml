@@ -13,11 +13,33 @@
         <SolidColorBrush Color="WhiteSmoke" />
     </Page.Background>
 
-    <Page.DataContext>
-        <vm:NavigationViewModel></vm:NavigationViewModel>
-    </Page.DataContext>
+    <NavigationView x:Name="NavView"
+                    IsSettingsVisible="False"
+                    IsBackEnabled="True"
+                    ItemInvoked="NavView_ItemInvoked">
+        <NavigationView.MenuItems>
+            <NavigationViewItem 
+                    x:Uid="NavHome"
+                    Tag="Home"
+                    Icon="Home"/>
+            <NavigationViewItem 
+                    x:Uid="NavAdd"
+                    Tag="Add"
+                    Icon="Add"/>
+        </NavigationView.MenuItems>
+        <NavigationView.PaneFooter>
+            <NavigationViewItem 
+                    x:Uid="NavLogout"
+                    Tag="Logout"
+                    Tapped="Logout"
+                    Icon="BlockContact"/>
+        </NavigationView.PaneFooter>
+        <NavigationView.Content>
+            <Frame x:Name="ContentFrame"/>
+        </NavigationView.Content>
+    </NavigationView>
 
-    <Grid>
+    <!--<Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
                 <VisualState x:Name="Phone">
@@ -77,5 +99,5 @@
             </NavigationView.MenuItems>
             <Frame x:Name="Content" />
         </NavigationView>
-    </Grid>
+    </Grid>-->
 </Page>

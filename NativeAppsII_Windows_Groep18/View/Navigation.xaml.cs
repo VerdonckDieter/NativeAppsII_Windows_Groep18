@@ -1,8 +1,10 @@
-﻿using NativeAppsII_Windows_Groep18.View.TripView;
+﻿using NativeAppsII_Windows_Groep18.Services.Instances;
+using NativeAppsII_Windows_Groep18.View.TripView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -13,54 +15,40 @@ namespace NativeAppsII_Windows_Groep18.View
     /// </summary>
     public sealed partial class Navigation : Page
     {
-        private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
-        {
-            ("Home", typeof(TripOverview)),
-            ("Add Trip", typeof(AddTripView)),
-            ("Account", typeof(Account)),
-            ("Maps", typeof(Itinerary)),
-            ("Logout", typeof(MainPage))
-        };
         public Navigation()
         {
             InitializeComponent();
-            //InitializeElements();
-            var page = _pages.FirstOrDefault(p => p.Tag.Equals("Home"));
-            Type _page = page.Page;
-            Content.Navigate(_page);
+            ContentFrame.Navigate(typeof(TripOverview));
         }
 
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            Type _page = null;
-            var item = _pages.FirstOrDefault(p => p.Tag.Equals(args.InvokedItem.ToString()));
-            _page = item.Page;
-            switch (item.Tag)
+            var invokedItem = args.InvokedItemContainer.Tag.ToString();
+            switch (invokedItem)
             {
                 case "Home":
-                    Content.Navigate(_page);
+                    ContentFrame.Navigate(typeof(TripOverview));
                     break;
-                case "Add Trip":
-                    Content.Navigate(_page);
-                    break;
-                case "Account":
-                    Content.Navigate(_page);
-                    break;
-                case "Maps":
-                    Content.Navigate(_page);
-                    break;
-                case "Logout":
-                    Frame.Navigate(_page);
+                case "Add":
+                    ContentFrame.Navigate(typeof(AddTripView));
                     break;
                 default:
                     break;
             }
         }
 
-        //private void InitializeElements()
-        //{
-        //    var binding = new Binding { Source = ClientSingleton.Instance.Client.Email, Mode = BindingMode.OneWay };
-        //    ClientEmail.SetBinding(NavigationViewItem.ContentProperty, binding);
-        //}
+        private void Logout(object sender, TappedRoutedEventArgs e)
+        {
+            StorageService.StoreToken("");
+            Frame.Navigate(typeof(Login));
+        }
+
+        private void NavView_BackRequest(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            if (ContentFrame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+        }
     }
 }
