@@ -144,6 +144,7 @@
     <Compile Include="Services\IServices\ITripService.cs" />
     <Compile Include="Services\IServices\IUserService.cs" />
     <Compile Include="Services\IServices\IWeatherService.cs" />
+    <Compile Include="Utility\DateTimeToDateTimeOffsetConverter.cs" />
     <Compile Include="Utility\Globals.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\AddTripViewModel.cs" />
@@ -151,12 +152,16 @@
     <Compile Include="ViewModel\NavigationViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\TripDetailViewModel.cs" />
+    <Compile Include="ViewModel\UpdateTripViewModel.cs" />
     <Compile Include="ViewModel\WeatherViewModel.cs" />
     <Compile Include="View\TripView\TripDetail.xaml.cs">
       <DependentUpon>TripDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TripView\TripWeather.xaml.cs">
       <DependentUpon>TripWeather.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TripView\UpdateTripView.xaml.cs">
+      <DependentUpon>UpdateTripView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\User\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
@@ -217,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TripView\TripWeather.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TripView\UpdateTripView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -290,7 +299,9 @@
     <PRIResource Include="Strings\nl-be\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Strings\en-US\Resources.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -63,6 +63,7 @@ namespace NativeAppsII_Windows_Groep18
             services.AddTransient<AddTripViewModel>();
             services.AddTransient<TripDetailViewModel>();
             services.AddTransient<WeatherViewModel>();
+            services.AddTransient<UpdateTripViewModel>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITripService, TripService>();

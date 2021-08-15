@@ -1,0 +1,112 @@
+﻿<Page
+    x:Class="NativeAppsII_Windows_Groep18.View.TripView.UpdateTripView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NativeAppsII_Windows_Groep18.View.TripView"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:utility="using:NativeAppsII_Windows_Groep18.Utility"
+    mc:Ignorable="d"
+    >
+
+    <Page.Background>
+        <ImageBrush Stretch="None" ImageSource="/Assets/forest.png"/>
+    </Page.Background>
+
+    <Page.Resources>
+        <utility:DateTimeToDateTimeOffsetConverter x:Key="DateConverter" />
+    </Page.Resources>
+
+    <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ScreenSizes">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".05*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".9*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".05*"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".125*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".75*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".125*"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[0].Width" Value=".25*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[1].Width" Value=".5*"></Setter>
+                        <Setter Target="LayoutGrid.ColumnDefinitions[2].Width" Value=".25*"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Center"
+                    Grid.Column="1"
+                    Margin="24">
+            <TextBlock x:Uid="UpdateTripTitle"
+                       x:Name="UpdateTripTitle"
+                       HorizontalAlignment="Center"
+                       Style="{ThemeResource TitleTextBlockStyle}"/>
+            <StackPanel HorizontalAlignment="Stretch">
+                <TextBox x:Uid="TripName"
+                         x:Name="UpdateTripName"
+                         Text="{x:Bind UpdateTripViewModel.Trip.Name, Mode=TwoWay}"
+                         HorizontalAlignment="Stretch"
+                         Margin="0, 0, 0, 24" 
+                         Tapped="ResetErrors"/>
+                <TextBox x:Uid="TripLocation"
+                         x:Name="UpdateTripLocation"
+                         Text="{x:Bind UpdateTripViewModel.Trip.Location, Mode=TwoWay}"
+                         HorizontalAlignment="Stretch"
+                         Margin="0, 0, 0, 24" 
+                         Tapped="ResetErrors"/>
+                <Grid HorizontalAlignment="Stretch"
+                      Margin="0, 0, 0, 24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <CalendarDatePicker x:Uid="TripStartDate"
+                                        x:Name="UpdateTripStartDate"
+                                        Date="{x:Bind UpdateTripViewModel.Trip.StartDate, Converter={StaticResource DateConverter}, Mode=TwoWay}"
+                                        Tapped="ResetErrors"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Stretch"/>
+                    <CalendarDatePicker x:Uid="TripEndDate"
+                                        x:Name="UpdateTripEndDate"
+                                        Date="{x:Bind UpdateTripViewModel.Trip.EndDate, Converter={StaticResource DateConverter}, Mode=TwoWay}"
+                                        Tapped="ResetErrors"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Stretch"/>
+                </Grid>
+            </StackPanel>
+            <Button x:Uid="UpdateTripButton" 
+                    x:Name="UpdateTripButton" 
+                    Click="UpdateTrip" 
+                    HorizontalAlignment="Stretch"
+                    CornerRadius="5" 
+                    Background="CornflowerBlue" 
+                    Foreground="WhiteSmoke"/>
+        </StackPanel>
+    </Grid>
+</Page>
