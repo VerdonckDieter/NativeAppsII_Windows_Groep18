@@ -30,6 +30,11 @@
         /// Gets or sets a value indicating wether the item is added.
         /// </summary>
         public bool Added { get; set; }
+
+        /// <summary>
+        /// Gets the item's display name.
+        /// </summary>
+        public string DisplayName => $"{Name}({Amount})";
         #endregion
 
         #region Constructors
