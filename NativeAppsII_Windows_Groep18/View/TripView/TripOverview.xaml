@@ -64,7 +64,19 @@
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="model:Trip">
                         <StackPanel x:Name="TripGridViewItem"
-                                    Tapped="NavigateToDetail">
+                                    Tapped="NavigateToDetail"
+                                    IsRightTapEnabled="True"
+                                    RightTapped="ShowMenu">
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout Placement="Bottom">
+                                    <MenuFlyoutItem x:Uid="MenuFlyoutItemModify"
+                                                    x:Name="MenuModifyTrip"
+                                                    Click="MenuFlyoutItemTapped"/>
+                                    <MenuFlyoutItem x:Uid="MenuFlyoutItemDelete"
+                                                    x:Name="MenuDeleteTrip"
+                                                    Click="MenuFlyoutItemTapped"/>
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
                             <Grid Background="LightGray"
                                   BorderBrush="DarkGreen"
                                   BorderThickness="2"

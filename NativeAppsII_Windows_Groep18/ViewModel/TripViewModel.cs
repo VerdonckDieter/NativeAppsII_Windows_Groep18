@@ -3,7 +3,9 @@ using NativeAppsII_Windows_Groep18.Model;
 using NativeAppsII_Windows_Groep18.Services.IServices;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Windows.System;
+using Windows.UI.Xaml.Controls;
 
 namespace NativeAppsII_Windows_Groep18.ViewModel
 {
@@ -12,6 +14,7 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
         #region Fields
         private bool _isLoading;
         private readonly ITripService _tripService;
+        private readonly IContentDialogService _contentDialogService;
         #endregion
 
         #region Properties
@@ -24,10 +27,11 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
         #endregion
 
         #region Constructor
-        public TripViewModel(ITripService tripService)
+        public TripViewModel(ITripService tripService, IContentDialogService contentDialogService)
         {
             Trips = new ObservableCollection<Trip>();
             _tripService = tripService;
+            _contentDialogService = contentDialogService;
             IsLoading = false;
         }
         #endregion
@@ -45,7 +49,7 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
 
             var trips = await _tripService.GetTrips();
 
-            await System.Threading.Tasks.Task.Delay(2000);
+            await Task.Delay(2000);
 
             await dispatcherQueue.EnqueueAsync(() =>
             {
@@ -56,6 +60,12 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
                 IsLoading = false;
             });
         }
+
+        public async Task<bool> DeleteTrip(int id) => await _tripService.DeleteTrip(id);
+
+
+        public async Task<ContentDialogResult> ShowContentDialog(string title, string content, string primaryButtonText, string closeButtonText) =>
+            await _contentDialogService.ShowContentDialog(title, content, primaryButtonText, closeButtonText);
         #endregion
     }
 }
