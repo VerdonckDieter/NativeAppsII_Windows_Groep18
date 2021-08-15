@@ -58,12 +58,26 @@ namespace NativeAppsII_Windows_Groep18.Model
         /// <summary>
         /// Gets the trip's item progress.
         /// </summary>
-        public double ItemProgress => Convert.ToDouble(Categories.Sum(c => c.ItemsAdded)) / Categories.Sum(c => c.Items.Count) * 100;
+        public double ItemProgress
+        {
+            get
+            {
+                int totalItems = Categories.Sum(c => c.Items.Count);
+                return totalItems == 0 ? 0 : Convert.ToDouble(Categories.Sum(c => c.ItemsAdded)) / totalItems * 100;
+            }
+        }
 
         /// <summary>
         /// Gets the trip's chore progress.
         /// </summary>
-        public double ChoreProgress => Convert.ToDouble(Chores.Count(c => c.Completed)) / Chores.Count * 100;
+        public double ChoreProgress
+        {
+            get
+            {
+                int totalChores = Chores.Count;
+                return totalChores == 0 ? 0 : Convert.ToDouble(Chores.Count(c => c.Completed)) / totalChores * 100;
+            }
+        }
         #endregion
 
         #region Constructors
