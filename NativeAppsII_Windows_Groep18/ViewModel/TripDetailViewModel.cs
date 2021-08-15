@@ -1,7 +1,6 @@
 ﻿using NativeAppsII_Windows_Groep18.Model;
 using NativeAppsII_Windows_Groep18.Model.Weather;
 using NativeAppsII_Windows_Groep18.Services.IServices;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
@@ -70,8 +69,6 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
         public async Task UpdateItem(Item item) => await _itemService.UpsertItem(item);
 
         public async Task UpdateChore(Chore chore) => await _choreService.UpsertChore(chore);
-
-        public async Task DeleteTrip(int id) => await _tripService.DeleteTrip(id);
 
         public async Task<bool> DeleteCategory(int categoryId) => await _categoryService.DeleteCategory(Trip.Id, categoryId);
 
