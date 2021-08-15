@@ -65,12 +65,12 @@
                        HorizontalAlignment="Center"
                        Style="{ThemeResource TitleTextBlockStyle}"/>
             <StackPanel HorizontalAlignment="Stretch">
-                <TextBox x:Uid="AddTripName"
+                <TextBox x:Uid="TripName"
                          x:Name="AddTripName"
                          HorizontalAlignment="Stretch"
                          Margin="0, 0, 0, 24" 
                          Tapped="ResetErrors"/>
-                <TextBox x:Uid="AddTripLocation"
+                <TextBox x:Uid="TripLocation"
                          x:Name="AddTripLocation"
                          HorizontalAlignment="Stretch"
                          Margin="0, 0, 0, 24" 
@@ -81,12 +81,12 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-                    <CalendarDatePicker x:Uid="AddTripStartDate"
+                    <CalendarDatePicker x:Uid="TripStartDate"
                                         x:Name="AddTripStartDate"
                                         Tapped="ResetErrors"
                                         Grid.Column="0"
                                         HorizontalAlignment="Stretch"/>
-                    <CalendarDatePicker x:Uid="AddTripEndDate"
+                    <CalendarDatePicker x:Uid="TripEndDate"
                                         x:Name="AddTripEndDate"
                                         Tapped="ResetErrors"
                                         Grid.Column="1"

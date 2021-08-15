@@ -51,21 +51,21 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             if (string.IsNullOrWhiteSpace(AddTripName.Text))
             {
                 AddTripName.Text = string.Empty;
-                AddTripName.Header = ResourceLoader.GetString("AddTripNameEmpty");
+                AddTripName.Header = ResourceLoader.GetString("TripNameEmpty");
                 AddTripName.BorderBrush = new SolidColorBrush(Colors.Red);
                 success = false;
             }
             if (string.IsNullOrWhiteSpace(AddTripLocation.Text))
             {
                 AddTripLocation.Text = string.Empty;
-                AddTripLocation.Header = ResourceLoader.GetString("AddTripLocationEmpty");
+                AddTripLocation.Header = ResourceLoader.GetString("TripLocationEmpty");
                 AddTripLocation.BorderBrush = new SolidColorBrush(Colors.Red);
                 success = false;
             }
             if (AddTripStartDate.Date == null)
             {
                 AddTripStartDate.Date = null;
-                AddTripStartDate.Header = ResourceLoader.GetString("AddTripStartDateEmpty");
+                AddTripStartDate.Header = ResourceLoader.GetString("TripStartDateEmpty");
                 AddTripStartDate.Foreground = new SolidColorBrush(Colors.Red);
                 AddTripStartDate.BorderBrush = new SolidColorBrush(Colors.Red);
                 success = false;
@@ -73,7 +73,7 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             if (AddTripEndDate.Date == null)
             {
                 AddTripEndDate.Date = null;
-                AddTripEndDate.Header = ResourceLoader.GetString("AddTripEndDateEmpty");
+                AddTripEndDate.Header = ResourceLoader.GetString("TripEndDateEmpty");
                 AddTripEndDate.Foreground = new SolidColorBrush(Colors.Red);
                 AddTripEndDate.BorderBrush = new SolidColorBrush(Colors.Red);
                 success = false;
@@ -83,17 +83,17 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
 
         private void ResetErrors(object sender, TappedRoutedEventArgs e)
         {
-            AddTripName.Header = ResourceLoader.GetString("AddTripName/Header");
+            AddTripName.Header = ResourceLoader.GetString("TripName/Header");
             AddTripName.ClearValue(BorderBrushProperty);
 
-            AddTripLocation.Header = ResourceLoader.GetString("AddTripLocation/Header");
+            AddTripLocation.Header = ResourceLoader.GetString("TripLocation/Header");
             AddTripLocation.ClearValue(BorderBrushProperty);
 
-            AddTripStartDate.Header = ResourceLoader.GetString("AddTripStartDate/Header");
+            AddTripStartDate.Header = ResourceLoader.GetString("TripStartDate/Header");
             AddTripStartDate.ClearValue(ForegroundProperty);
             AddTripStartDate.ClearValue(BorderBrushProperty);
 
-            AddTripEndDate.Header = ResourceLoader.GetString("AddTripEndDate/Header");
+            AddTripEndDate.Header = ResourceLoader.GetString("TripEndDate/Header");
             AddTripEndDate.ClearValue(ForegroundProperty);
             AddTripEndDate.ClearValue(BorderBrushProperty);
         }
