@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddAmount.PlaceholderText" xml:space="preserve">
+  <data name="AddCategoryName.PlaceholderText" xml:space="preserve">
+    <value>Add new category</value>
+  </data>
+  <data name="AddChoreName.PlaceholderText" xml:space="preserve">
+    <value>Add new chore</value>
+  </data>
+  <data name="AddItemAmount.PlaceholderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="AddName.PlaceholderText" xml:space="preserve">
-    <value>Name</value>
+  <data name="AddItemName.PlaceholderText" xml:space="preserve">
+    <value>Add new item</value>
   </data>
   <data name="AddTripButton.Content" xml:space="preserve">
     <value>Add trip</value>
@@ -129,41 +135,11 @@
   <data name="AddTripCreated" xml:space="preserve">
     <value>Trip {0} was created</value>
   </data>
-  <data name="AddTripEndDate.Header" xml:space="preserve">
-    <value>End date</value>
-  </data>
-  <data name="AddTripEndDateEmpty" xml:space="preserve">
-    <value>The end date field cannot be empty</value>
-  </data>
-  <data name="AddTripLocation.Header" xml:space="preserve">
-    <value>Location</value>
-  </data>
-  <data name="AddTripLocation.PlaceholderText" xml:space="preserve">
-    <value>Where are you going?</value>
-  </data>
-  <data name="AddTripLocationEmpty" xml:space="preserve">
-    <value>The location field cannot be empty</value>
-  </data>
-  <data name="AddTripName.Header" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="AddtripName.PlaceholderText" xml:space="preserve">
-    <value>Name of the trip</value>
-  </data>
-  <data name="AddTripNameEmpty" xml:space="preserve">
-    <value>The name field cannot be empty</value>
-  </data>
-  <data name="AddTripStartDate.Header" xml:space="preserve">
-    <value>Start date</value>
-  </data>
-  <data name="AddTripStartDateEmpty" xml:space="preserve">
-    <value>The start date field cannot be empty</value>
-  </data>
   <data name="AddTripTitle.Text" xml:space="preserve">
     <value>Create your trip</value>
   </data>
   <data name="ChoresTitle.Text" xml:space="preserve">
-    <value>Tasks</value>
+    <value>Chores</value>
   </data>
   <data name="DeleteContentDialogCloseButton" xml:space="preserve">
     <value>Cancel</value>
@@ -212,6 +188,21 @@
   </data>
   <data name="LoginUserNotFound" xml:space="preserve">
     <value>Could not find user</value>
+  </data>
+  <data name="MenuFlyoutItemDelete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="MenuFlyoutItemModify.Text" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="NavAdd.Content" xml:space="preserve">
+    <value>Add Trip</value>
+  </data>
+  <data name="NavHome.Content" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="NavLogout.Content" xml:space="preserve">
+    <value>Logout</value>
   </data>
   <data name="RegisterAccountCreated" xml:space="preserve">
     <value>Account for {0} was created</value>
@@ -270,10 +261,43 @@
   <data name="TravelListTitle.Text" xml:space="preserve">
     <value>Travel List</value>
   </data>
-  <data name="TripDetailMenuFlyoutItemDelete.Text" xml:space="preserve">
-    <value>Delete</value>
+  <data name="TripEndDate.Header" xml:space="preserve">
+    <value>End date</value>
   </data>
-  <data name="TripDetailMenuFlyoutItemModify.Text" xml:space="preserve">
-    <value>Modify</value>
+  <data name="TripEndDateEmpty" xml:space="preserve">
+    <value>The end date field cannot be empty</value>
+  </data>
+  <data name="TripLocation.Header" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="TripLocation.PlaceholderText" xml:space="preserve">
+    <value>Where are you going?</value>
+  </data>
+  <data name="TripLocationEmpty" xml:space="preserve">
+    <value>The location field cannot be empty</value>
+  </data>
+  <data name="TripName.Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TripName.PlaceholderText" xml:space="preserve">
+    <value>Name of the trip</value>
+  </data>
+  <data name="TripNameEmpty" xml:space="preserve">
+    <value>The name field cannot be empty</value>
+  </data>
+  <data name="TripStartDate.Header" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="TripStartDateEmpty" xml:space="preserve">
+    <value>The start date field cannot be empty</value>
+  </data>
+  <data name="UpdateTripButton.Content" xml:space="preserve">
+    <value>Update trip</value>
+  </data>
+  <data name="UpdateTripTitle.Text" xml:space="preserve">
+    <value>Update your trip</value>
+  </data>
+  <data name="UpdateTripUpdated" xml:space="preserve">
+    <value>Trip {0} was updated</value>
   </data>
 </root>
