@@ -10,19 +10,19 @@
 
         <Style TargetType="CheckBox">
             <Setter Property="FlowDirection" Value="RightToLeft"/>
-            <!--<Setter Property="ContentTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <ContentControl FlowDirection="LeftToRight" Content="{Binding}"/>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>-->
             <Setter Property="Padding" Value="0"/>
             <Setter Property="MinWidth" Value="0"/>
         </Style>
         <Style TargetType="Path">
             <Setter Property="FlowDirection" Value="LeftToRight"/>
         </Style>
+
+        <Style TargetType="ToggleButton"
+               x:Key="ExpanderHeader">
+            
+            
+        </Style>
+        
     </Page.Resources>
     <Page.Background>
         <ImageBrush Stretch="None" ImageSource="/Assets/skyline4.png"/>
@@ -237,10 +237,10 @@
                                 CornerRadius="2">
 
                         <ListView x:Name="ListViewCategories"
-                              HorizontalAlignment="Stretch"
-                              Padding="12"
-                              ItemsSource="{x:Bind TripDetailViewModel.Trip.Categories}"
-                                  Foreground="CornflowerBlue">
+                                  HorizontalAlignment="Stretch"
+                                  Padding="12"
+                                  ItemsSource="{x:Bind TripDetailViewModel.Trip.Categories}"
+                                  >
 
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
@@ -256,16 +256,17 @@
                                 <DataTemplate x:DataType="model:Category">
                                     <Grid>
                                         <controls:Expander IsExpanded="True"
-                                                       HorizontalContentAlignment="Stretch" Background="SkyBlue">
+                                                           HorizontalContentAlignment="Stretch" 
+                                                           >
                                             <controls:Expander.Header>
                                                 <Grid HorizontalAlignment="Stretch"
-                                                  RightTapped="ShowMenu">
+                                                      RightTapped="ShowMenu">
                                                     <FlyoutBase.AttachedFlyout>
                                                         <MenuFlyout Placement="Bottom">
-                                                            <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemModify"
+                                                            <MenuFlyoutItem x:Uid="MenuFlyoutItemModify"
                                                                         x:Name="MenuModifyCategory"
                                                                         Click="MenuFlyoutItemTapped"/>
-                                                            <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemDelete"
+                                                            <MenuFlyoutItem x:Uid="MenuFlyoutItemDelete"
                                                                         x:Name="MenuDeleteCategory"
                                                                         Click="MenuFlyoutItemTapped"/>
                                                         </MenuFlyout>
@@ -312,10 +313,10 @@
                                                               RightTapped="ShowMenu">
                                                                     <FlyoutBase.AttachedFlyout>
                                                                         <MenuFlyout Placement="Bottom">
-                                                                            <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemModify"
+                                                                            <MenuFlyoutItem x:Uid="MenuFlyoutItemModify"
                                                                                     x:Name="MenuModifyItem"
                                                                                     Click="MenuFlyoutItemTapped"/>
-                                                                            <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemDelete"
+                                                                            <MenuFlyoutItem x:Uid="MenuFlyoutItemDelete"
                                                                                     x:Name="MenuDeleteItem"
                                                                                     Click="MenuFlyoutItemTapped"/>
                                                                         </MenuFlyout>
@@ -349,17 +350,19 @@
 
                                                     <Grid Background="White">
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="8*"/>
                                                             <ColumnDefinition Width="*"/>
                                                             <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="Auto"/>
                                                         </Grid.ColumnDefinitions>
-                                                        <TextBox x:Uid="AddName"
+                                                        <TextBox x:Uid="AddItemName"
                                                                  Grid.Column="0"
                                                                  VerticalAlignment="Center"
+                                                                 BorderBrush="Transparent"
                                                                  Background="White"/>
-                                                        <TextBox x:Uid="AddAmount"
+                                                        <TextBox x:Uid="AddItemAmount"
                                                                  Grid.Column="1"
                                                                  VerticalAlignment="Center"
+                                                                 BorderBrush="Transparent"
                                                                  InputScope="Number"
                                                                  BeforeTextChanging="AmountBeforeTextChanging"/>
                                                         <Button Grid.Column="2"
@@ -385,8 +388,9 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBox x:Uid="AddName"
+                            <TextBox x:Uid="AddCategoryName"
                                      x:Name="AddCategoryName"
+                                     BorderBrush="Transparent"
                                      Grid.Column="0"
                                      VerticalAlignment="Center"/>
                             <Button Grid.Column="1"
@@ -422,10 +426,10 @@
                                       RightTapped="ShowMenu">
                                         <FlyoutBase.AttachedFlyout>
                                             <MenuFlyout Placement="Bottom">
-                                                <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemModify"
+                                                <MenuFlyoutItem x:Uid="MenuFlyoutItemModify"
                                                             x:Name="MenuModifyChore"
                                                             Click="MenuFlyoutItemTapped"/>
-                                                <MenuFlyoutItem x:Uid="TripDetailMenuFlyoutItemDelete"
+                                                <MenuFlyoutItem x:Uid="MenuFlyoutItemDelete"
                                                             x:Name="MenuDeleteChore"
                                                             Click="MenuFlyoutItemTapped"/>
                                             </MenuFlyout>
@@ -456,8 +460,9 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBox x:Uid="AddName"
+                            <TextBox x:Uid="AddChoreName"
                                      x:Name="AddChoreName"
+                                     BorderBrush="Transparent"
                                      Grid.Column="0"
                                      VerticalAlignment="Center"/>
                             <Button Grid.Column="1"
