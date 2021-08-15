@@ -85,8 +85,7 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             var amount = (TextBox)((Grid)((Button)sender).Parent).Children[1];
             if (!string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(amount.Text))
             {
-                int itemAmount;
-                if (int.TryParse(amount.Text, out itemAmount))
+                if (int.TryParse(amount.Text, out int itemAmount))
                 {
                     TripDetailViewModel.AddItem(new Item { CategoryId = categoryId, Name = name.Text, Amount = itemAmount, Added = false }, categoryId);
                 }
