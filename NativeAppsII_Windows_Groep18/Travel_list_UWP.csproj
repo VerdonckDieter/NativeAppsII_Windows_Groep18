@@ -148,6 +148,7 @@
     <Compile Include="Utility\Globals.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\AddTripViewModel.cs" />
+    <Compile Include="ViewModel\ItineraryViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
