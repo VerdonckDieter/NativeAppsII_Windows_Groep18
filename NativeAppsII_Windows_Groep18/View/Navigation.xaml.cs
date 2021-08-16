@@ -32,6 +32,9 @@ namespace NativeAppsII_Windows_Groep18.View
                 case "Add":
                     ContentFrame.Navigate(typeof(AddTripView));
                     break;
+                case "Maps":
+                    ContentFrame.Navigate(typeof(Itinerary));
+                    break;
                 default:
                     break;
             }
