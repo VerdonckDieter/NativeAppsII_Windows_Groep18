@@ -195,7 +195,7 @@
                     <Button Click="NavigateToWeather" Background="SkyBlue" >
                         <StackPanel>
                             <Image Source="/Assets/sun.png"/>
-                            <TextBlock Text="Weather" Foreground="White" HorizontalAlignment="Center"></TextBlock>
+                            <TextBlock Text="Weather" Foreground="White" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
