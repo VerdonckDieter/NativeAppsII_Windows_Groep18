@@ -138,6 +138,9 @@
   <data name="AddTripTitle.Text" xml:space="preserve">
     <value>Create your trip</value>
   </data>
+  <data name="ChooseRouteButton.Content" xml:space="preserve">
+    <value>Choose route</value>
+  </data>
   <data name="ChoresTitle.Text" xml:space="preserve">
     <value>Chores</value>
   </data>
@@ -155,6 +158,15 @@
   </data>
   <data name="ErrorText" xml:space="preserve">
     <value>An error has occurred</value>
+  </data>
+  <data name="ItineraryButtonShow.Content" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="ItineraryComboBox.PlaceholderText" xml:space="preserve">
+    <value>Pick a trip</value>
+  </data>
+  <data name="ItineraryComboBoxTitle.Text" xml:space="preserve">
+    <value>Show route for:</value>
   </data>
   <data name="LoginButton.Content" xml:space="preserve">
     <value>Login</value>
@@ -203,6 +215,9 @@
   </data>
   <data name="NavLogout.Content" xml:space="preserve">
     <value>Logout</value>
+  </data>
+  <data name="NavMaps.Content" xml:space="preserve">
+    <value>Maps</value>
   </data>
   <data name="RegisterAccountCreated" xml:space="preserve">
     <value>Account for {0} was created</value>
