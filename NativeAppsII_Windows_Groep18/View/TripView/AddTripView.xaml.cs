@@ -7,6 +7,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI;
 using Windows.UI.Xaml.Input;
 using NativeAppsII_Windows_Groep18.Services.Instances;
+using Windows.UI.Xaml.Navigation;
+using System.Numerics;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -31,14 +33,13 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             AddTripLocation.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
             AddTripStartDate.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
             AddTripEndDate.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
-            //MapService.ServiceToken = "kiMTfBjS18oItbEwSQsi~V30ULXHdubcpoIgp7E9GjA~AhlM7Rp6OqMz_O06wAnydivBQG4XpUEUJKwS9nPg-y5tajWHqTi5VJ9fnOUiUQTD";
         }
 
         private async void AddTrip(object sender, RoutedEventArgs e)
         {
             if (Validate())
             {
-                if(await AddTripViewModel.AddTrip(AddTripName.Text, AddTripLocation.Text, AddTripStartDate.Date.Value.DateTime, AddTripEndDate.Date.Value.DateTime) != null)
+                if (await AddTripViewModel.AddTrip(AddTripName.Text, AddTripLocation.Text, AddTripStartDate.Date.Value.DateTime, AddTripEndDate.Date.Value.DateTime) != null)
                 {
                     ToastService.MakeToast(string.Format(ResourceLoader.GetString("AddTripCreated"), AddTripName.Text));
                 }
@@ -96,6 +97,13 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             AddTripEndDate.Header = ResourceLoader.GetString("TripEndDate/Header");
             AddTripEndDate.ClearValue(ForegroundProperty);
             AddTripEndDate.ClearValue(BorderBrushProperty);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            SharedShadow.Receivers.Add(BackgroundGrid);
+            AddStackPanel.Translation += new Vector3(0, 0, 10);
         }
     }
 }

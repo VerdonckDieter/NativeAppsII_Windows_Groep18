@@ -2,19 +2,18 @@
     x:Class="NativeAppsII_Windows_Groep18.View.TripView.AddTripView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:NativeAppsII_Windows_Groep18.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:my="using:NativeAppsII_Windows_Groep18.Model"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    x:Name="pageAdd"
-    >
+    x:Name="pageAdd">
 
     <Page.Background>
         <ImageBrush Stretch="None" ImageSource="/Assets/forest.png"/>
     </Page.Background>
 
-    <Grid x:Name="LayoutGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid x:Name="LayoutGrid" 
+          HorizontalAlignment="Stretch" 
+          VerticalAlignment="Stretch">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
                 <VisualState x:Name="Phone">
@@ -56,15 +55,27 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel HorizontalAlignment="Stretch" 
+        <Grid.Resources>
+            <ThemeShadow x:Name="SharedShadow" />
+        </Grid.Resources>
+
+        <Grid x:Name="BackgroundGrid" Grid.Column="1" />
+
+        <StackPanel x:Name="AddStackPanel"
+                    HorizontalAlignment="Stretch" 
                     VerticalAlignment="Center"
                     Grid.Column="1"
+                    Shadow="{StaticResource SharedShadow}"
                     Margin="24">
+            <StackPanel.Background>
+                <SolidColorBrush Color="#f8f8ff" />
+            </StackPanel.Background>
             <TextBlock x:Uid="AddTripTitle"
                        x:Name="AddTripTitle"
                        HorizontalAlignment="Center"
                        Style="{ThemeResource TitleTextBlockStyle}"/>
-            <StackPanel HorizontalAlignment="Stretch">
+            <StackPanel HorizontalAlignment="Stretch"
+                        Padding="50">
                 <TextBox x:Uid="TripName"
                          x:Name="AddTripName"
                          HorizontalAlignment="Stretch"
@@ -92,14 +103,14 @@
                                         Grid.Column="1"
                                         HorizontalAlignment="Stretch"/>
                 </Grid>
-            </StackPanel>
-            <Button x:Uid="AddTripButton" 
+                <Button x:Uid="AddTripButton" 
                     x:Name="AddTripButton" 
                     Click="AddTrip" 
                     HorizontalAlignment="Stretch"
                     CornerRadius="5" 
                     Background="CornflowerBlue" 
                     Foreground="WhiteSmoke"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>
