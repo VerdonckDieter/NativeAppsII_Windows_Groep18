@@ -315,4 +315,7 @@
   <data name="UpdateTripUpdated" xml:space="preserve">
     <value>Trip {0} was updated</value>
   </data>
+  <data name="WeatherTextBlock.Text" xml:space="preserve">
+    <value>Weather</value>
+  </data>
 </root>
