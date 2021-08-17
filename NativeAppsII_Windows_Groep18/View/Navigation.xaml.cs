@@ -1,8 +1,5 @@
 ﻿using NativeAppsII_Windows_Groep18.Services.Instances;
 using NativeAppsII_Windows_Groep18.View.TripView;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -44,14 +41,6 @@ namespace NativeAppsII_Windows_Groep18.View
         {
             StorageService.StoreToken("");
             Frame.Navigate(typeof(Login));
-        }
-
-        private void NavView_BackRequest(NavigationView sender, NavigationViewBackRequestedEventArgs args)
-        {
-            if (ContentFrame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
         }
     }
 }
