@@ -1,5 +1,4 @@
 ﻿using NativeAppsII_Windows_Groep18.ViewModel;
-using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -9,6 +8,7 @@ using Windows.UI.Xaml.Media;
 using Microsoft.Extensions.DependencyInjection;
 using Windows.UI.Xaml.Navigation;
 using NativeAppsII_Windows_Groep18.Model;
+using System.Numerics;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +22,7 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
         #region Properties
         private UpdateTripViewModel UpdateTripViewModel { get; set; }
         private ResourceLoader ResourceLoader { get; set; }
-
         #endregion
-
 
         #region Constructors
         public UpdateTripView()
@@ -46,6 +44,8 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             base.OnNavigatedTo(e);
             Trip trip = (Trip)e.Parameter;
             UpdateTripViewModel.Trip = trip;
+            SharedShadow.Receivers.Add(BackgroundGrid);
+            UpdateStackPanel.Translation += new Vector3(0, 0, 10);
         }
         private async void UpdateTrip(object sender, RoutedEventArgs e)
         {
