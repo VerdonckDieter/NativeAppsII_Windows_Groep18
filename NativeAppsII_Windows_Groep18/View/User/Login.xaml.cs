@@ -118,7 +118,6 @@ namespace NativeAppsII_Windows_Groep18.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
             SharedShadow.Receivers.Add(BackgroundGrid);
             LoginStackPanel.Translation += new Vector3(0, 0, 10);
         }
