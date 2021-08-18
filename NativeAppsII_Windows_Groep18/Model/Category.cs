@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace NativeAppsII_Windows_Groep18.Model
@@ -6,8 +7,13 @@ namespace NativeAppsII_Windows_Groep18.Model
     /// <summary>
     /// Represents a category.
     /// </summary>
-    public class Category
+    public class Category : INotifyPropertyChanged
     {
+        #region Fields
+        public event PropertyChangedEventHandler PropertyChanged;
+        private int _itemsAdded;
+        #endregion
+
         #region Properties
         /// <summary>
         /// Gets or sets the category's id.
@@ -25,9 +31,17 @@ namespace NativeAppsII_Windows_Groep18.Model
         public ObservableCollection<Item> Items { get; set; }
 
         /// <summary>
-        /// Gets the category's added items.
+        /// Gets or sets the category's added items.
         /// </summary>
-        public int ItemsAdded => Items.Count(i => i.Added);
+        public int ItemsAdded
+        {
+            get => _itemsAdded;
+            set
+            {
+                _itemsAdded = value;
+                OnPropertyChanged(nameof(ItemsAdded));
+            }
+        }
         #endregion
 
         #region Constructors
@@ -35,6 +49,15 @@ namespace NativeAppsII_Windows_Groep18.Model
         /// Creates a new category.
         /// </summary>
         public Category() => Items = new ObservableCollection<Item>();
+        #endregion
+
+        #region Methods
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void UpdateItemsAdded() => ItemsAdded = Items.Count(i => i.Added);
         #endregion
     }
 }

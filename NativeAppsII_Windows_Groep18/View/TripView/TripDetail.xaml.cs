@@ -48,6 +48,10 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             if (selectedItem != null)
             {
                 await TripDetailViewModel.UpdateItem(selectedItem);
+                foreach (Category c in TripDetailViewModel.Trip.Categories)
+                {
+                    c.UpdateItemsAdded();
+                }
             }
         }
 
