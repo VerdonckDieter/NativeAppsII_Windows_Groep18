@@ -65,7 +65,8 @@
                     x:Uid="NavLogout"
                     Tag="Logout"
                     Tapped="Logout"
-                    Icon="BlockContact"/>
+                    Icon="BlockContact"
+                    Margin="0,0,24,0"/>
         </NavigationView.PaneFooter>
         <NavigationView.Content>
             <Frame x:Name="ContentFrame"/>
