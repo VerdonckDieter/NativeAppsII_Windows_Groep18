@@ -93,7 +93,7 @@ namespace Travel_list_API.Controllers
             var result = await _userManager.CreateAsync(identityUser, model.Password);
             if (result.Succeeded)
             {
-                result = await _userManager.AddClaimAsync(identityUser, new Claim(ClaimTypes.Role, "client"));
+                result = await _userManager.AddClaimAsync(identityUser, new Claim(ClaimTypes.Role, "user"));
 
                 if (result.Succeeded && await _userRepository.UpsertUserAsync(user))
                     return Ok();
