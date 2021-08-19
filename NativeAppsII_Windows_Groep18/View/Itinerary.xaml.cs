@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Windows.UI.Xaml.Navigation;
 using NativeAppsII_Windows_Groep18.Model;
 using NativeAppsII_Windows_Groep18.Utility;
+using Windows.ApplicationModel.Resources;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,6 +24,7 @@ namespace NativeAppsII_Windows_Groep18.View
     {
         #region Properties
         public ItineraryViewModel ItineraryViewModel { get; set; }
+        private ResourceLoader ResourceLoader { get; set; }
         #endregion
 
         #region Constructors
@@ -31,6 +34,7 @@ namespace NativeAppsII_Windows_Groep18.View
             ItineraryViewModel = App.Current.Services.GetService<ItineraryViewModel>();
             DataContext = ItineraryViewModel;
             TravelMap.MapServiceToken = Globals.MAP_TOKEN;
+            ResourceLoader = ResourceLoader.GetForCurrentView();
         }
         #endregion
 
@@ -103,12 +107,22 @@ namespace NativeAppsII_Windows_Groep18.View
                     break;
 
                 case GeolocationAccessStatus.Denied:
+                    await ShowContentDialog();
                     break;
                 case GeolocationAccessStatus.Unspecified:
+                    await ShowContentDialog();
                     break;
                 default:
                     break;
             }
+        }
+
+        private async Task<ContentDialogResult> ShowContentDialog()
+        {
+            return await ItineraryViewModel.ShowContentDialog(
+                            ResourceLoader.GetString("LocationDialogTitle"),
+                            ResourceLoader.GetString("LocationDialogContent"),
+                            ResourceLoader.GetString("LocationDialogClose"));
         }
         #endregion
     }

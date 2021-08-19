@@ -1,6 +1,8 @@
 ﻿using NativeAppsII_Windows_Groep18.Model;
 using NativeAppsII_Windows_Groep18.Services.IServices;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace NativeAppsII_Windows_Groep18.ViewModel
 {
@@ -8,17 +10,20 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
     {
         #region Fields
         private readonly ITripService _tripService;
+        private readonly IContentDialogService _contentDialogService;
         #endregion
+
         #region Properties
         public Trip Trip { get; set; }
         public ObservableCollection<Trip> Trips { get; set; }
         #endregion
 
         #region Constructors
-        public ItineraryViewModel(ITripService tripService)
+        public ItineraryViewModel(ITripService tripService, IContentDialogService contentDialogService)
         {
             Trips = new ObservableCollection<Trip>();
             _tripService = tripService;
+            _contentDialogService = contentDialogService;
         }
         #endregion
 
@@ -32,6 +37,9 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
                 trips.ForEach(trip => Trips.Add(trip));
             }
         }
+
+        public async Task<ContentDialogResult> ShowContentDialog(string title, string content, string closeButtonText) =>
+            await _contentDialogService.ShowContentDialog(title, content, closeButtonText);
         #endregion
     }
 }
