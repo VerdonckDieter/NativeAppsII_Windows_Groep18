@@ -168,6 +168,15 @@
   <data name="ItineraryComboBoxTitle.Text" xml:space="preserve">
     <value>Show route for:</value>
   </data>
+  <data name="LocationDialogClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="LocationDialogContent" xml:space="preserve">
+    <value>Make sure the location services for the app are enabled </value>
+  </data>
+  <data name="LocationDialogTitle" xml:space="preserve">
+    <value>Location services</value>
+  </data>
   <data name="LoginButton.Content" xml:space="preserve">
     <value>Login</value>
   </data>
