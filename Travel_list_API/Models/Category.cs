@@ -11,7 +11,7 @@ namespace Travel_list_API.Models
         /// <summary>
         /// Gets or sets the category's id.
         /// </summary>
-        public int Id { get; set; }
+        public int CategoryId { get; set; }
 
         /// <summary>
         /// Gets or sets the category's name.

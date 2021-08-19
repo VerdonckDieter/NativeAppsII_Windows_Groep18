@@ -69,6 +69,7 @@ namespace Travel_list_API.Controllers
             {
                 Id = tripDTO.Id,
                 Name = tripDTO.Name,
+                Location = tripDTO.Location,
                 StartDate = tripDTO.StartDate,
                 EndDate = tripDTO.EndDate,
                 Chores = tripDTO.Chores,

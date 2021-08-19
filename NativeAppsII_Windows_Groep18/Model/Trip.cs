@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace NativeAppsII_Windows_Groep18.Model
 {
@@ -15,9 +16,14 @@ namespace NativeAppsII_Windows_Groep18.Model
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the trip's
+        /// Gets or sets the trip's name.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the trip's location.
+        /// </summary>
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets the trip's start date.
@@ -43,6 +49,35 @@ namespace NativeAppsII_Windows_Groep18.Model
         /// Gets or sets the trip's itineraries.
         /// </summary>
         public ObservableCollection<Itinerary> Itineraries { get; set; }
+
+        /// <summary>
+        /// Gets the trip's time period.
+        /// </summary>
+        public string Period => StartDate.ToShortDateString() + " - " + EndDate.ToShortDateString();
+
+        /// <summary>
+        /// Gets the trip's item progress.
+        /// </summary>
+        public double ItemProgress
+        {
+            get
+            {
+                int totalItems = Categories.Sum(c => c.Items.Count);
+                return totalItems == 0 ? 0 : Convert.ToDouble(Categories.Sum(c => c.ItemsAdded)) / totalItems * 100;
+            }
+        }
+
+        /// <summary>
+        /// Gets the trip's chore progress.
+        /// </summary>
+        public double ChoreProgress
+        {
+            get
+            {
+                int totalChores = Chores.Count;
+                return totalChores == 0 ? 0 : Convert.ToDouble(Chores.Count(c => c.Completed)) / totalChores * 100;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -56,11 +91,5 @@ namespace NativeAppsII_Windows_Groep18.Model
             Itineraries = new ObservableCollection<Itinerary>();
         }
         #endregion
-
-        //public void UpdateProgress()
-        //{
-        //    double count = Items.Count(i => i.Added == true);
-        //    Progress = (int)(count / Items.Count() * 100);
-        //}
     }
 }

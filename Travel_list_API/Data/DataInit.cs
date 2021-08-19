@@ -31,7 +31,7 @@ namespace Travel_list_API.Data
                 var user = new User { Email = "client@gmail.com", FirstName = "Dieter", LastName = "D" };
                 await _db.Users.AddAsync(user);
 
-                var trip = new Trip { Name = "Paris", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1) };
+                var trip = new Trip { Name = "Travel to Paris", Location = "Paris", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1) };
                 user.Trips.Add(trip);
 
                 var category = new Category { Name = "Kitchen" };
@@ -48,7 +48,7 @@ namespace Travel_list_API.Data
                 user = new User { Email = "client2@gmail.com", FirstName = "Dylan", LastName = "D" };
                 await _db.Users.AddAsync(user);
 
-                trip = new Trip { Name = "London", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(2) };
+                trip = new Trip { Name = "Travel to London", Location = "London", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(2) };
                 user.AddTrip(trip);
 
                 category = new Category { Name = "Sports" };
@@ -65,7 +65,7 @@ namespace Travel_list_API.Data
                 user = new User { Email = "client3@gmail.com", FirstName = "Thibault", LastName = "D" };
                 await _db.Users.AddAsync(user);
 
-                trip = new Trip { Name = "Milan", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(3) };
+                trip = new Trip { Name = "Travel to Milan", Location = "Milan", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(3) };
                 user.AddTrip(trip);
 
                 category = new Category { Name = "Electronics" };

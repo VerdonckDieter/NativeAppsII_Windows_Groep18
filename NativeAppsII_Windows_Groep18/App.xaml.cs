@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NativeAppsII_Windows_Groep18.Services.Instances;
+using NativeAppsII_Windows_Groep18.Services.IServices;
+using NativeAppsII_Windows_Groep18.View;
+using NativeAppsII_Windows_Groep18.ViewModel;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace NativeAppsII_Windows_Groep18
@@ -28,8 +23,46 @@ namespace NativeAppsII_Windows_Groep18
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            Services = ConfigureServices();
+            InitializeComponent();
+            Suspending += OnSuspending;
+        }
+
+        /// <summary>
+        /// Gets the current <see cref="App"/> instance in use
+        /// </summary>
+        public static new App Current => (App)Application.Current;
+
+        /// <summary>
+        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+        /// </summary>
+        public IServiceProvider Services { get; }
+
+        /// <summary>
+        /// Configures the services for the application.
+        /// </summary>
+        private static IServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
+
+            services.AddTransient<LoginViewModel>();
+            services.AddTransient<RegisterViewModel>();
+            services.AddTransient<TripViewModel>();
+            services.AddTransient<AddTripViewModel>();
+            services.AddTransient<TripDetailViewModel>();
+            services.AddTransient<WeatherViewModel>();
+            services.AddTransient<UpdateTripViewModel>();
+            services.AddTransient<ItineraryViewModel>();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITripService, TripService>();
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IChoreService, ChoreService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IWeatherService, WeatherService>();
+            services.AddScoped<IContentDialogService, ContentDialogService>();
+
+            return services.BuildServiceProvider();
         }
 
         /// <summary>
@@ -66,7 +99,7 @@ namespace NativeAppsII_Windows_Groep18
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(Login), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();

@@ -4,9 +4,13 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
 {
     public class NavigationViewModel
     {
+        #region Properties
         public User Client { get; set; }
-        public NavigationViewModel()
-        {
-        }
+
+        #endregion
+
+        #region Constructors
+        public NavigationViewModel() { }
+        #endregion
     }
 }

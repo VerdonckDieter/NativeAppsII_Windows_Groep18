@@ -2,22 +2,19 @@
     x:Class="NativeAppsII_Windows_Groep18.View.Navigation"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:NativeAppsII_Windows_Groep18.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:NativeAppsII_Windows_Groep18.ViewModel"
-    mc:Ignorable="d"
-    >
+    mc:Ignorable="d">
 
     <Page.Background>
         <SolidColorBrush Color="WhiteSmoke" />
     </Page.Background>
 
-    <Page.DataContext>
-        <vm:NavigationViewModel></vm:NavigationViewModel>
-    </Page.DataContext>
-
-    <Grid>
+    <NavigationView x:Name="NavView"
+                    IsSettingsVisible="False"
+                    IsBackEnabled="False"
+                    IsBackButtonVisible="Collapsed"
+                    ItemInvoked="NavView_ItemInvoked">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ScreenSizes">
                 <VisualState x:Name="Phone">
@@ -25,7 +22,8 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="navView.PaneDisplayMode" Value="LeftMinimal"></Setter>
+                        <Setter Target="NavView.PaneDisplayMode" 
+                                Value="LeftMinimal"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Tablet">
@@ -33,7 +31,8 @@
                         <AdaptiveTrigger MinWindowWidth="720"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="navView.PaneDisplayMode" Value="LeftCompact"></Setter>
+                        <Setter Target="NavView.PaneDisplayMode" 
+                                Value="LeftCompact"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Desktop">
@@ -41,45 +40,36 @@
                         <AdaptiveTrigger MinWindowWidth="1024"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="navView.PaneDisplayMode" Value="Top"></Setter>
+                        <Setter Target="NavView.PaneDisplayMode" 
+                                Value="Top"></Setter>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <NavigationView 
-            x:Name="navView" 
-            ItemInvoked="NavView_ItemInvoked" 
-            IsSettingsVisible="False" 
-            IsBackButtonVisible="Collapsed"
-            >
-            <NavigationView.MenuItems>
-                <NavigationViewItem 
-                    Content="Home" 
-                    Icon="Home">
-                </NavigationViewItem>
-                <NavigationViewItem 
-                    Content="Add TravelList" 
-                    Icon="Add">
-                </NavigationViewItem>
-                <NavigationViewItem 
-                    Content="Maps" 
-                    Icon="Map">
-                </NavigationViewItem>
-                <NavigationViewItem
-                    Content="Account"
-                    Icon="Account">
-                </NavigationViewItem>
-                <!--<NavigationViewItem 
-                    x:Name="ClientEmail"
-                    Icon="Contact">
-                </NavigationViewItem>-->
-                <NavigationViewItem 
-                    x:Name="Logout"
-                    Content="Logout" 
-                    Icon="BlockContact">
-                </NavigationViewItem>
-            </NavigationView.MenuItems>
-            <Frame x:Name="Content" />
-        </NavigationView>
-    </Grid>
+        <NavigationView.MenuItems>
+            <NavigationViewItem 
+                    x:Uid="NavHome"
+                    Tag="Home"
+                    Icon="Home"/>
+            <NavigationViewItem 
+                    x:Uid="NavAdd"
+                    Tag="Add"
+                    Icon="Add"/>
+            <NavigationViewItem 
+                    x:Uid="NavMaps"
+                    Tag="Maps"
+                    Icon="Map"/>
+        </NavigationView.MenuItems>
+        <NavigationView.PaneFooter>
+            <NavigationViewItem 
+                    x:Uid="NavLogout"
+                    Tag="Logout"
+                    Tapped="Logout"
+                    Icon="BlockContact"
+                    Margin="0,0,24,0"/>
+        </NavigationView.PaneFooter>
+        <NavigationView.Content>
+            <Frame x:Name="ContentFrame"/>
+        </NavigationView.Content>
+    </NavigationView>
 </Page>

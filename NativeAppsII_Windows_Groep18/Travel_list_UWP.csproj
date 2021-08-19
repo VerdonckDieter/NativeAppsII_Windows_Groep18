@@ -123,43 +123,67 @@
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Chore.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Model\DTO\TravelListDTO.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Itinerary.cs" />
     <Compile Include="Model\Trip.cs" />
-    <Compile Include="Services\Globals.cs" />
-    <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="Model\Weather\Weather.cs" />
+    <Compile Include="Services\Instances\CategoryService.cs" />
+    <Compile Include="Services\Instances\ChoreService.cs" />
+    <Compile Include="Services\Instances\ContentDialogService.cs" />
+    <Compile Include="Services\Instances\ItemService.cs" />
+    <Compile Include="Services\Instances\StorageService.cs" />
+    <Compile Include="Services\Instances\ToastService.cs" />
+    <Compile Include="Services\Instances\TripService.cs" />
+    <Compile Include="Services\Instances\UserService.cs" />
+    <Compile Include="Services\Instances\WeatherService.cs" />
+    <Compile Include="Services\IServices\ICategoryService.cs" />
+    <Compile Include="Services\IServices\IChoreService.cs" />
+    <Compile Include="Services\IServices\IContentDialogService.cs" />
+    <Compile Include="Services\IServices\IItemService.cs" />
+    <Compile Include="Services\IServices\ITripService.cs" />
+    <Compile Include="Services\IServices\IUserService.cs" />
+    <Compile Include="Services\IServices\IWeatherService.cs" />
+    <Compile Include="Utility\DateTimeToDateTimeOffsetConverter.cs" />
+    <Compile Include="Utility\Globals.cs" />
+    <Compile Include="ViewModel\AddTripViewModel.cs" />
+    <Compile Include="ViewModel\ItineraryViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
-    <Compile Include="View\Account.xaml.cs">
-      <DependentUpon>Account.xaml</DependentUpon>
+    <Compile Include="ViewModel\TripDetailViewModel.cs" />
+    <Compile Include="ViewModel\UpdateTripViewModel.cs" />
+    <Compile Include="ViewModel\WeatherViewModel.cs" />
+    <Compile Include="View\TripView\TripDetail.xaml.cs">
+      <DependentUpon>TripDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TripView\TripWeather.xaml.cs">
+      <DependentUpon>TripWeather.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TripView\UpdateTripView.xaml.cs">
+      <DependentUpon>UpdateTripView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Itinerary.xaml.cs">
       <DependentUpon>Itinerary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Login.xaml.cs">
+    <Compile Include="View\User\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\TravelListViewModel.cs" />
-    <Compile Include="View\AddTravelListView.xaml.cs">
-      <DependentUpon>AddTravelListView.xaml</DependentUpon>
+    <Compile Include="ViewModel\TripViewModel.cs" />
+    <Compile Include="View\TripView\AddTripView.xaml.cs">
+      <DependentUpon>AddTripView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TravelListOverview.xaml.cs">
-      <DependentUpon>TravelListOverview.xaml</DependentUpon>
+    <Compile Include="View\TripView\TripOverview.xaml.cs">
+      <DependentUpon>TripOverview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Navigation.xaml.cs">
       <DependentUpon>Navigation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Register.xaml.cs">
+    <Compile Include="View\User\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TravelListDetail.xaml.cs">
-      <DependentUpon>TravelListDetail.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +192,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\forest.png" />
+    <Content Include="Assets\shine.jpg" />
+    <Content Include="Assets\Skyline4.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -176,13 +203,22 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\sun.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\Account.xaml">
+    <Page Include="View\TripView\TripDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TripView\TripWeather.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TripView\UpdateTripView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,7 +226,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Login.xaml">
+    <Page Include="View\User\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,11 +234,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\AddTravelListView.xaml">
+    <Page Include="View\TripView\AddTripView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TravelListOverview.xaml">
+    <Page Include="View\TripView\TripOverview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -210,16 +246,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Register.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TravelListDetail.xaml">
+    <Page Include="View\User\Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Divider">
+      <Version>5.0.0.2012</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection">
+      <Version>5.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
     </PackageReference>
@@ -238,10 +276,17 @@
     <PackageReference Include="NSwag.AspNetCore">
       <Version>13.11.2</Version>
     </PackageReference>
+    <PackageReference Include="Prism.Core">
+      <Version>8.1.97</Version>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Strings\nl-be\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\en-US\Resources.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

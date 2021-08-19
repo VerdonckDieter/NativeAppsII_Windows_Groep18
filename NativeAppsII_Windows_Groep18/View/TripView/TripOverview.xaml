@@ -1,0 +1,127 @@
+﻿<Page
+    x:Class="NativeAppsII_Windows_Groep18.View.TripView.TripOverview"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:NativeAppsII_Windows_Groep18.Model" 
+    xmlns:MUXC="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    >
+
+    <Page.Background>
+        <ImageBrush Stretch="None" 
+                    ImageSource="/Assets/forest.png"/>
+    </Page.Background>
+
+    <ScrollViewer>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ScreenSizes">
+                <VisualState x:Name="Phone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TripGridView.HorizontalAlignment" 
+                                Value="Center"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TripGridView.HorizontalAlignment" 
+                                Value="Left"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TripGridView.HorizontalAlignment" 
+                                Value="Left"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <Grid Padding="12">
+            <GridView x:Name="TripGridView"
+                      ItemsSource="{x:Bind TripViewModel.Trips}"
+                      Margin="0,20,0,0"                
+                      IsItemClickEnabled="True">
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="FrameworkElement">
+                        <Setter Property="Margin" Value="12" />
+                    </Style>
+                </GridView.ItemContainerStyle>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Trip">
+                        <StackPanel x:Name="TripGridViewItem"
+                                    Tapped="NavigateToDetail"
+                                    IsRightTapEnabled="True"
+                                    RightTapped="ShowMenu">
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout Placement="Bottom">
+                                    <MenuFlyoutItem x:Uid="MenuFlyoutItemModify"
+                                                    x:Name="MenuModifyTrip"
+                                                    Click="MenuFlyoutItemTapped"/>
+                                    <MenuFlyoutItem x:Uid="MenuFlyoutItemDelete"
+                                                    x:Name="MenuDeleteTrip"
+                                                    Click="MenuFlyoutItemTapped"/>
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
+                            <Grid Background="LightGray"
+                                  BorderBrush="DarkGreen"
+                                  BorderThickness="2"
+                                  CornerRadius="2"
+                                  Padding="12,24">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Margin="0,0,0,6"
+                                           Text="{x:Bind Name}"
+                                           TextWrapping="NoWrap"
+                                           TextAlignment="Center"
+                                           Foreground="DarkGreen"
+                                           Style="{ThemeResource TitleTextBlockStyle}"/>
+                                <TextBlock Grid.Row="1"
+                                           Margin="0,6"
+                                           Text="{x:Bind Period}"
+                                           TextWrapping="NoWrap"
+                                           TextAlignment="Center"
+                                           Foreground="DarkGreen"
+                                           Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                                <MUXC:ProgressBar Grid.Row="2"
+                                                  Margin="0,6"
+                                                  Value="{x:Bind ItemProgress}"
+                                                  Maximum="100"
+                                                  IsIndeterminate="False"
+                                                  Foreground="CornflowerBlue"/>
+                                <MUXC:ProgressBar Grid.Row="3"
+                                                  Margin="0,6"
+                                                  Value="{x:Bind ChoreProgress}"
+                                                  Maximum="100"
+                                                  IsIndeterminate="False"
+                                                  Foreground="ForestGreen"/>
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+            <MUXC:ProgressRing
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Height="100"
+                            Width="100"
+                            IsIndeterminate="True"
+                            Visibility="{x:Bind TripViewModel.IsLoading, Mode=OneWay}" />
+        </Grid>
+    </ScrollViewer>
+</Page>

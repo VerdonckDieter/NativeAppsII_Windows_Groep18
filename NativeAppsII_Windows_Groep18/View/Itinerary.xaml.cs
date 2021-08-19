@@ -1,10 +1,17 @@
-﻿using System;
+﻿using NativeAppsII_Windows_Groep18.ViewModel;
+using System;
 using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
+using Microsoft.Extensions.DependencyInjection;
+using Windows.UI.Xaml.Navigation;
+using NativeAppsII_Windows_Groep18.Model;
+using NativeAppsII_Windows_Groep18.Utility;
+using Windows.ApplicationModel.Resources;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -15,50 +22,108 @@ namespace NativeAppsII_Windows_Groep18.View
     /// </summary>
     public sealed partial class Itinerary : Page
     {
+        #region Properties
+        public ItineraryViewModel ItineraryViewModel { get; set; }
+        private ResourceLoader ResourceLoader { get; set; }
+        #endregion
+
+        #region Constructors
         public Itinerary()
         {
             InitializeComponent();
+            ItineraryViewModel = App.Current.Services.GetService<ItineraryViewModel>();
+            DataContext = ItineraryViewModel;
+            TravelMap.MapServiceToken = Globals.MAP_TOKEN;
+            ResourceLoader = ResourceLoader.GetForCurrentView();
+        }
+        #endregion
+
+        #region Methods
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (ItineraryViewModel.Trips.Count < 1)
+            {
+                ItineraryViewModel.LoadTrips();
+            }
         }
 
-        //private void Click_ShowRoute(object sender, RoutedEventArgs e)
-        //{
-        //    TravelList travelList = (TravelList)ItineraryComboBox.SelectedItem;
-        //    ShowRouteOnMap(travelList.Itinerary.StartLatitude, travelList.Itinerary.StartLongitude, travelList.Itinerary.EndLatitude, travelList.Itinerary.EndLongitude);
-        //}
+        private void ShowRoute(object sender, RoutedEventArgs e)
+        {
+            Trip trip = (Trip)ItineraryComboBox.SelectedItem;
+            ShowRouteOnMap(trip);
+        }
 
-        //private async void ShowRouteOnMap(double startLatitude, double startLongitude, double endLatitude, double endLongitude)
-        //{
-        //    TravelMap.Routes.Clear();
+        private async void ShowRouteOnMap(Trip trip)
+        {
+            var accessStatus = await Geolocator.RequestAccessAsync();
 
-        //    BasicGeoposition startLocation = new BasicGeoposition() { Latitude = startLatitude, Longitude = startLongitude };
-        //    BasicGeoposition endLocation = new BasicGeoposition() { Latitude = endLatitude, Longitude = endLongitude };
+            switch (accessStatus)
+            {
+                case GeolocationAccessStatus.Allowed:
+                    Geolocator geolocator = new Geolocator { DesiredAccuracy = PositionAccuracy.High };
+                    Geoposition geoposition = await geolocator.GetGeopositionAsync();
 
-        //    // Get the route between the points.
-        //    MapRouteFinderResult routeResult =
-        //          await MapRouteFinder.GetDrivingRouteAsync(
-        //          new Geopoint(startLocation),
-        //          new Geopoint(endLocation),
-        //          MapRouteOptimization.Time,
-        //          MapRouteRestrictions.None);
+                    BasicGeoposition startLocation = new BasicGeoposition()
+                    {
+                        Latitude = geoposition.Coordinate.Point.Position.Latitude,
+                        Longitude = geoposition.Coordinate.Point.Position.Longitude
+                    };
 
-        //    if (routeResult.Status == MapRouteFinderStatus.Success)
-        //    {
-        //        // Use the route to initialize a MapRouteView.
-        //        MapRouteView viewOfRoute = new MapRouteView(routeResult.Route)
-        //        {
-        //            RouteColor = Colors.Yellow,
-        //            OutlineColor = Colors.Black
-        //        };
+                    BasicGeoposition endLocation;
 
-        //        // Add the new MapRouteView to the Routes collection of the MapControl.
-        //        TravelMap.Routes.Add(viewOfRoute);
+                    MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(trip.Location, null, 1);
+                    endLocation = result.Status == MapLocationFinderStatus.Success
+                        ? new BasicGeoposition()
+                        {
+                            Latitude = result.Locations[0].Point.Position.Latitude,
+                            Longitude = result.Locations[0].Point.Position.Longitude
+                        }
+                        : new BasicGeoposition()
+                        {
+                            Latitude = 51.0543422,
+                            Longitude = 3.7174243
+                        };
 
-        //        // Fit the MapControl to the route.
-        //        await TravelMap.TrySetViewBoundsAsync(
-        //              routeResult.Route.BoundingBox,
-        //              null,
-        //              MapAnimationKind.Bow);
-        //    }
-        //}
+                    MapRouteFinderResult routeResult =
+                            await MapRouteFinder.GetDrivingRouteAsync(
+                            new Geopoint(startLocation),
+                            new Geopoint(endLocation),
+                            MapRouteOptimization.Time,
+                            MapRouteRestrictions.None);
+
+                    if (routeResult.Status == MapRouteFinderStatus.Success)
+                    {
+                        MapRouteView viewOfRoute = new MapRouteView(routeResult.Route)
+                        {
+                            RouteColor = Colors.Yellow,
+                            OutlineColor = Colors.Black
+                        };
+                        TravelMap.Routes.Add(viewOfRoute);
+                        await TravelMap.TrySetViewBoundsAsync(
+                              routeResult.Route.BoundingBox,
+                              null,
+                              MapAnimationKind.Bow);
+                    }
+                    break;
+
+                case GeolocationAccessStatus.Denied:
+                    await ShowContentDialog();
+                    break;
+                case GeolocationAccessStatus.Unspecified:
+                    await ShowContentDialog();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private async Task<ContentDialogResult> ShowContentDialog()
+        {
+            return await ItineraryViewModel.ShowContentDialog(
+                            ResourceLoader.GetString("LocationDialogTitle"),
+                            ResourceLoader.GetString("LocationDialogContent"),
+                            ResourceLoader.GetString("LocationDialogClose"));
+        }
+        #endregion
     }
 }

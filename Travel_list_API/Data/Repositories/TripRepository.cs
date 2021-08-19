@@ -47,7 +47,7 @@ namespace Travel_list_API.Data.Repositories
             }
             else
             {
-                _db.Entry(current).CurrentValues.SetValues(trip);
+                _db.Trips.Update(trip);
             }
             await _db.SaveChangesAsync();
             return trip;
@@ -81,7 +81,7 @@ namespace Travel_list_API.Data.Repositories
                 .Include(u => u.Trips).ThenInclude(t => t.Itineraries)
                 .AsNoTracking()
                 .SingleAsync(s => s.Email == email);
-        } 
+        }
         #endregion
     }
 }

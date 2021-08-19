@@ -1,38 +1,26 @@
-﻿using System;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
-using NativeAppsII_Windows_Groep18.Services;
-using Windows.Web.Http;
-using Windows.Storage.Streams;
+﻿using System.Threading.Tasks;
+using NativeAppsII_Windows_Groep18.Services.IServices;
 
 namespace NativeAppsII_Windows_Groep18.ViewModel
 {
     public class LoginViewModel
     {
-        public async Task<bool> Login(string email, string password)
+        #region Fields
+        private IUserService _userService;
+        #endregion
+
+        #region Constructors
+        public LoginViewModel(IUserService userService)
         {
-            HttpClient client = new HttpClient();
-            var success = false;
-            try
-            {
-                var json = JsonConvert.SerializeObject(new
-                {
-                    email,
-                    password
-                });
-                var result = await client.PostAsync(new Uri($"{Globals.BASE_URL}/User/Login"),
-                    new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
-                if (result.IsSuccessStatusCode)
-                {
-                    Globals.LoggedInUser = result.Content.ToString();
-                    return success = true;
-                }
-                return success;
-            }
-            catch (Exception)
-            {
-                return success;
-            }
+            _userService = userService;
         }
+        #endregion
+
+        #region Methods
+        public async Task<string> Login(string email, string password)
+        {
+            return await _userService.Login(email, password);
+        }
+        #endregion
     }
 }

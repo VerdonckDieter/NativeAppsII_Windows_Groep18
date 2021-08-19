@@ -60,7 +60,7 @@ namespace Travel_list_API.Data.Repositories
         {
             return await _db.Categories
                 .Include(c => c.Items)
-                .SingleAsync(c => c.Id == id);
+                .SingleAsync(c => c.CategoryId == id);
         } 
         #endregion
     }
