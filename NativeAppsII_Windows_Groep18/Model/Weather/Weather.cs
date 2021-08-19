@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace NativeAppsII_Windows_Groep18.Model.Weather
 {

@@ -63,7 +63,6 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
 
         public async Task<bool> DeleteTrip(int id) => await _tripService.DeleteTrip(id);
 
-
         public async Task<ContentDialogResult> ShowContentDialog(string title, string content, string primaryButtonText, string closeButtonText) =>
             await _contentDialogService.ShowContentDialog(title, content, primaryButtonText, closeButtonText);
         #endregion

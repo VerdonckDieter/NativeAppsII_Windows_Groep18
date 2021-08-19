@@ -40,6 +40,7 @@ namespace NativeAppsII_Windows_Groep18.View
         private async void LoginUser(object sender, RoutedEventArgs e)
         {
             if (Validate())
+            {
                 switch (await LoginViewModel.Login(LoginMail.Text, LoginPassword.Password))
                 {
                     case "SUCCESS":
@@ -54,6 +55,7 @@ namespace NativeAppsII_Windows_Groep18.View
                     default:
                         break;
                 }
+            }
         }
 
         private bool Validate()

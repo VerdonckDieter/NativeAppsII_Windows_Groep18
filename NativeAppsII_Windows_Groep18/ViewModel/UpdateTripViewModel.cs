@@ -1,9 +1,5 @@
 ﻿using NativeAppsII_Windows_Groep18.Model;
 using NativeAppsII_Windows_Groep18.Services.IServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NativeAppsII_Windows_Groep18.ViewModel

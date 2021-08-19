@@ -10,11 +10,9 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
     public class TripDetailViewModel
     {
         #region Fields
-        private readonly ITripService _tripService;
         private readonly IItemService _itemService;
         private readonly IChoreService _choreService;
         private readonly ICategoryService _categoryService;
-        private readonly IWeatherService _weatherService;
         private readonly IContentDialogService _contentDialogService;
         #endregion
 
@@ -24,11 +22,8 @@ namespace NativeAppsII_Windows_Groep18.ViewModel
         #endregion
 
         #region Constructors
-        public TripDetailViewModel(ITripService tripService, IWeatherService weatherService,
-            IItemService itemService, IChoreService choreService, ICategoryService categoryService, IContentDialogService contentDialogService)
+        public TripDetailViewModel(IItemService itemService, IChoreService choreService, ICategoryService categoryService, IContentDialogService contentDialogService)
         {
-            _tripService = tripService;
-            _weatherService = weatherService;
             _itemService = itemService;
             _choreService = choreService;
             _categoryService = categoryService;

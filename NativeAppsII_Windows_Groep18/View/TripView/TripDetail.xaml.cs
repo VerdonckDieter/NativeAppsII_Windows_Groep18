@@ -108,52 +108,14 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             var modify = (MenuFlyoutItem)sender;
             switch (modify.Name)
             {
-                case "MenuModifyCategory":
-                    Modify("Category", modify);
-                    break;
                 case "MenuDeleteCategory":
                     Delete("Category", modify);
-                    break;
-                case "MenuModifyItem":
-                    Modify("Item", modify);
                     break;
                 case "MenuDeleteItem":
                     Delete("Item", modify);
                     break;
-                case "MenuModifyChore":
-                    Modify("Chore", modify);
-                    break;
                 case "MenuDeleteChore":
                     Delete("Chore", modify);
-                    break;
-                default: break;
-            }
-        }
-
-        private async void Modify(string option, MenuFlyoutItem sender)
-        {
-            switch (option)
-            {
-                case "Category":
-                    var modifyCategory = (Category)sender.DataContext;
-                    if (modifyCategory != null)
-                    {
-                        await TripDetailViewModel.UpdateCategory(modifyCategory);
-                    }
-                    break;
-                case "Item":
-                    var modifyItem = (Item)sender.DataContext;
-                    if (modifyItem != null)
-                    {
-                        await TripDetailViewModel.UpdateItem(modifyItem);
-                    }
-                    break;
-                case "Chore":
-                    var modifyChore = (Chore)sender.DataContext;
-                    if (modifyChore != null)
-                    {
-                        await TripDetailViewModel.UpdateChore(modifyChore);
-                    }
                     break;
                 default: break;
             }
@@ -185,6 +147,10 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
                             if (await TripDetailViewModel.DeleteItem(deleteItem.CategoryId, deleteItem.Id))
                             {
                                 TripDetailViewModel.Trip.Categories.SingleOrDefault(c => c.CategoryId == deleteItem.CategoryId).Items.Remove(deleteItem);
+                                foreach (Category c in TripDetailViewModel.Trip.Categories)
+                                {
+                                    c.UpdateItemsAdded();
+                                }
                             }
                         }
                     }

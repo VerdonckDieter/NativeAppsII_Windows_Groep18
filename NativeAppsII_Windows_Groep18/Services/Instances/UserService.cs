@@ -10,13 +10,18 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
 {
     public class UserService : IUserService
     {
+        #region Fields
         private readonly HttpClient _httpClient;
+        #endregion
 
+        #region Constructors
         public UserService()
         {
             _httpClient = new HttpClient();
         }
+        #endregion
 
+        #region Methods
         public async Task<string> Login(string email, string password)
         {
             var json = JsonConvert.SerializeObject(new
@@ -60,6 +65,7 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
                 return await result.Content.ReadAsStringAsync() == "true" ? "AVAILABLE" : "NOTAVAILABLE";
             }
             return "FAIL";
-        }
+        } 
+        #endregion
     }
 }

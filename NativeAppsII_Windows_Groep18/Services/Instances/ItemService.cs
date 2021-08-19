@@ -12,13 +12,18 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
 {
     public class ItemService : IItemService
     {
+        #region Fields
         private readonly HttpClient _httpClient;
+        #endregion
 
+        #region Constructors
         public ItemService()
         {
             _httpClient = new HttpClient();
         }
+        #endregion
 
+        #region Methods
         public async Task<bool> DeleteItem(int categoryId, int itemId)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("Bearer", StorageService.RetrieveToken());
@@ -32,6 +37,7 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
             var json = JsonConvert.SerializeObject(item);
             var result = await _httpClient.PostAsync(new Uri($"{Globals.BASE_URL}/Item/{categoryId}"), new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
             return JsonConvert.DeserializeObject<Item>(await result.Content.ReadAsStringAsync());
-        }
+        } 
+        #endregion
     }
 }

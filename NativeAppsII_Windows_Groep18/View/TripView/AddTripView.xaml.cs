@@ -23,6 +23,8 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
         public AddTripViewModel AddTripViewModel { get; set; }
         private ResourceLoader ResourceLoader { get; set; }
         #endregion
+
+        #region Constructors
         public AddTripView()
         {
             InitializeComponent();
@@ -34,7 +36,9 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             AddTripStartDate.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
             AddTripEndDate.AddHandler(TappedEvent, new TappedEventHandler(ResetErrors), true);
         }
+        #endregion
 
+        #region Methods
         private async void AddTrip(object sender, RoutedEventArgs e)
         {
             if (Validate())
@@ -42,6 +46,7 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
                 if (await AddTripViewModel.AddTrip(AddTripName.Text, AddTripLocation.Text, AddTripStartDate.Date.Value.DateTime, AddTripEndDate.Date.Value.DateTime) != null)
                 {
                     ToastService.MakeToast(string.Format(ResourceLoader.GetString("AddTripCreated"), AddTripName.Text));
+                    Frame.Navigate(typeof(TripOverview));
                 }
             }
         }
@@ -104,6 +109,7 @@ namespace NativeAppsII_Windows_Groep18.View.TripView
             base.OnNavigatedTo(e);
             SharedShadow.Receivers.Add(BackgroundGrid);
             AddStackPanel.Translation += new Vector3(0, 0, 10);
-        }
+        } 
+        #endregion
     }
 }

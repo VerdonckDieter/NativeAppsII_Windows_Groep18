@@ -5,6 +5,7 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
 {
     public static class ToastService
     {
+        #region Methods
         public static void MakeToast(string text)
         {
             var content = new ToastContentBuilder()
@@ -13,6 +14,7 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
                 .GetToastContent();
             var notification = new ToastNotification(content.GetXml());
             ToastNotificationManager.CreateToastNotifier().Show(notification);
-        }
+        } 
+        #endregion
     }
 }

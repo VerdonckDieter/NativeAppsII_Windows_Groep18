@@ -12,13 +12,18 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
 {
     public class ChoreService : IChoreService
     {
+        #region Fields
         private readonly HttpClient _httpClient;
+        #endregion
 
+        #region Constructors
         public ChoreService()
         {
             _httpClient = new HttpClient();
         }
+        #endregion
 
+        #region Methods
         public async Task<bool> DeleteChore(int tripId, int choreId)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("Bearer", StorageService.RetrieveToken());
@@ -32,6 +37,7 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
             var json = JsonConvert.SerializeObject(chore);
             var result = await _httpClient.PostAsync(new Uri($"{Globals.BASE_URL}/Chore/{tripId}"), new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
             return JsonConvert.DeserializeObject<Chore>(await result.Content.ReadAsStringAsync());
-        }
+        } 
+        #endregion
     }
 }

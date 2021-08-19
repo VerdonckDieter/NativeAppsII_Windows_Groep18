@@ -12,13 +12,18 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
 {
     public class CategoryService : ICategoryService
     {
+        #region Fields
         private readonly HttpClient _httpClient;
+        #endregion
 
+        #region Constructors
         public CategoryService()
         {
             _httpClient = new HttpClient();
         }
+        #endregion
 
+        #region Methods
         public async Task<bool> DeleteCategory(int tripId, int categoryId)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("Bearer", StorageService.RetrieveToken());
@@ -33,5 +38,6 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
             var result = await _httpClient.PostAsync(new Uri($"{Globals.BASE_URL}/Category/{tripId}"), new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
             return JsonConvert.DeserializeObject<Category>(await result.Content.ReadAsStringAsync());
         }
+        #endregion
     }
 }

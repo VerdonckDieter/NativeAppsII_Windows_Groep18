@@ -12,12 +12,15 @@ namespace NativeAppsII_Windows_Groep18.View
     /// </summary>
     public sealed partial class Navigation : Page
     {
+        #region Constructors
         public Navigation()
         {
             InitializeComponent();
             ContentFrame.Navigate(typeof(TripOverview));
         }
+        #endregion
 
+        #region Methods
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             var invokedItem = args.InvokedItemContainer.Tag.ToString();
@@ -42,5 +45,6 @@ namespace NativeAppsII_Windows_Groep18.View
             StorageService.StoreToken("");
             Frame.Navigate(typeof(Login));
         }
+        #endregion
     }
 }

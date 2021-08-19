@@ -271,10 +271,7 @@
                                                       RightTapped="ShowMenu">
                                                     <FlyoutBase.AttachedFlyout>
                                                         <MenuFlyout Placement="Bottom">
-                                                            <MenuFlyoutItem x:Uid="MenuFlyoutItemModify"
-                                                                        x:Name="MenuModifyCategory"
-                                                                        Click="MenuFlyoutItemTapped"/>
-                                                            <MenuFlyoutItem x:Uid="MenuFlyoutItemDelete"
+                                                             <MenuFlyoutItem x:Uid="MenuFlyoutItemDelete"
                                                                         x:Name="MenuDeleteCategory"
                                                                         Click="MenuFlyoutItemTapped"/>
                                                         </MenuFlyout>
@@ -322,9 +319,7 @@
                                                                       RightTapped="ShowMenu">
                                                                     <FlyoutBase.AttachedFlyout>
                                                                         <MenuFlyout Placement="Bottom">
-                                                                            <MenuFlyoutItem x:Uid="MenuFlyoutItemModify"
-                                                                                    x:Name="MenuModifyItem"
-                                                                                    Click="MenuFlyoutItemTapped"/>
+                                                                            
                                                                             <MenuFlyoutItem x:Uid="MenuFlyoutItemDelete"
                                                                                     x:Name="MenuDeleteItem"
                                                                                     Click="MenuFlyoutItemTapped"/>
@@ -443,9 +438,7 @@
                                       RightTapped="ShowMenu">
                                         <FlyoutBase.AttachedFlyout>
                                             <MenuFlyout Placement="Bottom">
-                                                <MenuFlyoutItem x:Uid="MenuFlyoutItemModify"
-                                                            x:Name="MenuModifyChore"
-                                                            Click="MenuFlyoutItemTapped"/>
+                                                
                                                 <MenuFlyoutItem x:Uid="MenuFlyoutItemDelete"
                                                             x:Name="MenuDeleteChore"
                                                             Click="MenuFlyoutItemTapped"/>

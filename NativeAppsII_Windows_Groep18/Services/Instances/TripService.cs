@@ -13,13 +13,18 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
 {
     public class TripService : ITripService
     {
+        #region Fields
         private readonly HttpClient _httpClient;
+        #endregion
 
+        #region Constructors
         public TripService()
         {
             _httpClient = new HttpClient();
         }
+        #endregion
 
+        #region Methods
         public async Task<List<Trip>> GetTrips()
         {
             _httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("Bearer", StorageService.RetrieveToken());
@@ -47,6 +52,7 @@ namespace NativeAppsII_Windows_Groep18.Services.Instances
             var json = JsonConvert.SerializeObject(trip);
             var result = await _httpClient.PostAsync(new Uri($"{Globals.BASE_URL}/Trip"), new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json"));
             return JsonConvert.DeserializeObject<Trip>(await result.Content.ReadAsStringAsync());
-        }
+        } 
+        #endregion
     }
 }

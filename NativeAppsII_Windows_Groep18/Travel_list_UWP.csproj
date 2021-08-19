@@ -123,7 +123,6 @@
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Chore.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Model\DTO\TravelListDTO.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Itinerary.cs" />
     <Compile Include="Model\Trip.cs" />
@@ -146,7 +145,6 @@
     <Compile Include="Services\IServices\IWeatherService.cs" />
     <Compile Include="Utility\DateTimeToDateTimeOffsetConverter.cs" />
     <Compile Include="Utility\Globals.cs" />
-    <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\AddTripViewModel.cs" />
     <Compile Include="ViewModel\ItineraryViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -163,9 +161,6 @@
     </Compile>
     <Compile Include="View\TripView\UpdateTripView.xaml.cs">
       <DependentUpon>UpdateTripView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\User\Account.xaml.cs">
-      <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Itinerary.xaml.cs">
       <DependentUpon>Itinerary.xaml</DependentUpon>
@@ -189,9 +184,6 @@
     </Compile>
     <Compile Include="View\User\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TravelListDetail.xaml.cs">
-      <DependentUpon>TravelListDetail.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -230,10 +222,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\User\Account.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Itinerary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -259,10 +247,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\User\Register.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TravelListDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
